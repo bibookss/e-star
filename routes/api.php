@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::post('dorms', 'DormController@store');
+// Route::get('dorms', 'DormController@index');
+// Route::get('dorms/{id}', 'DormController@show');
+// Route::patch('dorms/{id}', 'DormController@update');
+// Route::delete('dorms/{id}', 'DormController@destroy');
+
+Route::apiResource('dorms', DormController::class);
