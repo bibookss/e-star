@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(User::all(), 201);
     }
 
     /**
@@ -46,7 +47,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return $user;
     }
 
     /**
@@ -80,6 +82,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return response()->json(User::all(), 201);
     }
 }

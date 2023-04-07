@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Dorm;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -20,97 +21,53 @@ class DormController extends Controller
     }
 
     /**
-     * Show the form for creating a new dorm.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        
-    }
-
-    /**
      * Store a newly created dorm in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Location $location
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Location $location)
     {
-        $request->validate([
-            'dorm_name' => 'required|max:255',
-            'dorm_address' => 'required|max:255',
-        ]);
-
-        $newDorm = new Dorm([
-            'dorm_name' => $request->get('dorm_name'),
-            'dorm_address' => $request->get('dorm_address'),
-        ]);
-
-        $newDorm->save();
-
+        $newDorm = new Dorm($request->all());
+        $location->dorms()->save($newDorm);
+    
         return response()->json($newDorm);
     }
 
     /**
      * Display the specified dorm.
      *
-     * @param  int  $id
+     * @param  \App\Models\Dorm $dorm
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Dorm $dorm)
     {
-        $dorm = Dorm::findOrFail($id);
         return response()->json($dorm);
-    }
-
-    /**
-     * Show the form for editing the specified dorm.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
      * Update the specified dorm in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Dorm $dorm
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Dorm $dorm)
     {
-        $dorm = Dorm::findOrFail($id);
-
-        $request->validate([
-            'dorm_name' => 'required|max:255',
-            'dorm_address' => 'required|max:255',
-        ]);
-
-        $dorm->dorm_name = $request->get('dorm_name');
-        $dorm->dorm_address = $request->get('dorm_address');
-
-        $dorm->save();
-
+        $dorm->update($request->all());
         return response()->json($dorm);
     }
 
     /**
      * Remove the specified dorm from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Dorm $dorm
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Dorm $dorm)
     {
-        $dorm = Dorm::findOrFail($id);
         $dorm->delete();
-      
-        $dorms = Dorm::all();
-        return response()->json($dorms);
+        return response()->json(Dorm::all());
     }
 }

@@ -11,6 +11,12 @@ class Location extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'barangay',
+        'street',
+        'city'
+    ];
+
     public function dorms(): HasMany 
     {
         return $this->hasMany(Dorm::class);

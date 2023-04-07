@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +24,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::patch('dorms/{id}', 'DormController@update');
 // Route::delete('dorms/{id}', 'DormController@destroy');
 
-Route::apiResource('dorms', DormController::class);
+// Route::apiResource('dorms', DormController::class);
+
+
+Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function() {
+    Route::post('locations/{location}/dorms', 'DormController@store');
+    Route::apiResource('users', UserController::class);
+    Route::apiResource('dorms', DormController::class);
+    Route::apiResource('locations', LocationController::class); 
+    Route::apiResource('ratings', RatingController::class);     
+    Route::get('locations/{location}/dorms', 'LocationController@dorms');
+ 
+});
