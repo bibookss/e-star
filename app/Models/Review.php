@@ -2,23 +2,20 @@
 
 namespace App\Models;
 
-use App\Models\Post;
-use App\Models\Review;
+use App\Models\Rating;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Rating extends Model
+class Review extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'review_id',
         'dorm_id',
-        'location',
-        'security',
-        'internet',
-        'bathroom'
+        'rating_id',
+        'review_body',
     ];
 
     public function user(): BelongsTo
@@ -31,8 +28,9 @@ class Rating extends Model
         return $this->belongsTo(Dorm::class);
     }
 
-    public function review(): BelongsTo
+    public function rating(): HasOne
     {
-        return $this->belongsTo(Review::class);
+        return $this->hasOne(Rating::class);
     }
+
 }

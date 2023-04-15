@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\UserResource;
+use App\Http\Resources\V1\UserCollection;
 
 class UserController extends Controller
 {
@@ -13,9 +15,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getAllUsers()
     {
-        return response()->json(User::all(), 201);
+        return new UserCollection(User::paginate());
     }
 
     /**
@@ -45,10 +47,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getUser(User $user)
     {
-        $user = User::findOrFail($id);
-        return $user;
+        return new UserResource($user);
+
     }
 
     /**

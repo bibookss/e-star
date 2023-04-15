@@ -18,21 +18,48 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::post('dorms', 'DormController@store');
-// Route::get('dorms', 'DormController@index');
-// Route::get('dorms/{id}', 'DormController@show');
-// Route::patch('dorms/{id}', 'DormController@update');
-// Route::delete('dorms/{id}', 'DormController@destroy');
-
-// Route::apiResource('dorms', DormController::class);
-
-
 Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function() {
-    Route::post('locations/{location}/dorms', 'DormController@store');
-    Route::apiResource('users', UserController::class);
-    Route::apiResource('dorms', DormController::class);
-    Route::apiResource('locations', LocationController::class); 
-    Route::apiResource('ratings', RatingController::class);     
-    Route::get('locations/{location}/dorms', 'LocationController@dorms');
- 
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/', 'UserController@getAllUsers');
+        Route::get('/{user}', 'UserController@getUser');
+    });
+
+    Route::group(['prefix' => 'dorms'], function () {
+        Route::post('/', 'DormController@createDorm');
+        Route::get('/', 'DormController@getAllDorms');
+        Route::get('/{dorm}', 'DormController@getDorm');
+        Route::patch('/{dorm}', 'DormController@updateDorm');
+        Route::delete('/{dorm}', 'DormController@deleteDorm');
+    });
+
+    Route::group(['prefix' => 'locations'], function () {
+        Route::post('/', 'LocationController@createLocation');
+        Route::get('/', 'LocationController@getAllLocations');
+        Route::get('/{location}', 'LocationController@getLocation');
+        Route::patch('/{location}', 'LocationController@updateLocation');
+        Route::delete('/{location}', 'LocationController@deleteLocation');
+    });
+
+    Route::group(['prefix' => 'reviews'], function () {
+        Route::post('/', 'ReviewController@createReview');
+        Route::get('/', 'ReviewController@getAllReviews');
+        Route::get('/{review}', 'ReviewController@getReview');
+        Route::patch('/{review}', 'ReviewController@updateReview');
+        Route::delete('/{review}', 'ReviewController@deleteReview');
+    });
+
+    Route::group(['prefix' => 'ratings'], function () {
+        Route::post('/', 'RatingController@createRating');
+        Route::get('/', 'RatingController@getAllRatings');
+        Route::get('/{rating}', 'RatingController@getRating');
+        Route::patch('/{rating}', 'RatingController@updateRating');
+        Route::delete('/{rating}', 'RatingController@deleteRating');
+        Route::get('/dorms/{dorm}', 'RatingController@getRatingsByDormId');
+        Route::get('/users/{user}', 'RatingController@getRatingsByUserId');
+        Route::get('/dorms/{dorm}/average', 'RatingController@getAverageRatingByDormId');
+        Route::get('/dorms/{dorm}/location/average', 'RatingController@getAverageRatingOfLocationByDormId');
+        Route::get('/dorms/{dorm}/security/average', 'RatingController@getAverageRatingOfSecurityByDormId');
+        Route::get('/dorms/{dorm}/internet/average', 'RatingController@getAverageRatingOfInternetByDormId');
+        Route::get('/dorms/{dorm}/bathroom/average', 'RatingController@getAverageRatingOfBathroomByDormId');
+    });
 });

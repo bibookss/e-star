@@ -4,78 +4,47 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Location;
 use Illuminate\Http\Request;
+use App\Filters\V1\LocationsFilter;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\LocationResource;
+use App\Http\Resources\V1\LocationCollection;
 
 class LocationController extends Controller
 {
-    /**
-     * Display a listing of the locations.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function getAllLocations(Request $request)
     {
-        $locations = Location::all();
-        return response()->json($locations);
+        $filter = new LocationsFilter();
+        $filterItems = $filter->transform($request);
+
+        $locations = Location::where($filterItems);
+
+        return new LocationCollection($locations->paginate()->appends($request->query()));
     }
 
-    /**
-     * Store a newly created location in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function createLocation(StoreLocationRequest $request)
     {
         $newLocation = new Location($request->all());
         $newLocation->save();
-    
-        return response()->json($newLocation);
+        return new LocationResource($newLocation);
     }
 
-    /**
-     * Display the specified location.
-     *
-     * @param  \App\Models\Location  $location
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Location $location)
+    public function getLocation(Location $location)
     {
-        return response()->json($location);
+        return new LocationResource($location);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Location $location
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Location $location)
+    public function updateLocation(StoreLocationRequest $request, Location $location)
     {
         $location->update($request->all());
-        return response()->json($location);
+        return new LocationResource($location);
     }
 
-    /**
-     * Remove the specified location from storage.
-     *
-     * @param  \App\Models\Location $location
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Location $location)
+    public function deleteLocation(Location $location)
     {
         $location->delete();
-        return response()->json(Location::all());
-    }
 
-    /**
-     * Display the Dorms in the specified location
-     *
-     * @param  \App\Models\Location $location
-     * @return \Illuminate\Http\Response
-     */
-    public function dorms(Location $location) {
-        return response()->json($location->dorms);
+        $locations = Location::all();
+
+        return new LocationCollection($locations);
     }
 }

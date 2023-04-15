@@ -5,67 +5,49 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\Dorm;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use App\Filters\V1\DormsFilter;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\DormResource;
+use App\Http\Resources\V1\DormCollection;
+use App\Http\Requests\V1\StoreDormRequest;
 
 class DormController extends Controller
 {
-    /**
-     * Display a listing of the dorm.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function getAllDorms(Request $request)
     {
-        $dorms = Dorm::all();
-        return response()->json($dorms);
-    }
+        $filter = new DormsFilter();
+        $filterItems = $filter->transform($request);
 
-    /**
-     * Store a newly created dorm in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Location $location
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, Location $location)
+        $dorms = Dorm::where($filterItems);
+
+        return new DormCollection($dorms->paginate()->appends($request->query()));
+   }
+
+    public function createDorm(StoreDormRequest $request)
     {
-        $newDorm = new Dorm($request->all());
+        $location = Location::findOrFail($request->locationId);
+
+        $newDorm = new Dorm([
+            "name" => $request->name
+        ]);
+
         $location->dorms()->save($newDorm);
     
-        return response()->json($newDorm);
+        return new DormResource($newDorm);
     }
 
-    /**
-     * Display the specified dorm.
-     *
-     * @param  \App\Models\Dorm $dorm
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Dorm $dorm)
+    public function getDorm(Dorm $dorm)
     {
-        return response()->json($dorm);
+        return new DormResource($dorm);
     }
 
-    /**
-     * Update the specified dorm in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Dorm $dorm
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Dorm $dorm)
+    public function updateDorm(StoreDormRequest $request, Dorm $dorm)
     {
         $dorm->update($request->all());
-        return response()->json($dorm);
+        return new DormResource($dorm);
     }
 
-    /**
-     * Remove the specified dorm from storage.
-     *
-     * @param  \App\Models\Dorm $dorm
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Dorm $dorm)
+    public function deleteDorm(Dorm $dorm)
     {
         $dorm->delete();
         return response()->json(Dorm::all());

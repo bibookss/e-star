@@ -15,6 +15,8 @@ class DormSeeder extends Seeder
     public function run()
     {
         Dorm::factory()
+            ->hasRatings(2)
+            ->hasReviews(2)
             ->count(50)
             ->create();
     }
