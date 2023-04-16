@@ -13,16 +13,10 @@ class DormsFilter extends ApiFilter
         'barangay' => ['eq'],
         'city' => ['eq'],
         'street' => ['eq'],
-        // 'overallRating' => ['eq', 'gt', 'gte', 'lt', 'lte'],
-        // 'locationRating' => ['eq', 'gt', 'gte', 'lt', 'lte'],
-        // 'securityRating' => ['eq', 'gt', 'gte', 'lt', 'lte'],
-        // 'internetRating' => ['eq', 'gt', 'gte', 'lt', 'lte'],
-        // 'bathroomRating' => ['eq', 'gt', 'gte', 'lt', 'lte'],
     ];
 
     protected $operatorMap = [
         'eq' => '=',
-        'gt' => '>',
     ];
 
     protected $columnMap = [

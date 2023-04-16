@@ -16,7 +16,13 @@ class LocationController extends Controller
         $filter = new LocationsFilter();
         $filterItems = $filter->transform($request);
 
+        $includedDorms = $request->query('includeDorms');
+
         $locations = Location::where($filterItems);
+
+        if ($includedDorms === 'true') {
+            $locations = Location::with('dorms')->where($filterItems);
+        }
 
         return new LocationCollection($locations->paginate()->appends($request->query()));
     }
@@ -30,6 +36,12 @@ class LocationController extends Controller
 
     public function getLocation(Location $location)
     {
+        $includeDorms = request()->query('includeDorms');
+
+        if ($includeDorms === 'true') {
+            return new LocationResource($location->loadMissing('dorms'));
+        }
+
         return new LocationResource($location);
     }
 

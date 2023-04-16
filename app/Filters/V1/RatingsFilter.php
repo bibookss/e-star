@@ -11,7 +11,6 @@ class RatingsFilter extends ApiFilter
         'ratingId' => ['eq'],
         'dormId' => ['eq'],
         'userId' => ['eq'],
-        // 'overallRating' => ['eq', 'gt', 'gte', 'lt', 'lte'],
         'locationRating' => ['eq', 'gt', 'gte', 'lt', 'lte'],
         'securityRating' => ['eq', 'gt', 'gte', 'lt', 'lte'],
         'internetRating' => ['eq', 'gt', 'gte', 'lt', 'lte'],

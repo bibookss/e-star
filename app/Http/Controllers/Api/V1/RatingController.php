@@ -18,9 +18,11 @@ class RatingController extends Controller
     {
         $filter = new RatingsFilter();
         $filterItems = $filter->transform($request);
+        
+        $overallRating = $request->query('overallRating');
 
         $ratings = Rating::where($filterItems);
-
+    
         return new RatingCollection($ratings->paginate()->appends($request->query()));
     }
 
@@ -55,74 +57,5 @@ class RatingController extends Controller
     {
         $rating->delete();
         return new RatingCollection(Rating::all());
-    }
-
-    // Custom functions; maybe not needed
-
-    public function getRatingsByDormId($dormId)
-    {
-        $ratings = Rating::where('dorm_id', $dormId)->get();
-        return response()->json($ratings);
-    }
-
-    public function getRatingsByUserId($userId)
-    {
-        $ratings = Rating::where('user_id', $userId)->get();
-        return response()->json($ratings);
-    }
-
-    public function getAverageRatingByDormId($dormId)
-    {
-        $ratings = Rating::where('dorm_id', $dormId)->get();
-        $total = 0;
-        foreach ($ratings as $rating) {
-            $total += $rating->location + $rating->security + $rating->internet + $rating->bathroom;
-        }
-        $average = $total / (count($ratings) * 4);
-        return response()->json($average);
-    }
-
-    public function getAverageRatingOfLocationByDormId($dormId)
-    {
-        $ratings = Rating::where('dorm_id', $dormId)->get();
-        $total = 0;
-        foreach ($ratings as $rating) {
-            $total += $rating->location;
-        }
-        $average = $total / count($ratings);
-        return response()->json($average);
-    }
-
-    public function getAverageRatingOfSecurityByDormId($dormId)
-    {
-        $ratings = Rating::where('dorm_id', $dormId)->get();
-        $total = 0;
-        foreach ($ratings as $rating) {
-            $total += $rating->security;
-        }
-        $average = $total / count($ratings);
-        return response()->json($average);
-    }
-
-    public function getAverageRatingOfInternetByDormId($dormId) 
-    {
-        $ratings = Rating::where('dorm_id', $dormId)->get();
-        $total = 0;
-        foreach ($ratings as $rating) {
-            $total += $rating->internet;
-        }
-        $average = $total / count($ratings);
-        return response()->json($average);
-    }
-
-    public function getAverageRatingOfBathroomByDormId($dormId) 
-    {
-        $ratings = Rating::where('dorm_id', $dormId)->get();
-        $total = 0;
-        foreach ($ratings as $rating) {
-            $total += $rating->bathroom;
-        }
-        $average = $total / count($ratings);
-        return response()->json($average);
     }
 }

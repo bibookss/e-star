@@ -22,7 +22,7 @@ class RatingResource extends JsonResource
             'securityRating' => $this->security,
             'internetRating' => $this->internet,
             'bathroomRating' => $this->bathroom,
-            'overallRating' => ($this->location + $this->security + $this->internet + $this->bathroom) / 4,
+            'overallRating' => $this->overallRating,
         ];
     }
 }

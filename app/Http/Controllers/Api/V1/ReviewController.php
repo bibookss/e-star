@@ -18,8 +18,6 @@ class ReviewController extends Controller
         $filter = new ReviewsFilter();
         $filterItems = $filter->transform($request);
 
-        // $includeRating = $request->query('includeRating');
-
         $reviews = Review::where($filterItems);
 
         return new ReviewCollection($reviews->paginate()->appends($request->query()));

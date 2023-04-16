@@ -19,6 +19,7 @@ class LocationResource extends JsonResource
             'barangay' => $this->barangay,
             'street' => $this->street,
             'city' => $this->city,
+            'dorms' => DormResource::collection($this->whenLoaded('dorms'))
         ];
     }
 }

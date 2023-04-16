@@ -18,10 +18,27 @@ class DormController extends Controller
         $filter = new DormsFilter();
         $filterItems = $filter->transform($request);
 
+        $includeReviews = $request->query('includeReviews');
+        
         $dorms = Dorm::where($filterItems);
 
+        if ($includeReviews === 'true') {
+            $dorms = Dorm::with('reviews')->where($filterItems);
+        } 
+        
         return new DormCollection($dorms->paginate()->appends($request->query()));
    }
+
+    public function getDorm(Dorm $dorm)
+    {
+        $includeReviews = request()->query('includeReviews');
+
+        if ($includeReviews === 'true') {
+            return new DormResource($dorm->loadMissing('reviews'));
+        }
+
+        return new DormResource($dorm);
+    }
 
     public function createDorm(StoreDormRequest $request)
     {
@@ -34,11 +51,6 @@ class DormController extends Controller
         $location->dorms()->save($newDorm);
     
         return new DormResource($newDorm);
-    }
-
-    public function getDorm(Dorm $dorm)
-    {
-        return new DormResource($dorm);
     }
 
     public function updateDorm(StoreDormRequest $request, Dorm $dorm)
