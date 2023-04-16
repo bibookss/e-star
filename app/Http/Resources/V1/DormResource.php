@@ -13,7 +13,9 @@ class DormResource extends JsonResource
             'dormId' => $this->id,
             'name' => $this->name,
             'location' => new LocationResource($this->location),
-            'reviewCount' => $this->reviewCount,
+            'reviewCount' => $this->whenLoaded('reviews', function () {
+                return $this->reviewCount;
+            }),
             'averageLocationRating' => $this->averageLocationRating,
             'averageSecurityRating' => $this->averageSecurityRating,
             'averageBathroomRating' => $this->averageBathroomRating,

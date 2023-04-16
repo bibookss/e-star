@@ -41,12 +41,4 @@ class Rating extends Model
         $average = ($this->location + $this->security + $this->internet + $this->bathroom) / 4;
         return round($average, 1);
     }
-
-    // public function scopeOverallRatingGreaterThan($query, $overallRating)
-    // {
-    //     return $query->get()->filter(function ($rating) use ($overallRating) {
-    //         return $rating->overallRating > $overallRating;
-    //     });
-    // }
-
 }

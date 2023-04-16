@@ -32,5 +32,4 @@ class Review extends Model
     {
         return $this->hasOne(Rating::class);
     }
-
 }

@@ -26,6 +26,8 @@ class DormController extends Controller
             $dorms = Dorm::with('reviews')->where($filterItems);
         } 
         
+        // without paginate 
+        //         return new DormCollection($dorms->get()); 
         return new DormCollection($dorms->paginate()->appends($request->query()));
    }
 
