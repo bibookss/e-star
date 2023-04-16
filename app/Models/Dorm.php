@@ -35,35 +35,46 @@ class Dorm extends Model
 
     public function getOverallRatingAttribute()
     {
+        if (!$this->ratings()->exists()) return;
+        
         $average = ($this->ratings->sum('location') + $this->ratings->sum('security') + $this->ratings->sum('internet') + $this->ratings->sum('bathroom')) / (count($this->ratings) * 4);
         return round($average, 1);
     }
 
     public function getReviewCountAttribute()
     {
+
         return count($this->reviews);
     }
 
     public function getAverageLocationRatingAttribute()
     {
+        if (!$this->ratings()->exists()) return;
+
         $average = $this->ratings->sum('location') / count($this->ratings);
         return round($average, 1);
     }
 
     public function getAverageSecurityRatingAttribute()
     {
+        if (!$this->ratings()->exists()) return;
+
         $average = $this->ratings->sum('security') / count($this->ratings);
         return round($average, 1);
     }
 
     public function getAverageInternetRatingAttribute()
     {
+        if (!$this->ratings()->exists()) return;
+
         $average = $this->ratings->sum('internet') / count($this->ratings);
         return round($average, 1);
     }
 
     public function getAverageBathroomRatingAttribute()
     {
+        if (!$this->ratings()->exists()) return;
+
         $average = $this->ratings->sum('bathroom') / count($this->ratings);
         return round($average, 1);
     } 

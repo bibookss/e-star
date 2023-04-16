@@ -39,7 +39,7 @@ class AuthController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'is_verified_student' => 1
+                'is_verified_student' => false
             ]);
 
             return response()->json([
@@ -86,6 +86,24 @@ class AuthController extends Controller
                 'status' => true,
                 'message' => 'User Logged In Successfully',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
+            ], 200);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
+
+    public function logoutUser(Request $request)
+    {
+        try {
+            auth()->user()->tokens()->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User Logged Out Successfully',
             ], 200);
 
         } catch (\Throwable $th) {
