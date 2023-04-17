@@ -10,6 +10,8 @@ use App\Filters\V1\ReviewsFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\ReviewResource;
 use App\Http\Resources\V1\ReviewCollection;
+use App\Http\Requests\V1\StoreReviewRequest;
+use App\Http\Requests\V1\UpdateReviewRequest;
 
 class ReviewController extends Controller
 {
@@ -25,7 +27,7 @@ class ReviewController extends Controller
 
     public function createReview(StoreReviewRequest $request)
     {
-        $user = User::findOrFail($request->userId);
+        $user = auth()->user();
         $dorm = Dorm::findOrFail($request->dormId);
 
         $newReview = $user->reviews()->create([
@@ -41,8 +43,15 @@ class ReviewController extends Controller
         return new ReviewResource($review);
     }
 
-    public function updateReview(StoreReviewRequest $request, Review $review)
+    public function updateReview(UpdateReviewRequest $request, Review $review)
     {   
+        if (Review::where('id', $review->id)->where('user_id', auth()->id())->doesntExist()) {
+            return response()->json([
+                'message' => 'You are not authorized to update this rating.'
+            ], 403);
+        }
+
+
         $review->update([
             'review_body' => $request->reviewBody
         ]);

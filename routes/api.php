@@ -44,6 +44,10 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], f
         Route::get('/', 'RatingController@getAllRatings');
         Route::get('/{rating}', 'RatingController@getRating');
     });
+
+    Route::group(['prefix' => 'search'], function () {
+        Route::get('/', 'SearchController@searchDorms');
+    });
 });
 
 

@@ -78,6 +78,27 @@ class Dorm extends Model
         $average = $this->ratings->sum('bathroom') / count($this->ratings);
         return round($average, 1);
     } 
+
+    public function scopeSearch($query, $params)
+    {
+        foreach ($params as $param => $value) {
+            if (!empty($value)) {
+                if (in_array($param, ['barangay', 'city', 'street'])) {
+                    $query->whereHas('location', function ($subQuery) use ($param, $value) {
+                        $subQuery->where($param, 'like', "%$value%");
+                    });
+                } else if (in_array($param, ['location', 'security', 'bathroom', 'internet'])) {
+                    $query->whereHas('ratings', function ($subQuery) use ($param, $value) {
+                        $subQuery->where($param, '>=', $value);
+                    });
+                } else {
+                    $query->where($param, 'like', "%$value%");
+                }
+            }
+        }
+
+        return $query;
+    }
 }
 
 

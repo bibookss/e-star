@@ -8,6 +8,8 @@ use App\Filters\V1\LocationsFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\LocationResource;
 use App\Http\Resources\V1\LocationCollection;
+use App\Http\Requests\V1\StoreLocationRequest;
+use App\Http\Requests\V1\UpdateLocationRequest;
 
 class LocationController extends Controller
 {
@@ -45,9 +47,13 @@ class LocationController extends Controller
         return new LocationResource($location);
     }
 
-    public function updateLocation(StoreLocationRequest $request, Location $location)
+    public function updateLocation(UpdateLocationRequest $request, Location $location)
     {
-        $location->update($request->all());
+        $location->update([
+            'barangay' => $request->barangay ?? $location->barangay,
+            'city' => $request->city ?? $location->city,
+            'street' => $request->street ?? $location->street
+        ]);
         return new LocationResource($location);
     }
 

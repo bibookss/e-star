@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\RatingResource;
 use App\Http\Resources\V1\RatingCollection;
 use App\Http\Requests\V1\StoreRatingRequest;
+use App\Http\Requests\V1\UpdateRatingRequest;
 
 class RatingController extends Controller
 {
@@ -28,11 +29,12 @@ class RatingController extends Controller
 
     public function createRating(StoreRatingRequest $request)
     {
-        $user = User::findOrFail($request->user_id);
-        $dorm = Dorm::findOrFail($request->dorm_id);
+        $user = auth()->user();
+        $dorm = Dorm::findOrFail($request->dormId);
 
         $newRating = $user->ratings()->create([
             'dorm_id' => $dorm->id,
+            'review_id' => $request->reviewId,
             'location' => $request->locationRating,
             'security' => $request->securityRating,
             'internet' => $request->internetRating,
@@ -47,9 +49,23 @@ class RatingController extends Controller
         return new RatingResource($rating);
     }
 
-    public function updateRating(StoreRatingRequest $request, Rating $rating)
+    public function updateRating(UpdateRatingRequest $request, Rating $rating)
     {
-        $rating->update($request->all());
+        if (Rating::where('id', $rating->id)->where('user_id', auth()->id())->doesntExist()) {
+            return response()->json([
+                'message' => 'You are not authorized to update this rating.'
+            ], 403);
+        }
+
+        $rating->update([
+            'location' => $request->locationRating ?? $rating->location,
+            'security' => $request->securityRating ?? $rating->security,
+            'internet' => $request->internetRating ?? $rating->internet,
+            'bathroom' => $request->bathroomRating ?? $rating->bathroom
+        ]);
+
+        $rating->save();
+        
         return new RatingResource($rating);
     }
 

@@ -4,7 +4,7 @@ namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreLocationRequest extends FormRequest
+class UpdateReviewRequest extends FormRequest
 {
     public function authorize()
     {
@@ -14,9 +14,7 @@ class StoreLocationRequest extends FormRequest
     public function rules()
     {
         return [
-            "barangay" => "required|string|max:100",
-            "city" => "required|string|max:100",
-            "street" => "required|string|max:100",
+            "reviewBody" => "required|string|max:1000",
         ];
     }
 }

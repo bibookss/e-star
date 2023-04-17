@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\DormResource;
 use App\Http\Resources\V1\DormCollection;
 use App\Http\Requests\V1\StoreDormRequest;
+use App\Http\Requests\V1\UpdateDormRequest;
 
 class DormController extends Controller
 {
@@ -55,9 +56,11 @@ class DormController extends Controller
         return new DormResource($newDorm);
     }
 
-    public function updateDorm(StoreDormRequest $request, Dorm $dorm)
+    public function updateDorm(UpdateDormRequest $request, Dorm $dorm)
     {
-        $dorm->update($request->all());
+        $dorm->update([
+            "name" => $request->name
+        ]);
         return new DormResource($dorm);
     }
 

@@ -4,18 +4,19 @@ namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreReviewRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     public function rules()
     {
         return [
-            "dormId" => "required|integer",
-            "reviewBody" => "required|string|max:1000",
+            'name' => 'string',
+            'email' => 'email|unique:users,email',
+            'password' => 'required'
         ];
     }
 }

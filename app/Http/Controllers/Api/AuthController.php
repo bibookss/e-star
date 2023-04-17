@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\V1\StoreUserRequest;
 
 class AuthController extends Controller
 {
@@ -16,25 +17,9 @@ class AuthController extends Controller
      * @param Request $request
      * @return User 
      */
-    public function createUser(Request $request)
+    public function createUser(StoreUserRequest $request)
     {
         try {
-            //Validated
-            $validateUser = Validator::make($request->all(), 
-            [
-                'name' => 'required',
-                'email' => 'required|email|unique:users,email',
-                'password' => 'required'
-            ]);
-
-            if($validateUser->fails()){
-                return response()->json([
-                    'status' => false,
-                    'message' => 'validation error',
-                    'errors' => $validateUser->errors()
-                ], 401);
-            }
-
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,

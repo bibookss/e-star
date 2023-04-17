@@ -31,10 +31,10 @@ class Rating extends Model
         return $this->belongsTo(Dorm::class);
     }
 
-    public function review(): BelongsTo
-    {
-        return $this->belongsTo(Review::class);
-    }
+    // public function review(): BelongsTo
+    // {
+    //     return $this->belongsTo(Review::class);
+    // }
 
     public function getOverallRatingAttribute()
     {
