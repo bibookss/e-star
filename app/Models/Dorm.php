@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Rating;
-use App\Models\Review;
+use App\Models\Post;
+use App\Models\Image;
 use App\Models\Location;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Dorm extends Model
 {
@@ -18,86 +19,69 @@ class Dorm extends Model
         'name',
     ];
 
-    public function reviews(): HasMany
-    {
-        return $this->hasMany(Review::class);
-    }
-
-    public function ratings(): HasMany
-    {
-        return $this->hasMany(Rating::class);
-    }
-
     public function location(): BelongsTo 
     {
         return $this->belongsTo(Location::class);
     }
 
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    public function schools(): BelongsToMany
+    {
+        return $this->belongsToMany(School::class, 'school_dorms', 'dorm_id', 'school_id');
+    }
+
     public function getOverallRatingAttribute()
     {
-        if (!$this->ratings()->exists()) return;
+        if (!$this->posts()->exists()) return;
         
-        $average = ($this->ratings->sum('location') + $this->ratings->sum('security') + $this->ratings->sum('internet') + $this->ratings->sum('bathroom')) / (count($this->ratings) * 4);
+        $average = ($this->posts->sum('location_rating') + $this->posts->sum('security_rating') + $this->posts->sum('internet_rating') + $this->posts->sum('bathroom_rating')) / (count($this->posts) * 4);
         return round($average, 1);
     }
 
-    public function getReviewCountAttribute()
+    public function getPostCountAttribute()
     {
-
-        return count($this->reviews);
+        return count($this->posts);
     }
 
     public function getAverageLocationRatingAttribute()
     {
-        if (!$this->ratings()->exists()) return;
+        if (!$this->posts()->exists()) return;
 
-        $average = $this->ratings->sum('location') / count($this->ratings);
+        $average = $this->posts->sum('location_rating') / count($this->posts);
         return round($average, 1);
     }
 
     public function getAverageSecurityRatingAttribute()
     {
-        if (!$this->ratings()->exists()) return;
+        if (!$this->posts()->exists()) return;
 
-        $average = $this->ratings->sum('security') / count($this->ratings);
+        $average = $this->posts->sum('security_rating') / count($this->posts);
         return round($average, 1);
     }
 
     public function getAverageInternetRatingAttribute()
     {
-        if (!$this->ratings()->exists()) return;
+        if (!$this->posts()->exists()) return;
 
-        $average = $this->ratings->sum('internet') / count($this->ratings);
+        $average = $this->posts->sum('internet_rating') / count($this->posts);
         return round($average, 1);
     }
 
     public function getAverageBathroomRatingAttribute()
     {
-        if (!$this->ratings()->exists()) return;
+        if (!$this->posts()->exists()) return;
 
-        $average = $this->ratings->sum('bathroom') / count($this->ratings);
+        $average = $this->posts->sum('bathroom_rating') / count($this->posts);
         return round($average, 1);
-    } 
-
-    public function scopeSearch($query, $params)
-    {
-        foreach ($params as $param => $value) {
-            if (!empty($value)) {
-                if (in_array($param, ['barangay', 'city', 'street'])) {
-                    $query->whereHas('location', function ($subQuery) use ($param, $value) {
-                        $subQuery->where($param, 'like', "%$value%");
-                    });
-                } else if (in_array($param, ['location', 'security', 'bathroom', 'internet'])) {
-                    $query->whereHas('ratings', function ($subQuery) use ($param, $value) {
-                        $subQuery->where($param, '>=', $value);
-                    });
-                } else {
-                    $query->where($param, 'like', "%$value%");
-                }
-            }
-        }
-
-        return $query;
     }
 }
 

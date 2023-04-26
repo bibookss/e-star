@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Rating;
-use App\Models\Review;
+use App\Models\Post;
+use App\Models\Image;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -35,14 +35,14 @@ class User extends Authenticatable
         'user_id',
         'created_at'
     ];
-    
-    public function reviews()
+
+    public function posts(): HasMany
     {
-        return $this->hasMany(Review::class);
+        return $this->hasMany(Post::class);
     }
 
-    public function ratings(): HasMany
+    public function images(): HasMany
     {
-        return $this->hasMany(Rating::class);
+        return $this->hasMany(Image::class);
     }
 }

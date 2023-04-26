@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests\V1;
 
+use App\Models\Dorm;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateDormRequest extends FormRequest
+class StoreSchoolRequest extends FormRequest
 {
     public function authorize()
     {
@@ -14,9 +16,16 @@ class UpdateDormRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => 'required|string|max:100',
-            "locationId" => 'integer',
-            'schools' => [
+            'locationId' => 'required|integer',
+            'name' => [
+                'string', 
+                'max:255',
+                Rule::unique('schools', 'name')->where(function ($query) {
+                    $locationId = $this->input('locationId');
+                    return $query->where('location_id', $locationId);
+                }),
+            ],
+            'dorms' => [
                 'array',
                 function ($attribute, $value, $fail) {
                     foreach ($value as $item) {
@@ -25,7 +34,7 @@ class UpdateDormRequest extends FormRequest
                         }
                     }
                 },
-            ]
+            ],
         ];
     }
 }

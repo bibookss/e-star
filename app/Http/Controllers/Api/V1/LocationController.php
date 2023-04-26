@@ -15,54 +15,119 @@ class LocationController extends Controller
 {
     public function getAllLocations(Request $request)
     {
-        $filter = new LocationsFilter();
-        $filterItems = $filter->transform($request);
+        try {
+            $filter = new LocationsFilter();
+            $filterItems = $filter->transform($request);
 
-        $includedDorms = $request->query('includeDorms');
+            $includedDorms = $request->query('includeDorms');
 
-        $locations = Location::where($filterItems);
+            $locations = Location::where($filterItems);
 
-        if ($includedDorms === 'true') {
-            $locations = Location::with('dorms')->where($filterItems);
+            if ($includedDorms === 'true') {
+                $locations = Location::with('dorms')->where($filterItems);
+            }
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Successfully retrieved locations.',
+                'data' => new LocationCollection($locations->paginate()->appends($request->query()))
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something went wrong.',
+                'data' => $e->getMessage()
+            ]);
         }
-
-        return new LocationCollection($locations->paginate()->appends($request->query()));
     }
 
     public function createLocation(StoreLocationRequest $request)
     {
-        $newLocation = new Location($request->all());
-        $newLocation->save();
-        return new LocationResource($newLocation);
-    }
-
-    public function getLocation(Location $location)
-    {
-        $includeDorms = request()->query('includeDorms');
-
-        if ($includeDorms === 'true') {
-            return new LocationResource($location->loadMissing('dorms'));
+        try {
+            $newLocation = new Location($request->all());
+            $newLocation->save();
+            
+            return response()->json([
+                'status' => 200,
+                'message' => 'Successfully created location.',
+                'data' => new LocationResource($newLocation)
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something went wrong.',
+                'data' => $e->getMessage()
+            ]);
         }
-
-        return new LocationResource($location);
     }
 
-    public function updateLocation(UpdateLocationRequest $request, Location $location)
+    public function getLocation($id)
     {
-        $location->update([
-            'barangay' => $request->barangay ?? $location->barangay,
-            'city' => $request->city ?? $location->city,
-            'street' => $request->street ?? $location->street
-        ]);
-        return new LocationResource($location);
+        try {
+            $location = Location::findOrFail($id);
+            
+            $includeDorms = request()->query('includeDorms');
+            if ($includeDorms === 'true') {
+                $location->loadMissing('dorms');
+            }
+
+            $data = new LocationResource($location);
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Successfully retrieved location.',
+                'data' => $data
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something went wrong.',
+                'data' => $e->getMessage()
+            ]);
+        }
     }
 
-    public function deleteLocation(Location $location)
+    public function updateLocation(UpdateLocationRequest $request, $id)
     {
-        $location->delete();
+        try {
+            $location = Location::findOrFail($id);
 
-        $locations = Location::all();
+            $location->update([
+                'barangay' => $request->barangay ?? $location->barangay,
+                'city' => $request->city ?? $location->city,
+                'street' => $request->street ?? $location->street
+            ]);
 
-        return new LocationCollection($locations);
+            return response()->json([
+                'status' => 200,
+                'message' => 'Successfully updated location.',
+                'data' => new LocationResource($location)
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something went wrong.',
+                'data' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function deleteLocation($id)
+    {
+       try {
+            $location = Location::findOrFail($id);
+            
+            $location->delete();
+            return response()->json([
+                'status' => 200,
+                'message' => 'Successfully deleted location.',
+            ]);
+        } catch (\Exception $e) {
+           return response()->json([
+               'status' => 500,
+               'message' => 'Something went wrong.',
+               'data' => $e->getMessage()
+           ]);
+       }
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserRequest extends FormRequest
+class StoreImageRequest extends FormRequest
 {
     public function authorize()
     {
@@ -14,8 +14,9 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string',
-            'email' => 'email|unique:users,email',
+            'name' => 'required|string|max:255|unique:images,name',
+            'path' => 'required|string|max:255',
+            'dormId' => 'required|integer',
         ];
     }
 }

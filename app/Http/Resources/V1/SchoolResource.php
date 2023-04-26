@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources\V1;
 
+use App\Http\Resources\V1\LocationResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class SchoolResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +16,10 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'userId' => $this->id,
+            'schoolId' => $this->id,
             'name' => $this->name,
-            'email' => $this->email,
-            'isVerifiedStudent' => $this->is_verified_student,
-            'posts' => PostResource::collection($this->whenLoaded('posts')),
+            'location' => new LocationResource($this->location),
+            'dorms' => DormResource::collection($this->whenLoaded('dorms')),
         ];
     }
 }

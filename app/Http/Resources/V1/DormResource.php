@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\V1;
 
-use App\Http\Resources\V1\RatingResource;
+use App\Http\Resources\V1\PostResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class DormResource extends JsonResource
@@ -13,16 +13,16 @@ class DormResource extends JsonResource
             'dormId' => $this->id,
             'name' => $this->name,
             'location' => new LocationResource($this->location),
-            'reviewCount' => $this->whenLoaded('reviews', function () {
-                return $this->reviewCount;
-            }),
+            'schools' => SchoolResource::collection($this->whenLoaded('schools')),
+            'postCount' => $this->postCount,
             'averageLocationRating' => $this->averageLocationRating,
             'averageSecurityRating' => $this->averageSecurityRating,
             'averageBathroomRating' => $this->averageBathroomRating,
             'averageInternetRating' => $this->averageInternetRating,
-            // 'averageRoomRating' => $this->averageRoomRating, 
             'overallRating' => $this->overallRating,
-            'reviews' => ReviewResource::collection($this->whenLoaded('reviews')),
+            'posts' => $this->when(request()->has('includePosts') && request()->query('includePosts') === 'true', function () {
+                return PostResource::collection($this->posts);
+            }),        
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Dorm;
+use App\Models\School;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use App\Filters\V1\DormsFilter;
@@ -16,57 +17,156 @@ class DormController extends Controller
 {
     public function getAllDorms(Request $request)
     {
-        $filter = new DormsFilter();
-        $filterItems = $filter->transform($request);
+        try {
+            $filter = new DormsFilter();
+            $filterItems = $filter->transform($request);
 
-        $includeReviews = $request->query('includeReviews');
-        
-        $dorms = Dorm::where($filterItems);
+            $includeSchools = $request->query('includeSchools');
 
-        if ($includeReviews === 'true') {
-            $dorms = Dorm::with('reviews')->where($filterItems);
-        } 
-        
-        // without paginate 
-        //         return new DormCollection($dorms->get()); 
-        return new DormCollection($dorms->paginate()->appends($request->query()));
-   }
+            $dorms = Dorm::where($filterItems);
+            
+            if ($includeSchools === 'true') {
+                $dorms = Dorm::with('schools')->where($filterItems);
+            }
 
-    public function getDorm(Dorm $dorm)
-    {
-        $includeReviews = request()->query('includeReviews');
-
-        if ($includeReviews === 'true') {
-            return new DormResource($dorm->loadMissing('reviews'));
+            return response()->json([
+                'status' => 200,
+                'message' => 'Successfully retrieved dorms.',
+                'data' => new DormCollection($dorms->get())
+            ]); 
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something went wrong.',
+                'data' => $e->getMessage()
+            ]);
         }
+    }
 
-        return new DormResource($dorm);
+    public function getDorm($id)
+    {
+        try {
+            $dorm = Dorm::findOrFail($id);
+            $data = new DormResource($dorm);
+
+            $includeSchools = request()->query('includeSchools');
+
+            if ($includeSchools === 'true') {
+                $data = new DormResource($dorm->load('schools'));
+            }
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Successfully retrieved dorm.',
+                'data' => $data
+            ]);
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Dorm not found.',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something went wrong.',
+                'data' => $e->getMessage()
+            ]);
+        }
     }
 
     public function createDorm(StoreDormRequest $request)
     {
-        $location = Location::findOrFail($request->locationId);
+        try {
+            $location = Location::findOrFail($request->locationId);
 
-        $newDorm = new Dorm([
-            "name" => $request->name
-        ]);
+            $newDorm = new Dorm([
+                "name" => $request->name
+            ]);
 
-        $location->dorms()->save($newDorm);
-    
-        return new DormResource($newDorm);
+            $location->dorms()->save($newDorm);
+        
+            $data = new DormResource($newDorm);
+
+            // Associate dorm with schools
+            if ($request->schools) {
+                foreach($request->schools as $schoolId) {
+                    $school = School::findOrFail($schoolId);
+                    $school->dorms()->attach($newDorm);
+                }
+                $data = new DormResource($newDorm->load('schools'));
+            }
+
+            return response()->json([
+                'status' => 201,
+                'message' => 'Successfully created dorm.',
+                'data' => $data
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something went wrong.',
+                'data' => $e->getMessage()
+            ]);
+        }
     }
 
-    public function updateDorm(UpdateDormRequest $request, Dorm $dorm)
+    public function updateDorm(UpdateDormRequest $request, $id)
     {
-        $dorm->update([
-            "name" => $request->name
-        ]);
-        return new DormResource($dorm);
+        try {
+            $dorm = Dorm::findOrFail($id);
+
+            $dorm->update([
+                "name" => $request->name ?? $dorm->name,
+                "schools" => $request->schools ?? $dorm->schools,
+            ]);
+
+            // Associate dorm with updated location
+            if ($request->locationId) {
+                $location = Location::findOrFail($request->locationId);
+                $location->dorms()->save($dorm);
+            }
+            
+            // Associate dorm with schools
+            if ($request->schools) {
+                foreach($request->schools as $schoolId) {
+                    $school = School::findOrFail($schoolId);
+                    $school->dorms()->attach($dorm);
+                }
+            }
+
+            $data = new DormResource($dorm->load('schools'));
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Successfully updated dorm.',
+                'data' => $data
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something went wrong.',
+                'data' => $e->getMessage()
+            ]);
+        }
     }
 
-    public function deleteDorm(Dorm $dorm)
+    public function deleteDorm($id)
     {
-        $dorm->delete();
-        return response()->json(Dorm::all());
+        try {
+            $dorm = Dorm::findOrFail($id);
+
+            $dorm->delete();
+
+            return response()->json([
+                'status' => 204,
+                'message' => 'Successfully deleted dorm.',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something went wrong.',
+                'data' => $e->getMessage()
+            ]);
+        }
     }
 }

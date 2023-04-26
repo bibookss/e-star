@@ -35,14 +35,19 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], f
         Route::get('/{location}', 'LocationController@getLocation');
     });
 
-    Route::group(['prefix' => 'reviews'], function () {
-        Route::get('/', 'ReviewController@getAllReviews');
-        Route::get('/{review}', 'ReviewController@getReview');
+    Route::group(['prefix' => 'posts'], function () {
+        Route::get('/', 'PostController@getAllPosts');
+        Route::get('/{post}', 'PostController@getPost');
     });
 
-    Route::group(['prefix' => 'ratings'], function () {
-        Route::get('/', 'RatingController@getAllRatings');
-        Route::get('/{rating}', 'RatingController@getRating');
+    Route::group(['prefix' => 'schools'], function () {
+        Route::get('/', 'SchoolController@getAllSchools');
+        Route::get('/{user}', 'SchoolController@getSchool');
+    });
+
+    Route::group(['prefix' => 'images'], function () {
+        Route::get('/', 'ImageController@getAllImages');
+        Route::get('/{image}', 'ImageController@getImage');
     });
 
     Route::group(['prefix' => 'search'], function () {
@@ -54,6 +59,9 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], f
 // Protected Routes
 Route::group(['prefix' => 'auth', 'namespace' => 'App\Http\Controllers\Api', 'middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', 'AuthController@logoutUser');
+    Route::patch('/update', 'AuthController@updateUser');
+    Route::patch('/update-password', 'AuthController@changePassword');
+    Route::delete('/delete', 'AuthController@deleteUser');
 });
 Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1', 'middleware' => ['auth:sanctum']], function() { 
     Route::group(['prefix' => 'users'], function () {
@@ -73,15 +81,21 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1', 'm
         Route::delete('/{location}', 'LocationController@deleteLocation');
     });
 
-    Route::group(['prefix' => 'reviews'], function () {
-        Route::post('/', 'ReviewController@createReview');
-        Route::patch('/{review}', 'ReviewController@updateReview');
-        Route::delete('/{review}', 'ReviewController@deleteReview');
+    Route::group(['prefix' => 'posts'], function () {
+        Route::post('/', 'PostController@createPost');
+        Route::patch('/{post}', 'PostController@updatePost');
+        Route::delete('/{post}', 'PostController@deletePost');
     });
 
-    Route::group(['prefix' => 'ratings'], function () {
-        Route::post('/', 'RatingController@createRating');
-        Route::patch('/{rating}', 'RatingController@updateRating');
-        Route::delete('/{rating}', 'RatingController@deleteRating');
+    Route::group(['prefix' => 'schools'], function () {
+        Route::post('/', 'SchoolController@createSchool');
+        Route::patch('/{school}', 'SchoolController@updateSchool');
+        Route::delete('/{school}', 'SchoolController@deleteSchool');
+    });
+
+    Route::group(['prefix' => 'images'], function () {
+        Route::post('/', 'ImageController@createImage');
+        Route::patch('/{image}', 'ImageController@updateImage');
+        Route::delete('/{image}', 'ImageController@deleteImage');
     });
 });

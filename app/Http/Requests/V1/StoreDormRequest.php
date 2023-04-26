@@ -17,6 +17,16 @@ class StoreDormRequest extends FormRequest
         return [
             "locationId" => "required|integer",
             "name" => 'required|string|max:100',
+            'schools' => [
+                'array',
+                function ($attribute, $value, $fail) {
+                    foreach ($value as $item) {
+                        if (!is_int($item)) {
+                            $fail("The $attribute must be an array of integers.");
+                        }
+                    }
+                },
+            ]
         ];
     }
 

@@ -4,89 +4,65 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Filters\V1\UsersFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\UserResource;
 use App\Http\Resources\V1\UserCollection;
+use App\Http\Requests\V1\UpdateUserRequest;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function getAllUsers()
     {
-        return new UserCollection(User::all());
+        try {
+            $filter = new UsersFilter();
+            $filterItems = $filter->transform(request());
+
+            $includePosts = request()->query('includePosts');
+
+            $users = User::where($filterItems);
+
+            if ($includePosts === 'true') {
+                $users = User::with('posts')->where($filterItems);
+            }
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Successfully retrieved users.',
+                'data' => new UserCollection($users->get())
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something went wrong.',
+                'data' => $e->getMessage()
+            ]);
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function getUser($id)
     {
-        //
-    }
+        try {
+            $user = User::findOrFail($id);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+            $includePosts = request()->query('includePosts');
+            if ($includePosts === 'true') {
+                $user->loadMissing('posts');
+            }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getUser(User $user)
-    {
-        return new UserResource($user);
+            $data = new UserResource($user);
 
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $user = User::findOrFail($id);
-        $user->delete();
-
-        return response()->json(User::all(), 201);
+            return response()->json([
+                'status' => 200,
+                'message' => 'Successfully retrieved user.',
+                'data' => $data
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Something went wrong.',
+                'data' => $e->getMessage()
+            ]);
+        }
     }
 }
