@@ -20,14 +20,7 @@ class DormController extends Controller
         try {
             $filter = new DormsFilter();
             $filterItems = $filter->transform($request);
-
-            $includeSchools = $request->query('includeSchools');
-
             $dorms = Dorm::where($filterItems);
-            
-            if ($includeSchools === 'true') {
-                $dorms = Dorm::with('schools')->where($filterItems);
-            }
 
             return response()->json([
                 'status' => 200,
@@ -48,12 +41,6 @@ class DormController extends Controller
         try {
             $dorm = Dorm::findOrFail($id);
             $data = new DormResource($dorm);
-
-            $includeSchools = request()->query('includeSchools');
-
-            if ($includeSchools === 'true') {
-                $data = new DormResource($dorm->load('schools'));
-            }
 
             return response()->json([
                 'status' => 200,
@@ -128,6 +115,8 @@ class DormController extends Controller
             
             // Associate dorm with schools
             if ($request->schools) {
+                // Detach all schools
+                $dorm->schools()->detach();
                 foreach($request->schools as $schoolId) {
                     $school = School::findOrFail($schoolId);
                     $school->dorms()->attach($dorm);

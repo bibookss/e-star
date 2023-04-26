@@ -106,22 +106,21 @@ class SchoolController extends Controller
     {
         try {
             $school = School::findOrFail($id);
-            
-            if ($request->locationId) {
-                $location = Location::findOrFail($request->locationId);
-            } else {
-                $location = Location::findOrFail($school->location_id);
-            }
 
             $school->update([
                 'name' => $request->name ?? $school->name,
-                'location_id' => $request->locationId ?? $school->location_id
             ]);
 
-            $location->schools()->save($school);
+            if ($request->locationId) {
+                $location = Location::findOrFail($request->locationId);
+                $location->schools()->save($school);
+            }
 
             // Associate school with dorms
             if ($request->dorms) {
+                // Detach all dorms
+                $school->dorms()->detach();
+
                 foreach($request->dorms as $dormId) {
                     $dorm = Dorm::findOrFail($dormId);
                     $dorm->schools()->attach($school);
