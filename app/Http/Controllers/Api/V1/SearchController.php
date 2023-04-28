@@ -17,7 +17,7 @@ class SearchController extends Controller
         $filterItems = $filter->transform($request);
         $dorms = $filter->apply($filterItems);
 
-        return new DormCollection($dorms->paginate());
+        return new DormCollection($dorms->get());
     }
 }
 
