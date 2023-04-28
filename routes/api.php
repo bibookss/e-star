@@ -94,7 +94,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1', 'm
     });
 
     Route::group(['prefix' => 'images'], function () {
-        Route::post('/', 'ImageController@createImage');
+        Route::post('/', 'ImageController@uploadImage');
         Route::patch('/{image}', 'ImageController@updateImage');
         Route::delete('/{image}', 'ImageController@deleteImage');
     });

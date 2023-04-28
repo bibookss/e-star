@@ -36,15 +36,19 @@ class ImageController extends Controller
         }
     }
 
-    public function createImage(StoreImageRequest $request)
+    public function uploadImage(StoreImageRequest $request)
     {
         try {
             $user = auth()->user();
             $dorm = Dorm::findOrFail($request->dormId);
-        
+            
+            $imageFile = $request->file('image');
+            $filename = uniqid() . '.' . $imageFile->getClientOriginalExtension();
+            $imageFile->storeAs('public/uploads', $filename);
+            
             $newImage = Image::create([
                 'name' => $request->name,
-                'path' => $request->path,
+                'path' => 'public/uploads' . $filename,
                 'dorm_id' => $dorm->id,
                 'user_id' => $user->id
             ]);
