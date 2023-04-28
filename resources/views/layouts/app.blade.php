@@ -37,7 +37,7 @@
                 <a class="navbar-brand" href="#">
                     <img src="assets/e-star logo blue bg.png" alt="e-star logo" height="50"/>
                 </a>
-                <ul class="navbar-nav gap-5">
+                <ul class="navbar-nav gap-5 fw-bold">
                     <li class="nav-item"><a  href="/"  class="nav-link text-white {{request()->is('/') ? 'active' : ''}}" >Home</a></li>
                     <li class="nav-item"><a  href="/dorms" class="nav-link text-white {{request()->is('dorms') ? 'active' : ''}}" >Dorms</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="#">Contact</a></li>
