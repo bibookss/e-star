@@ -10,6 +10,10 @@
           <div class="carousel-item">
             <img src="assets/image1.jpg" class="d-block w-100" alt="...">
           </div>
+            <button>
+                <i class="fa-regular fa-image"></i>
+                <span class="ps-2 fw-bold">25 Images</span>
+            </button>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>

@@ -1,6 +1,6 @@
 <div>
     <div class="card" style="width: 30rem;" >
-        <div class="list-group list-group-flush">
+        <div class=" list-group-flush">
             <div class="ps-3 pt-3 pb-1 ">
                 <span class="rating-bg mx-2 px-2 py-1 rounded-5 fw-bold text-white fs-1">4.5</span>
                 <span class="mx-3 flex-grow-1 fw-bold">87 reviews</span>

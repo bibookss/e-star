@@ -2,7 +2,7 @@
     <div class="col-10 mx-auto">
         <div class="row row-cols-4 row-cols-md-5 gap-5 justify-content-center">
             <a class="btn" href="/viewDorm" role="button">
-                <div class="card fw-bold rounded-4 col">
+                <div class="card fw-bold rounded-4 col" style="border-bottom: #000000 solid 4px;">
                     <img class="card-img-top img-card" src="assets/image1.jpg" alt="...">
                     <div class="card-body">
                         <h5 class="card-title d-flex fw-bold">Dormitory</h5>
