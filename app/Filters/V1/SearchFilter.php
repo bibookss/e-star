@@ -28,14 +28,14 @@ class SearchFilter extends ApiFilter
     ];
 
     protected $columnMap = [
-        'locationRating' => 'location', 
-        'securityRating' => 'security', 
-        'bathroomRating' => 'bathroom', 
-        'internetRating' => 'internet',
-        'overallRating' => 'overall'
+        'locationRating' => 'location_rating', 
+        'securityRating' => 'security_rating', 
+        'bathroomRating' => 'bathroom_rating', 
+        'internetRating' => 'internet_rating',
+        'overallRating' => 'overall_rating'
     ];
 
-    public function apply($filterItems) {
+    public function applys($filterItems) {
         $query = Dorm::with(['location', 'ratings']);
     
         foreach ($filterItems as $item) {
@@ -67,5 +67,32 @@ class SearchFilter extends ApiFilter
     
         return $query;
     }
+
+    public function apply($filterItems) {
+        $query = Dorm::with(['location', 'posts']);
+
+        foreach ($filterItems as $item) {
+            $column = $item[0];
+            $operator = $item[1];
+            $value = $item[2];
+
+            if (in_array($column, ['barangay', 'city', 'street'])) {
+                $query->whereHas('location', function ($query) use ($column, $operator, $value) {
+                    $query->where($column, $operator, $value);
+                });
+            } elseif (in_array($column, ['location_rating', 'security_rating', 'bathroom_rating', 'internet_rating', 'overall_rating'])) {
+                if ($column === 'overall_rating') {
+                    $query->whereRaw("(SELECT ROUND(AVG((location_rating + security_rating + bathroom_rating + internet_rating) / 4), 1) FROM `posts` WHERE `dorm_id` = `dorms`.`id`) {$operator} ?", [$value]);
+                } else {
+                    $query->whereRaw("(SELECT ROUND(AVG(`{$column}`), 1) FROM `posts` WHERE `dorm_id` = `dorms`.`id`) {$operator} ?", [$value]);
+                }
+            } else {
+                $query->where($column, $operator, $value);
+            }
+        }
+
+        return $query;
+    }
+
     
 }
