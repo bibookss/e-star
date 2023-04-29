@@ -1,34 +1,60 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="landing container-fluid px-5 pt-3">
+<div class="container-fluid px-5 pt-3">
     <br><br>
     <div class="row container-fluid">
         <div class="col my-5 d-flex justify-content-center pt-3">
-            <input type="text" class="address-input rounded-4 w-25 mx-5" id="fname" name="address" placeholder="   Enter address">
+            <input type="text" class="address-input rounded-4 w-25 mx-5 ps-3" id="fname" name="address" placeholder="Enter address">
             <button class="ylw-btn text-white px-4 py-2 fw-bold rounded-4">Search now</button>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-1 ms-5">
-                <h4 class="fw-bold">Sort by:</h4>
-            </div>
-            <div class="col">
-                <div class="dropdown d-grid gap-2 col-2">
-                    <button class="sort-dropdown dropdown-toggle btn-outline-dark rounded-4 h-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Most Likes
-                    </button>
-                    <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Rating</a></li>
-                    <li><a class="dropdown-item" href="#">Recent</a></li>
-                    <li><a class="dropdown-item" href="#">Most Likes</a></li>
-                    </ul>
-                </div>
+    <div class="d-flex">
+        <h4 class="fw-bold px-3 pt-2 fs-2">Sort by:</h4>
+        <div class="dropdown">
+            <button class="dropdown-btn">Most Likes<i class="fa-solid fa-caret-down fa-lg ps-2"></i></button>
+            <div class="dropdown-options">
+              <a href="#">Most Likes</a>
+              <a href="#">Rating</a>
+              <a href="#">Recent</a>
             </div>
         </div>
+        <h4 class="fw-bold px-3 pt-2 fs-2">Filter</h4>
+        <div class="dropdown">
+            <button class="dropdown-btn">by<i class="fa-solid fa-caret-down fa-lg ps-2"></i></button>
+            <div class="dropdown-options">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault"><span class="ps-2">Internet</span></label>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault"><span class="ps-2">Air Conditioner</span></label>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault"><span class="ps-2">Parking</span></label>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault"><span class="ps-2">Kitchen</span></label>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault"><span class="ps-2">CCTV</span></label>
+              </div>
+                
+            </div>
+          </div>
     </div>
-    <x-dorm-list></x-dorm-list>
+    <div class="d-flex flex-row flex-wrap gap-4 justify-content-center">
+        <x-dorm-list></x-dorm-list>
+        <x-dorm-list></x-dorm-list>
+        <x-dorm-list></x-dorm-list>
+        <x-dorm-list></x-dorm-list>
+        <x-dorm-list></x-dorm-list>
+        <x-dorm-list></x-dorm-list>
+    </div>
 </div>
 <x-footer></x-footer>
 @endsection

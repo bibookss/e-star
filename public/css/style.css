@@ -15,6 +15,9 @@
     color:white;
     border-bottom: #FCA311 solid 3px;
 }
+.nav-link:hover{
+    color: #928f8f;
+}
 .ylw-btn{
     font-family: 'DM Sans', sans-serif;
     background-color: #FCA311;
@@ -35,13 +38,50 @@
 .blue-btn:hover{
     background-color: #3976ab;
 }
+.google-btn{
+    font-family: 'DM Sans', sans-serif;
+    background-color: #F3F3F3;
+    border: 2px solid black;
+    color: black;
+    border-bottom: #000000 solid 4px;
+}
+.center{
+    margin:auto;
+}
+.right{
+    position: absolute;
+    right: 0px;
+}
+.hr2{
+    overflow: hidden;
+}
+.hr2:before,
+.hr2:after {
+  background-color: #000;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 18%;
+}
+
+.hr2:before {
+    right: 0.5em;
+    margin-left: -50%;
+}
+
+.hr2:after {
+    left: 0.5em;
+    margin-right: -50%;
+}
 .real-img{
     border: 2px solid black;
 }
 .address-input{
     width:60%;
     border: 2px solid black;
-    background-color: #D9D9D9;
+    background-color: #F3F3F3;
     height: 60px;
     border-bottom: #000000 solid 4px;
 }
@@ -70,28 +110,27 @@ text{
 }
 .sort-dropdown{
     font-family: 'DM Sans', sans-serif;
-    background-color: #D9D9D9;
+    background-color: #F3F3F3;
     border-bottom: #000000 solid 4px;
     
 }
+
 .carousel-inner{
     border: 2px solid black;
     background-color: #023047;
     border-radius: 20px;
     height: 300px;
+    border-bottom: #000000 solid 4px;
 }
 .carousel-inner button{
     position: absolute;
-    top: 85%;
-    left: 80%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
+    top: 75%;
+    left: 75%;
     background-color: white;
     color: black;
     font-size: 16px;
     padding: 12px 24px;
     border: 2px solid black;
-    cursor: pointer;
     border-radius: 10px;
     border-bottom: #000000 solid 4px;
 }
@@ -100,13 +139,14 @@ text{
 }
 .btn .card{
     border: 2px solid black;
-    background-color: #D9D9D9;
+    background-color: #F3F3F3;
     width: 280px;
 }
 .card{
     border: 2px solid black;
     background-color: #F3F3F3;
     border-bottom: #000000 solid 4px;
+    border-radius:15px;
 }
 .rating-bg{
     background-color: #3AB738;
@@ -120,6 +160,91 @@ text{
 .card-text{
     font-size: 11px;
 }
+.modal-dialog{
+    max-width: 750px;
+}
+.modal-lg{
+    max-width: 1000px;
+}
+.modal-backdrop{
+    display:none;
+    }
+.sign-in-modal{
+    border: 2px solid black;
+    border-bottom: 4px solid black;
+}
+.modal-review{
+    border: 4px solid black;
+    border-bottom: 7px solid black;
+}
+.form-control{
+    background-color: #F3F3F3;
+    border: 2px solid black;
+    border-bottom: 4px solid black;
+}
+
+.dorm-card{
+    position:relative;
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+.dropdown-btn{
+    border: 2px solid black;
+    border-radius:15px;
+    border-bottom: 4px solid black;
+    padding: 10px 20px;
+    font-size:18px;
+    cursor:pointer;
+}
+.dropdown-options {
+    display: none;
+    position: absolute;
+    overflow: auto;
+    background-color:#F3F3F3;
+    border: 2px solid black;
+    border-radius:15px;
+    border-bottom: 4px solid black;
+    z-index: 9;
+}
+.dropdown:hover .dropdown-options {
+    display: block;
+}
+.dropdown-options a {
+    display: block;
+    color: #000000;
+        
+    text-decoration: none;
+    padding:20px 50px 20px 20px;
+}
+.dropdown-options a:hover {
+    color: #0a0a23;
+    background-color: #ddd;
+    border-radius:5px;
+}
+
+.dropdown-options .form-check {
+    display: block;
+    color: #000000;
+    text-decoration: none;
+    padding:20px 50px 20px 50px;
+    z-index: 100;
+}
+.dropdown-options .form-check:hover {
+    color: #0a0a23;
+    background-color: #ddd;
+    border-radius:5px;
+    z-index: 100;
+}
+.account-btn{
+    border: none;
+    background-color: #F3F3F3;
+}
+
+
+
 
 
 .rate {
@@ -165,5 +290,5 @@ text{
     color:#3AB738;
 }
 .bg-gray2{
-    background-color: #D9D9D9;
+    background-color: #F3F3F3;
 }

@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('homepage');
 Route::get('dorms', [App\Http\Controllers\DormsController::class, 'index'])->name('dorms');
 Route::get('/viewDorm', [App\Http\Controllers\ViewDormController::class, 'index'])->name('viewDorm');
+Route::get('/profile', [App\Http\Controllers\profileController::class, 'index'])->name('profile');

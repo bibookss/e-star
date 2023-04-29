@@ -1,5 +1,5 @@
 <div>
-    <div class="card" style="width: 30rem;" >
+    <div class="card rounded-4" style="width: 30rem;" >
         <div class=" list-group-flush">
             <div class="ps-3 pt-3 pb-1 ">
                 <span class="rating-bg mx-2 px-2 py-1 rounded-5 fw-bold text-white fs-1">4.5</span>
@@ -22,9 +22,11 @@
                 </span>
             </div>
         </div>
+        <div class="ps-2">
         <x-star-rating></x-star-rating>
+        </div>
     </div>
     <div class="py-5">
-        <img class="real-img rounded-4" src="assets/real-map.png"  style="width: 30rem;">
+        <img class="real-img rounded-4" src="assets/real-map.png"  style="width: 30rem; border-bottom: 4px solid black;">
     </div>
 </div>

@@ -14,7 +14,7 @@
                     to help each other decide their rest in  the city!</h4>
             </div>
             <div class="my-5 align-items-center d-flex gap-5">
-                <input type="text" class="address-input rounded-4" id="fname" name="address" placeholder="   Enter address">
+                <input type="text" class="address-input rounded-4 ps-4" id="fname" name="address" placeholder="Enter address">
                 <button class="ylw-btn text-white px-4 py-2 fw-bold rounded-4">Search now</button>
             </div>
         </div>
@@ -75,7 +75,16 @@
 <div>
     <h1 class="text-center fw-bold pt-5">View the best reviewed dormitories in the city</h1>
 </div>
-<x-dorm-list></x-dorm-list>
+<div class="container">
+    <div class="d-flex flex-wrap gap-4 justify-content-center">
+        <x-dorm-list></x-dorm-list>
+        <x-dorm-list></x-dorm-list>
+        <x-dorm-list></x-dorm-list>
+        <x-dorm-list></x-dorm-list>
+        <x-dorm-list></x-dorm-list>
+        <x-dorm-list></x-dorm-list>
+    </div>
+</div>
 <!--footer-->
 <x-footer></x-footer>
 @endsection

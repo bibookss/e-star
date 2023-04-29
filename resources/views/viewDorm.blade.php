@@ -6,7 +6,7 @@
   <x-image-carousel></x-image-carousel>
   <div class="d-flex py-5">
     <h2 class="fw-bold p-1 flex-grow-1">Elice Dormitory</h2>
-    <button class="ylw-btn text-white px-4 py-2 fw-bold rounded-4">Write a Review</button>
+    <x-make-review></x-make-review>
   </div>
   <div class="d-flex justify-content-between">
     <x-dorm-summary></x-dorm-summary>
@@ -17,7 +17,7 @@
   </div>
   <div class="container-fluid row justify-content-end pb-5">
     <p class="col-5 fw-bold pt-4 ">Showing 2 of 87 reviews</p>
-    <button class="col-2 blue-btn text-white fw-bold rounded-4">Load More</button>
+    <button class="col-2 blue-btn text-white rounded-4">Load More</button>
   </div>
 </div>
 <x-footer></x-footer>
