@@ -15,7 +15,7 @@
                     </button>
                 </div>
                 <div class="px-5">
-                    <textarea rows="7" class="form-control" placeholder="Write something..." aria-label="review-text"></textarea>
+                    <textarea rows="7" style="width:900px;" class=" write-review p-4 rounded-4" placeholder="Write something..." aria-label="review-text"></textarea>
                     <br>
                     <x-star-rating></x-star-rating>
                 </div>

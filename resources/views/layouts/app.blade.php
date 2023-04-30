@@ -37,16 +37,16 @@
                     <img src="assets/e-star logo blue bg.png" alt="e-star logo" height="50"/>
                 </a>
                 <ul class="navbar-nav d-flex ms-auto gap-5">
-                    <li class="nav-item"><a href="/"  class="nav-link text-white {{request()->is('/') ? 'active' : ''}}" >Home</a></li>
+                    <li class="nav-item ps-5"><a href="/"  class="nav-link text-white {{request()->is('/') ? 'active' : ''}}" >Home</a></li>
                     <li class="nav-item"><a href="/dorms" class="nav-link text-white {{request()->is('dorms') ? 'active' : ''}}" >Dorms</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="#">Contact</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="#">About</a></li>
                 </ul>
-                <div class="d-flex gap-5 ms-auto">
+                <div class="d-flex gap-1 ms-auto">
                     <a href="/profile">
                         <iconify-icon icon="healthicons:ui-user-profile" height="40" style="color: white;"></iconify-icon><a>
                     <x-sign-in></x-sign-in>
-                    
+                    <x-create-account></x-create-account>
                 </div>
             </div>
         </nav>
