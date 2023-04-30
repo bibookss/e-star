@@ -77,12 +77,9 @@
 </div>
 <div class="container">
     <div class="d-flex flex-wrap gap-4 justify-content-center">
-        <x-dorm-list></x-dorm-list>
-        <x-dorm-list></x-dorm-list>
-        <x-dorm-list></x-dorm-list>
-        <x-dorm-list></x-dorm-list>
-        <x-dorm-list></x-dorm-list>
-        <x-dorm-list></x-dorm-list>
+        @foreach ($dorms['data'] as $dorm) 
+          <x-dorm-list :dorm="$dorm"></x-dorm-list>  
+        @endforeach
     </div>
 </div>
 <!--footer-->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dorms;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 
 class DormsController extends Controller
 {
@@ -14,7 +15,10 @@ class DormsController extends Controller
      */
     public function index()
     {
-        return view ('dorms');
+        $client = new Client();
+        $response = $client->get('http://localhost:8000/api/v1/dorms');
+        $dorms = json_decode($response->getBody()->getContents(), true);
+        return view ('dorms', compact('dorms'));
     }
 
     /**
