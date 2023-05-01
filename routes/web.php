@@ -2,21 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// Public Routes
+Route::group(['namespace' => 'App\Http\Controllers'], function() { 
+    Route::get('/', 'HomeController@index');
 
+    Route::group(['prefix' => 'dorms'], function () {
+        Route::get('/', 'DormController@index');
+        Route::get('/{dorm}', 'DormController@show');
+        Route::get('/create-dorm', 'DormController@create');
+        Route::get('/{dorm}/edit-dorm', 'DormController@edit');
+    });
 
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/', 'UserController@index');
+        Route::get('/{user}', 'UserController@show');
+        // Route::get('/', 'UserController@create');
+        // Route::get('/{user}', 'UserController@edit');
+    });
+});
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('homepage');
-Route::get('dorms', [App\Http\Controllers\DormsController::class, 'index'])->name('dorms');
-Route::get('/viewDorm', [App\Http\Controllers\ViewDormController::class, 'index'])->name('viewDorm');
-Route::get('/profile', [App\Http\Controllers\profileController::class, 'index'])->name('profile');
-Route::get('/createDorm', [App\Http\Controllers\CreateDormController::class, 'index'])->name('createDorm');

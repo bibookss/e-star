@@ -12,7 +12,7 @@ data-bs-toggle="modal" data-bs-target="#signIn">
             <button class="btn d-flex flex-row-reverse right" data-bs-dismiss="modal" aria-label="Close">
                 <i class="fa-regular fa-circle-xmark fa-2xl"></i>
             </button>
-            <form>
+            <form method="POST" action="http://localhost:8001/api/auth/login">
               <div class="container">
                   <div class="fs-2 fw-bold pt-2">Sign-in</div>
                   <br>

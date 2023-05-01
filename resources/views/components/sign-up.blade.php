@@ -12,11 +12,11 @@
             <button class="btn d-flex flex-row-reverse right" data-bs-dismiss="modal" aria-label="Close">
                 <i class="fa-regular fa-circle-xmark fa-2xl"></i>
             </button>
-            <form>
+            <form method="POST" action="http://localhost:8001/api/auth/register">
               <div class="container">
                     <div class="fs-2 fw-bold pt-2">Create Account</div>
                     <br>
-                    <input type="email" class=" my-2 center rounded-2 p-2 email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" required>
+                    <input type="email" class=" my-2 center rounded-2 p-2 email" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Email" required>
                     <br>
                     <input type="password" class="password rounded-2 p-2 my-2" id="pass" name="password" minlength="8" placeholder="Password" required>
                     <br>
