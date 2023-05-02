@@ -45,15 +45,56 @@
                 <div class="d-flex gap-1 ms-auto">
                     <a href="/profile">
                         <iconify-icon icon="healthicons:ui-user-profile" height="40" style="color: white;"></iconify-icon><a>
-                    <x-sign-in></x-sign-in>
-                    <x-sign-up></x-sign-up>
+                    
+                    @guest
+                        <x-sign-in></x-sign-in>
+                        <x-sign-up></x-sign-up>                        
+                    @endguest
+
+                    <!-- Temporary Logout -->
+                    @if(auth()->check())
+                        <form id="logout-form">
+                            @csrf
+                            <button type="submit" class="ylw-btn rounded-4 px-2 py-1 my-2" style="width: 20rem;">Logout</button>
+                        </form>
+                    @endif
                 </div>
             </div>
         </nav>
-        
         <main class="landing">
             @yield('content')
         </main>
     </div>
 </body>
 </html>
+
+<script>
+    const logoutForm = document.getElementById('logout-form');
+    if (logoutForm) {
+        logoutForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+        
+            const logout = new FormData(logoutForm);
+            const token = localStorage.getItem('token');
+            axios.post('http://localhost:8001/api/auth/logout', logout, {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            })
+            .then(response => {
+                alert('User logged out successfully!');
+                console.log(response.data);
+
+                // Remove the token from local storage
+                localStorage.removeItem('token');
+
+                // Redirect the user to the dashboard or any other page
+                window.location = '/';
+            })
+            .catch(error => {
+                alert(error.response.data.message);
+                // Handle error response here
+            });
+        });
+    }
+    </script>
