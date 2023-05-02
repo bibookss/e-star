@@ -5,14 +5,15 @@
 <div class="px-5 pt-5 mt-5">
   <x-image-carousel></x-image-carousel>
   <div class="d-flex py-5">
-    <h2 class="fw-bold p-1 flex-grow-1">Elice Dormitory</h2>
-    <x-make-review></x-make-review>
+    <h2 class="fw-bold p-1 flex-grow-1"> {{$dorm['data']['name']}} </h2>
+    <x-create-review />
   </div>
   <div class="d-flex justify-content-between">
-    <x-dorm-summary></x-dorm-summary>
+    <x-dorm-summary :dorm="$dorm['data']" />
     <div class="d-flex flex-column gap-5">
-      <x-user-dorm-rating></x-user-dorm-rating>
-      <x-user-dorm-rating></x-user-dorm-rating>
+      @foreach ($dorm['data']['posts'] as $post) 
+        <x-user-dorm-rating :post="$post" />
+      @endforeach
     </div>
   </div>
   <div class="container-fluid row justify-content-end pb-5">

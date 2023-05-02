@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class DormList extends Component
+class UserDormRating extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class DormList extends Component
      */
     public function render()
     {
-        return view('components.dorm-list');
+        return view('components.user-dorm-rating');
     }
 }

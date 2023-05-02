@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class createAccount extends Component
+class StarRating extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class createAccount extends Component
      */
     public function render()
     {
-        return view('components.create-account');
+        return view('components.star-rating');
     }
 }

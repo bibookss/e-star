@@ -34,7 +34,7 @@
         <nav class="navbar navbar-expand-md fixed-top">
             <div class="container px-5">
                 <a class="navbar-brand " href="/">
-                    <img src="assets/e-star logo blue bg.png" alt="e-star logo" height="50"/>
+                    <img src="/assets/e-star-logo-blue-bg.png" alt="e-star logo" height="50"/>
                 </a>
                 <ul class="navbar-nav d-flex ms-auto gap-5">
                     <li class="nav-item ps-5"><a href="/"  class="nav-link text-white {{request()->is('/') ? 'active' : ''}}" >Home</a></li>
@@ -46,7 +46,7 @@
                     <a href="/profile">
                         <iconify-icon icon="healthicons:ui-user-profile" height="40" style="color: white;"></iconify-icon><a>
                     <x-sign-in></x-sign-in>
-                    <x-create-account></x-create-account>
+                    <x-sign-up></x-sign-up>
                 </div>
             </div>
         </nav>
