@@ -3,11 +3,13 @@
 @section('content')
 <div class="container-fluid px-5 pt-3">
     <br><br>
-    <div class="row container-fluid">
-        <div class="col my-5 d-flex justify-content-center pt-3">
-            <input type="text" class="address-input rounded-4 w-25 mx-5 ps-3" id="fname" name="address" placeholder="Enter address">
-            <button class="ylw-btn text-white px-4 py-2 fw-bold rounded-4">Search now</button>
+    <div class=" ">
+        <div class=" my-5 d-flex justify-content-center pt-3">
+          <form class="mx-auto">
+            <input type="text" class="address-input rounded-4 w-50 mx-5 ps-3" id="fname" name="address" placeholder="Search Dorm">
+            <button type="submit" value="submit" class="ylw-btn text-white px-4 py-3 fw-bold rounded-4">Search now</button>
             <x-create-dorm></x-create-dorm>
+          </form>
         </div>
     </div>
     <div class="d-flex">
