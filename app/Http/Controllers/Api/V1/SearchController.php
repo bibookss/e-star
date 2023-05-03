@@ -43,6 +43,8 @@ class SearchController extends Controller
                 $query->orWhere('street', $operator, $value);
                 $query->orWhere('name', $operator, $value);
             });
+
+            \Log::debug($query->toSql());
         }
 
         $dorms = $query->get();

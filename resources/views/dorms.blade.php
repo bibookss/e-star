@@ -4,12 +4,16 @@
 <div class="container-fluid px-5 pt-3">
     <br><br>
     <div class="row container-fluid">
-        <div class="col my-5 d-flex justify-content-center pt-3">
-            <input type="text" class="address-input rounded-4 w-25 mx-5 ps-3" id="fname" name="address" placeholder="Enter address">
-            <button class="ylw-btn text-white px-4 py-2 fw-bold rounded-4">Search now</button>
-            <x-create-dorm></x-create-dorm>
-        </div>
-    </div>
+      <form method="GET" action="{{ route('search') }}">
+      <div class="col my-5 d-flex justify-content-center pt-3">
+          @csrf
+          <input type="text" class="address-input rounded-4 w-25 mx-5 ps-3" id="fname" name="address" placeholder="Enter address">
+          <button class="ylw-btn text-white px-4 py-2 fw-bold rounded-4">Search now</button>
+        </form>  
+        <x-create-dorm></x-create-dorm>
+      </div>
+  </div>
+
     <div class="d-flex">
         <h4 class="fw-bold px-3 pt-2 fs-2">Sort by:</h4>
         <div class="dropdown">

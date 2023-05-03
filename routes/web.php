@@ -19,6 +19,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
         Route::get('/{dorm}/edit-dorm', 'DormController@edit');
     });
 
+    Route::get('/search', 'DormController@search')->name('search');
+
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', 'UserController@index');
         Route::get('/{user}', 'UserController@show');
