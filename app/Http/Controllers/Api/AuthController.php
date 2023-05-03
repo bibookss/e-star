@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use queue;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,9 +12,17 @@ use App\Http\Resources\V1\UserResource;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\V1\StoreUserRequest;
 use App\Http\Requests\V1\UpdateUserRequest;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Response;
 
 class AuthController extends Controller
 {
+    public function isAuthenticated()
+    {
+        return auth()->check();
+    }
+
     public function createUser(StoreUserRequest $request)
     {
         try {
@@ -27,7 +36,7 @@ class AuthController extends Controller
                 'status' => 201,
                 'message' => 'User Created Successfully',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
-            ]);
+            ])->header('Access-Control-Allow-Origin', 'http://localhost:8000');
 
         } catch (\Throwable $th) {
             return response()->json([
@@ -54,21 +63,23 @@ class AuthController extends Controller
                 ]);
             }
 
-            if(!Auth::attempt($request->only(['email', 'password']))){
+            if(Auth::attempt($request->only(['email', 'password']))){
+                $user = Auth::user();
+                // $success['token'] = $user->createToken('API Token')->accessToken;
+                // $success['name'] = $user->name;
+
+                return response()->json([
+                    'status' => 204,
+                    'message' => 'User Logged In Successfully',
+                    'user' => $user->email,
+                    'token' => $user->createToken("API TOKEN")->plainTextToken
+                ])->header('Access-Control-Allow-Origin', 'http://localhost:8000');
+            } else {
                 return response()->json([
                     'status' => 401,
                     'message' => 'Email & Password does not match with our record.',
                 ]);
             }
-
-            $user = User::where('email', $request->email)->first();
-
-            return response()->json([
-                'status' => 204,
-                'message' => 'User Logged In Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
-            ]);
-
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 500,
@@ -81,6 +92,9 @@ class AuthController extends Controller
     {
         try {
             auth()->user()->tokens()->delete();
+
+            Session::flush();
+            Auth::logout(); 
 
             return response()->json([
                 'status' => 204,
