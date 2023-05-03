@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class SearchFilter extends ApiFilter
 {
     protected $safeParms = [
+        'address' => ['LIKE'],
         'barangay' => ['eq'],
         'city' => ['eq'],
         'street' => ['eq'],
@@ -25,6 +26,7 @@ class SearchFilter extends ApiFilter
         'gte' => '>=',
         'lt' => '<',
         'lte' => '<=',
+        'LIKE' => 'LIKE'
     ];
 
     protected $columnMap = [
@@ -34,39 +36,6 @@ class SearchFilter extends ApiFilter
         'internetRating' => 'internet_rating',
         'overallRating' => 'overall_rating'
     ];
-
-    public function applys($filterItems) {
-        $query = Dorm::with(['location', 'ratings']);
-    
-        foreach ($filterItems as $item) {
-            $column = $item[0];
-            $operator = $item[1]; 
-            $value = $item[2];
-    
-            if (in_array($column, ['barangay', 'city', 'street'])) {
-                $query->whereHas('location', function ($query) use ($column, $operator, $value) {
-                    $query->where($column, $operator, $value);
-                });
-            } elseif (in_array($column, ['location', 'security', 'bathroom', 'internet', 'overall'])) {
-                if ($column === 'overall') {
-                    $query->whereHas('ratings', function ($query) use ($operator, $value) {
-                        $query->whereRaw('(SELECT ROUND(AVG((location + security + bathroom + internet) / 4), 1) FROM `ratings` WHERE `dorm_id` = `dorms`.`id`) ' . $operator . ' ?', [$value]);
-                    });
-                } else {
-                    $query->whereHas('ratings', function ($query) use ($column, $operator, $value) {
-                        $query->where($column, $operator, $value);
-                    });
-                    $query->whereHas('ratings', function ($query) use ($column, $operator, $value) {
-                        $query->whereRaw('(SELECT ROUND(AVG(`'.$column.'`), 1) FROM `ratings` WHERE `dorm_id` = `dorms`.`id`) ' . $operator . ' ?', [$value]);
-                    });
-                }
-            } else {
-                $query->where($column, $operator, $value);
-            }
-        }
-    
-        return $query;
-    }
 
     public function apply($filterItems) {
         $query = Dorm::with(['location', 'posts']);
@@ -92,7 +61,5 @@ class SearchFilter extends ApiFilter
         }
 
         return $query;
-    }
-
-    
+    }    
 }

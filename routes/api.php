@@ -51,6 +51,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], f
     });
 
     Route::group(['prefix' => 'search'], function () {
+        Route::get('/filter', 'SearchController@filterDorms');
         Route::get('/', 'SearchController@searchDorms');
     });
 });
