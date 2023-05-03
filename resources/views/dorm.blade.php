@@ -12,7 +12,7 @@
     <x-dorm-summary :dorm="$dorm['data']" />
     <div class="d-flex flex-column gap-5">
       @foreach ($dorm['data']['posts'] as $post) 
-        <x-user-dorm-rating :post="$post" />
+        <x-dorm-post :post="$post" />
       @endforeach
     </div>
   </div>

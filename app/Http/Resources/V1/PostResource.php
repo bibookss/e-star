@@ -12,6 +12,7 @@ class PostResource extends JsonResource
             'postId' => $this->id,
             'dormId' => $this->dorm_id,
             'userId' => $this->user_id,
+            'datePosted' => $this->created_at,
             'review' => $this->review,
             'locationRating' => $this->location_rating,
             'securityRating' => $this->security_rating,
