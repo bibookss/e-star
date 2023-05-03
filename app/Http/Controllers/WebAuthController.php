@@ -19,7 +19,7 @@ class WebAuthController extends Controller {
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer ' . session()->get('token')
             ],
-            'query' => [
+            'form_params' => [
                 'email' => $email,
                 'password' => $password
             ]
@@ -73,5 +73,48 @@ class WebAuthController extends Controller {
                 'message' => 'User logged out successfully'
             ]);
         }
+    }
+
+    public function register(Request $request) {
+        $http = new Client();
+
+        $email = $request->email;
+        $password = $request->password;
+
+        $response = $http->post('http://localhost:8001/api/auth/register', [
+            'headers' => [
+                'Accept' => 'application/json',
+            ],
+            'form_params' => [
+                'email' => $email,
+                'password' => $password
+            ]
+        ]);
+
+        $result = json_decode((string) $response->getBody(), true);
+
+        \Log::debug("REGISTER DITO");
+
+        
+
+        if ($result['status'] == 201) {
+            \Log::debug("201 daw succeess");
+            $credentials = [
+                'email' => $request->input('email'),
+                'password' => $request->input('password'),
+            ];
+            if (Auth::attempt($credentials)) {
+                \Log::debug('User authenticated successfull dotp after g 204');
+                $token = $result['token'];
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'User authenticated successfully',
+                    'user' => Auth::user()->email,
+                    'token' => $token
+                ]);
+            }
+        }
+
+
     }
 }

@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 Route::group(['namespace' => 'App\Http\Controllers'], function() { 
     Route::post('/login', 'WebAuthController@login');
     Route::post('/logout', 'WebAuthController@logout');
+    Route::post('/register', 'WebAuthController@register');
 
     Route::get('/', 'HomeController@index');
 

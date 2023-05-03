@@ -49,7 +49,7 @@
 
         const register = new FormData(registerForm);
 
-        axios.post('http://localhost:8001/api/auth/register', register)
+        axios.post('http://localhost:8000/register', register)
             .then(response => {
                 alert(response.data.message);
                 console.log(response.data);
