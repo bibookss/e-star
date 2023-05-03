@@ -42,12 +42,13 @@ data-bs-toggle="modal" data-bs-target="#signIn">
 
           const login = new FormData(loginForm);
 
-          axios.post('http://localhost:8001/api/auth/login', login)
+          axios.post('http://localhost:8000/login', login)
               .then(response => {
                   alert(response.data.user);
                   console.log(response.data);
 
                   localStorage.setItem('token', response.data.token);
+                  console.log(localStorage.getItem('token'));
                   // Redirect the user to home
                   window.location = '/';
               })

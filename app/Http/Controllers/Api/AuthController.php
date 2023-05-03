@@ -14,6 +14,7 @@ use App\Http\Requests\V1\StoreUserRequest;
 use App\Http\Requests\V1\UpdateUserRequest;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Response;
 
 class AuthController extends Controller
 {
@@ -62,26 +63,23 @@ class AuthController extends Controller
                 ]);
             }
 
-            if(!Auth::attempt($request->only(['email', 'password']))){
+            if(Auth::attempt($request->only(['email', 'password']))){
+                $user = Auth::user();
+                // $success['token'] = $user->createToken('API Token')->accessToken;
+                // $success['name'] = $user->name;
+
+                return response()->json([
+                    'status' => 204,
+                    'message' => 'User Logged In Successfully',
+                    'user' => $user->email,
+                    'token' => $user->createToken("API TOKEN")->plainTextToken
+                ])->header('Access-Control-Allow-Origin', 'http://localhost:8000');
+            } else {
                 return response()->json([
                     'status' => 401,
                     'message' => 'Email & Password does not match with our record.',
                 ]);
             }
-
-            if (Auth::attempt($request->only(['email', 'password']))) {
-                \Log::debug('User authenticated successfully');
-                \Log::debug(Auth::user());                
-            }
-            $user = Auth::user();
-            $request->session()->put('authenticated', time());
-            
-            return response()->json([
-                'status' => 204,
-                'message' => 'User Logged In Successfully',
-                'user' => $user->email,
-                'token' => $user->createToken("API TOKEN")->plainTextToken
-            ])->header('Access-Control-Allow-Origin', 'http://localhost:8000');
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 500,

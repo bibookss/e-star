@@ -19,6 +19,7 @@ class HomeController extends Controller
 
         if (Auth::check()) {
             $user = Auth::user();
+            \Log::debug($user);
             \Log::debug('User authenticated successfull homey');
         } else {
             \Log::debug('User not authenticated sa home');

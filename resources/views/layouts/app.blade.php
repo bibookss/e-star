@@ -52,12 +52,12 @@
                     @endguest
 
                     <!-- Temporary Logout -->
-                    @if(auth()->check())
+                    @auth
                         <form id="logout-form">
                             @csrf
                             <button type="submit" class="ylw-btn rounded-4 px-2 py-1 my-2" style="width: 20rem;">Logout</button>
                         </form>
-                    @endif
+                    @endauth
                 </div>
             </div>
         </nav>
@@ -76,7 +76,10 @@
         
             const logout = new FormData(logoutForm);
             const token = localStorage.getItem('token');
-            axios.post('http://localhost:8001/api/auth/logout', logout, {
+
+            console.log(token);
+
+            axios.post('http://localhost:8000/logout', logout, {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
