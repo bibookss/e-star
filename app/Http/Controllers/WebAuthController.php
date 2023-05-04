@@ -6,115 +6,96 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class WebAuthController extends Controller {
     public function login(Request $request) {
-        $http = new Client();
-
-        $email = $request->email;
-        $password = $request->password;
-
-        $response = $http->post('http://localhost:8001/api/auth/login', [
+        $http = new Client([
+            'base_uri' => 'http://localhost:8001/api/auth/',
             'headers' => [
                 'Accept' => 'application/json',
-                'Authorization' => 'Bearer ' . session()->get('token')
             ],
-            'form_params' => [
-                'email' => $email,
-                'password' => $password
-            ]
         ]);
 
-        $result = json_decode((string) $response->getBody(), true);
         $credentials = [
             'email' => $request->input('email'),
             'password' => $request->input('password'),
         ];
 
-        \Log::debug($result['token']);
+        $response = $http->post('login', [
+            'form_params' => [
+                'email' => $credentials['email'],
+                'password' => $credentials['password'],
+            ]
+        ]);
 
+        $result = json_decode((string) $response->getBody(), true);        
+        
         if ($result['status'] == 204) {
             if (Auth::attempt($credentials)) {
-                \Log::debug('User authenticated successfull dotp after g 204');
                 $token = $result['token'];
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'User authenticated successfully',
-                    'user' => Auth::user()->email,
-                    'token' => $token
-                ]);
+                Session::put('token', $token);
             }
         }
+        return back();
     }
 
     public function logout(Request $request) {
         if (Auth::check()) {
+            $token = Session::get('token');
 
-            $http = new Client();
-
-            \Log::debug(Auth::user()->email);
-            \Log::debug($request->bearerToken());
-            \Log::debug($request->headers->all());
-
-
-            $response = $http->post('http://localhost:8001/api/auth/logout', [
+            $http = new Client([
+                'base_uri' => 'http://localhost:8001/api/auth/',
                 'headers' => [
                     'Accept' => 'application/json',
-                    'Authorization' => 'Bearer ' . $request->bearerToken()
+                    'Authorization' => 'Bearer ' . $token,
                 ]
             ]);
 
+            $response = $http->post('logout');
 
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
-            return response()->json([
-                'status' => 200,
-                'message' => 'User logged out successfully'
-            ]);
         }
+        
+        $currentUrl = url()->previous();
+
+        if (strpos($currentUrl, 'profile') !== false) {
+            return redirect('/');
+        }
+        return back();
     }
 
     public function register(Request $request) {
-        $http = new Client();
-
-        $email = $request->email;
-        $password = $request->password;
-
-        $response = $http->post('http://localhost:8001/api/auth/register', [
+        $http = new Client([
+            'base_uri' => 'http://localhost:8001/api/auth/',
             'headers' => [
                 'Accept' => 'application/json',
             ],
+        ]);
+
+        $credentials = [
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+        ];
+
+        $response = $http->post('register', [
             'form_params' => [
-                'email' => $email,
-                'password' => $password
+                'email' => $credentials['email'],
+                'password' => $credentials['password'],
             ]
         ]);
 
         $result = json_decode((string) $response->getBody(), true);
-
-        \Log::debug("REGISTER DITO");
-
-        
-
         if ($result['status'] == 201) {
-            \Log::debug("201 daw succeess");
-            $credentials = [
-                'email' => $request->input('email'),
-                'password' => $request->input('password'),
-            ];
             if (Auth::attempt($credentials)) {
-                \Log::debug('User authenticated successfull dotp after g 204');
-                $token = $result['token'];
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'User authenticated successfully',
-                    'user' => Auth::user()->email,
-                    'token' => $token
-                ]);
+                if (Auth::attempt($credentials)) {
+                    $token = $result['token'];
+                    Session::put('token', $token);
+                }
             }
         }
-
-
+        return back();
     }
 }

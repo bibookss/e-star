@@ -89,3 +89,22 @@
       </div>
     </div>
   </div>
+
+  <script>
+    const dormForm = document.getElementById('dorm-form');
+    if (dormForm) {
+      dormForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const dormData = new FormData(dormForm);
+
+        axios.post('/dorms', dormData)
+          .then(function(response) {
+            console.log(response);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      });
+    }
+  </script>

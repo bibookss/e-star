@@ -12,7 +12,7 @@
           <button class="btn d-flex flex-row-reverse right" data-bs-dismiss="modal" aria-label="Close">
               <i class="fa-regular fa-circle-xmark fa-2xl"></i>
           </button>
-          <form id="register-form">
+          <form action="{{ route('register') }}" method="POST" >
             @csrf
             <div class="container">
                   <div class="fs-2 fw-bold pt-2">Create Account</div>
@@ -39,28 +39,3 @@
     </div>
   </div>
 </div>
-
-
-<script>
-  const registerForm = document.getElementById('register-form');
-  if (registerForm) {
-    registerForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const register = new FormData(registerForm);
-
-        axios.post('http://localhost:8000/register', register)
-            .then(response => {
-                alert(response.data.message);
-                console.log(response.data);
-                localStorage.setItem('token', response.data.token);
-                // Redirect the user to the dashboard or any other page
-                window.location = '/';
-            })
-            .catch(error => {
-                alert(error.response.data.message);
-                // Handle error response here
-            });
-    });
-  }
-</script>

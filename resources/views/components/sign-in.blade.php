@@ -12,7 +12,7 @@ data-bs-toggle="modal" data-bs-target="#signIn">
           <button class="btn d-flex flex-row-reverse right" data-bs-dismiss="modal" aria-label="Close">
               <i class="fa-regular fa-circle-xmark fa-2xl"></i>
           </button>
-          <form id="login-form">
+          <form action="{{ route('login') }}" method="POST">
             @csrf
             <div class="container">
                 <div class="fs-2 fw-bold pt-2">Sign-in</div>
@@ -33,28 +33,3 @@ data-bs-toggle="modal" data-bs-target="#signIn">
     </div>
   </div>
 </div>
-
-<script>
-  const loginForm = document.getElementById('login-form');
-  if (loginForm) {
-      loginForm.addEventListener('submit', function(event) {
-          event.preventDefault();
-
-          const login = new FormData(loginForm);
-
-          axios.post('http://localhost:8000/login', login)
-              .then(response => {
-                  alert(response.data.user);
-                  console.log(response.data);
-
-                  localStorage.setItem('token', response.data.token);
-                  console.log(localStorage.getItem('token'));
-                  // Redirect the user to home
-                  window.location = '/';
-              })
-              .catch(error => {
-                  alert(error.response.data.message);
-              });
-      });
-  }
-</script>
