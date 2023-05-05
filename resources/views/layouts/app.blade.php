@@ -40,7 +40,7 @@
                     <li class="nav-item ps-5"><a href="/"  class="nav-link text-white {{request()->is('/') ? 'active' : ''}}" >Home</a></li>
                     <li class="nav-item"><a href="/dorms" class="nav-link text-white {{request()->is('dorms') ? 'active' : ''}}" >Dorms</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="#">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="{{ url(route('home')) }}#about">About</a></li>
                 </ul>
                 <div class="d-flex gap-1 ms-auto">
                     @auth

@@ -24,7 +24,7 @@
     </div>
 </div>
 <!--2nd section-->
-<div class="offering container-fluid text-center py-5">
+<div class="offering container-fluid text-center py-5" id="about">
     <div>
         <h1 class="fw-bold">What we offer</h1>
         <br>

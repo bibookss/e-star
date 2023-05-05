@@ -10,7 +10,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
     Route::post('/logout', 'WebAuthController@logout')->name('logout');
     Route::post('/register', 'WebAuthController@register')->name('register');
 
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index')->name('home');
 
     Route::group(['prefix' => 'dorms'], function () {
         Route::get('/', 'DormController@index');
