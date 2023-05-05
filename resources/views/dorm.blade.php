@@ -6,7 +6,7 @@
   <x-image-carousel></x-image-carousel>
   <div class="d-flex py-5">
     <h2 class="fw-bold p-1 flex-grow-1"> {{$dorm['data']['name']}} </h2>
-    <x-create-review />
+    <x-create-post />
   </div>
   <div class="d-flex justify-content-between">
     <x-dorm-summary :dorm="$dorm['data']" />
