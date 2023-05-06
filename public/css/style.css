@@ -38,6 +38,18 @@
 .blue-btn:hover{
     background-color: #3976ab;
 }
+.grn-rating{
+    background-color: #3AB738;
+}
+.ylw-rating{
+    background-color: #e9e91b;
+}
+.red-rating{
+    background-color: #e90e0e;
+}
+.hikhok{
+    
+}
 .google-btn{
     font-family: 'DM Sans', sans-serif;
     background-color: #F3F3F3;
@@ -226,8 +238,7 @@ text{
 .dropdown {
     display: inline-block;
     position: relative;
-    right: 0;
-    left: auto;
+    
 }
 .dropdown-btn2{
     border: 2px solid black;
@@ -277,6 +288,9 @@ text{
     text-decoration: none;
     padding:20px 50px 20px 50px;
     z-index: 100;
+}
+.sign-up-check{
+    border: 2px solid black;
 }
 .dropdown-options .form-check:hover {
     color: #0a0a23;

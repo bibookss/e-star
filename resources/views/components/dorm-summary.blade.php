@@ -2,11 +2,11 @@
     <div class="card rounded-4" style="width: 30rem;" >
         <div class=" list-group-flush">
             <div class="ps-3 pt-3 pb-1 ">
-                <span class="rating-bg mx-2 px-2 py-1 rounded-5 fw-bold text-white fs-1">{{ $dorm['overallRating'] }}</span>
+                <span class="mx-2 px-2 py-1 rounded-5 fw-bold text-white fs-1" id="ratingOverall">{{ $dorm['overallRating'] }}</span>
                 <span class="mx-3 flex-grow-1 fw-bold"> {{ $dorm['postCount'] }} reviews</span>
                 <br>
                 <br>
-                <span class="">
+                {{-- <span class="">
                     <div class ="summary-icons d-flex gap-5" id="summary-icons">
                         <button onclick="buttonColor()" class="btn" id="wifi-btn">
                             <iconify-icon icon="ic:round-wifi" style="font-size: 25px;"></iconify-icon></button>
@@ -19,7 +19,7 @@
                         <button onclick="buttonColor()" class="btn" id="cctv-btn">
                             <iconify-icon icon="bxs:cctv" style="font-size: 25px;"></iconify-icon></button>
                     </div>
-                </span>
+                </span> --}}
             </div>
         </div>
         <div class="ps-2">
@@ -29,4 +29,19 @@
     <div class="py-5">
         <img class="real-img rounded-4" src="assets/real-map.png"  style="width: 30rem; border-bottom: 4px solid black;">
     </div>
+    <script>
+		const num = {{ $dorm['overallRating'] }};
+		const numElem = document.getElementById("ratingOverall");
+
+		if (num >= 1 && num <= 2) {
+			numElem.classList.add("red-rating");
+		} else if (num > 2 && num <= 4) {
+			numElem.classList.add("ylw-rating");
+		} else if (num > 4 && num <= 5) {
+			numElem.classList.add("grn-rating");
+		} else {
+			// Handle numbers outside the range
+			console.error("Number out of range");
+		}
+	</script>
 </div>

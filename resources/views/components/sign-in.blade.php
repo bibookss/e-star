@@ -5,7 +5,7 @@ data-bs-toggle="modal" data-bs-target="#signIn">
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="signIn" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="signIn" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered text-center">
     <div class="modal-content sign-in-modal">
       <div class="modal-body ">

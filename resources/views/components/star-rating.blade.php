@@ -1,6 +1,6 @@
 <div class="d-flex flex-column gap-2 py-1">
     <div class="rate list-group-item d-flex container fw-bold">
-        <div class="flex-grow-1 pt-2">Room</div>
+        <div class="flex-grow-1 pt-2">Bathroom</div>
         <input type="radio" id="star5" name="rate" value="5" />
         <label for="star5" title="text">5 stars</label>
         <input type="radio" id="star4" name="rate" value="4" />

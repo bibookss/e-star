@@ -18,6 +18,10 @@
                 <br>
                 <input type="text" class=" my-3 center rounded-2 p-2 email" id="dormName" required>
                 <br>
+                <label for="city" class="fs-4 fw-bold">City:</label>
+                <br>
+                <input type="text" class=" my-3 center rounded-2 p-2 email" id="city" required>
+                <br>
                 <label for="baranggayDataList" class="form-label fs-4 fw-bold">Baranggay:</label>
                 <div class="w-100"></div>
                 <input class="email rounded-2 p-2 mb-2" list="baranggayOptions" id="baranggayDataList" placeholder="">

@@ -23,7 +23,9 @@
                   <input type="password" class="password rounded-2 p-2 my-2" id="pass" name="password" minlength="8" placeholder="Password" required>
                   <span class="text-danger">@error('password') {{ $message }} @enderror</span>
                   <br>
-                  <div class="">I agree to the 
+                  <div class="form-check m-0 p-0">
+                    <input class="form-check-input sign-up-check border-2 ms-2" type="checkbox" value="" id="flexCheckDefault">
+                      I agree to the 
                       <u class="text-primary">Terms of Service</u>
                       and 
                       <u class="text-primary">Privacy Policy</u>
