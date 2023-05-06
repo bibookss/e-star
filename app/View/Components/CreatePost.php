@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class CreateReview extends Component
+class CreatePost extends Component
 {
     public function __construct()
     {
@@ -13,6 +13,6 @@ class CreateReview extends Component
 
     public function render()
     {
-        return view('components.create-review');
+        return view('components.create-post');
     }
 }

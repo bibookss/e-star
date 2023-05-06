@@ -13,15 +13,18 @@
                 <h4>Search across dorm reviews of our student-driven initiative 
                     to help each other decide their rest in  the city!</h4>
             </div>
-            <div class="my-5 align-items-center d-flex gap-5">
-                <input type="text" class="address-input rounded-4 ps-4" id="fname" name="address" placeholder="Enter address">
-                <button class="ylw-btn text-white px-4 py-2 fw-bold rounded-4">Search now</button>
-            </div>
+            <form method="GET" action="{{ route('search') }}">
+                @csrf
+                <div class="my-5 align-items-center d-flex gap-5">
+                    <input type="text" class="address-input rounded-4 ps-4" id="fname" name="address" placeholder="Enter address">
+                    <button class="ylw-btn text-white px-4 py-2 fw-bold rounded-4" type="submit">Search now</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 <!--2nd section-->
-<div class="offering container-fluid text-center py-5">
+<div class="offering container-fluid text-center py-5" id="about">
     <div>
         <h1 class="fw-bold">What we offer</h1>
         <br>
@@ -85,3 +88,18 @@
 <!--footer-->
 <x-footer></x-footer>
 @endsection
+
+{{-- <script>
+    const search = document.getElementById('search');
+    if (search) {
+        search.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const query = new FormData(search);
+
+            
+            
+        });
+    }
+</script> --}}
+  

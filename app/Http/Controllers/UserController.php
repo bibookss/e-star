@@ -2,24 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
-    public function show($id)
-    {
-        $client = new Client([
-            'base_uri' => 'http://localhost:8001/api/v1/',
-        ]);
+    
 
-        $response = $client->get('users/'.$id.'?includePosts=true');
-        $user = json_decode($response->getBody()->getContents(), true);
-        return view('profile', compact('user'));
-    }
-
-    public function create() 
+    public function show(Request $request)
     {
-        return view('');
+        if (Auth::check()) {
+            $id = Auth::user()->id;
+            $token = Session::get('token');            
+            $client = new Client([
+                'base_uri' => 'http://localhost:8001/api/v1/',
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $token,
+                    'Accept' => 'application/json',
+                ],
+            ]);
+
+            $response = $client->get('users/'.$id.'?includePosts=true');
+            return view('profile', compact('response'));
+        } 
+
+        return redirect('/');
     }
 }

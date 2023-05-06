@@ -4,7 +4,7 @@
             <div class="row align-items-start">
                 <div class="col-4">
                     <span class="rating-bg ms-2 px-2 py-1 rounded-5 text-white fs-1"> {{$post['overallRating']}} </span>
-                    <div class="pt-3 ps-2">July 14,2023</div>
+                    <div class="pt-3 ps-2">{{ $post['datePosted'] }}</div>
                 </div>
                 <div class="col d-flex justify-content-start">
                     {{ $post['review'] }}

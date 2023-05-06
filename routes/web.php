@@ -6,11 +6,11 @@ use GuzzleHttp\Client;
 
 // Public Routes
 Route::group(['namespace' => 'App\Http\Controllers'], function() { 
-    Route::post('/login', 'WebAuthController@login');
-    Route::post('/logout', 'WebAuthController@logout');
-    Route::post('/register', 'WebAuthController@register');
+    Route::post('/login', 'WebAuthController@login')->name('login');
+    Route::post('/logout', 'WebAuthController@logout')->name('logout');
+    Route::post('/register', 'WebAuthController@register')->name('register');
 
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index')->name('home');
 
     Route::group(['prefix' => 'dorms'], function () {
         Route::get('/', 'DormController@index');
@@ -19,11 +19,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
         Route::get('/{dorm}/edit-dorm', 'DormController@edit');
     });
 
-    Route::group(['prefix' => 'user'], function () {
-        Route::get('/', 'UserController@index');
-        Route::get('/{user}', 'UserController@show');
-        // Route::get('/', 'UserController@create');
-        // Route::get('/{user}', 'UserController@edit');
+    Route::get('/search', 'DormController@search')->name('search');
+
+    Route::group(['prefix' => 'profile'], function () {
+        Route::get('/', 'UserController@show')->name('profile');
     });
 });
 

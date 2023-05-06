@@ -21,10 +21,11 @@
     </div>
     <div class="col-2">
         <div class="fs-4 fw-bold pb-5 pt-3">Your Reviews</div>
-        <div class="d-flex flex-column gap-5">
-            <x-user-dorm-rating></x-user-dorm-rating>
-            <x-user-dorm-rating></x-user-dorm-rating>
-        </div>
+        {{-- <div class="d-flex flex-column gap-5">
+            @foreach ($dorms['data'] as $dorm) 
+             <x-dorm-list :dorm="$dorm"></x-dorm-list>  
+            @endforeach
+        </div> --}}
     </div>
 </div>
 <div class="d-flex justify-content-end py-3 px-5 me-3 mb-3">

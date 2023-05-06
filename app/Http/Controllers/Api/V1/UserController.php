@@ -40,9 +40,12 @@ class UserController extends Controller
         }
     }
 
-    public function getUser($id)
+    public function getUser(Request $request, $id)
     {
         try {
+            \Log::debug("user controller BACKENDDD");
+            \Log::debug($request->bearerToken());
+
             $user = User::findOrFail($id);
 
             $includePosts = request()->query('includePosts');

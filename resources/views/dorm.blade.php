@@ -6,13 +6,13 @@
   <x-image-carousel></x-image-carousel>
   <div class="d-flex py-5">
     <h2 class="fw-bold p-1 flex-grow-1"> {{$dorm['data']['name']}} </h2>
-    <x-create-review />
+    <x-create-post />
   </div>
   <div class="d-flex justify-content-between">
     <x-dorm-summary :dorm="$dorm['data']" />
     <div class="d-flex flex-column gap-5">
       @foreach ($dorm['data']['posts'] as $post) 
-        <x-user-dorm-rating :post="$post" />
+        <x-dorm-post :post="$post" />
       @endforeach
     </div>
   </div>
