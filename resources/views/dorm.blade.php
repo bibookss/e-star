@@ -7,7 +7,7 @@
   <div class="d-flex py-5">
     <h2 class="fw-bold p-1 flex-grow-1"> {{$dorm['data']['name']}} </h2>
     @auth
-      <x-create-post />
+      <x-create-post dormId="{{ $dorm['data']['dormId'] }}"/>
     @endauth
   </div>
   <div class="d-flex justify-content-between">

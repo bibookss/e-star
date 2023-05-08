@@ -50,7 +50,6 @@ class DormController extends Controller
     }
 
     public function addDorm(Request $request) {
-        \Log::debug("Controller ka na!");
         $token = Session::get('token');
 
         $httpLocation = new Client([
@@ -68,22 +67,16 @@ class DormController extends Controller
             'street' => $request->input('city')
         ];
 
-        \Log::debug("Token: ". $token);
-
-        \Log::debug($data);
-
         // Search for loation if it exists, create otherwise
         $address = '?barangay[eq]='. $data['barangay'] . '&city[eq]=' .$data['city']
                     . '&street[eq]=' . $data['street'];
 
-        \Log::debug("Query String: " . $address);
 
         $locationResponse = $httpLocation->get($address);
 
         $locationResult = json_decode((string) $locationResponse->getBody(), true);        
 
         if (empty($locationResult['data'])) {
-            \Log::debug("Walang location, gagawa pa lang!");
             // Create location
             $locationResponse = $httpLocation->post('/api/v1/locations', [
                 'json' => [
@@ -114,7 +107,6 @@ class DormController extends Controller
 
         $result = json_decode((string) $response->getBody(), true);        
 
-        // change to dorm
         return redirect('http://localhost:8000/dorms/'.$id);
     }
 

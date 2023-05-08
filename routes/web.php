@@ -18,7 +18,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
         Route::get('/{dorm}', 'DormController@show');
         Route::post('/create-dorm', 'DormController@addDorm')->name('add-dorm');
         // Route::get('/', 'DormController@addDorm')->name('add-dorm');
-        Route::get('/{dorm}/edit-dorm', 'DormController@edit');
+        // Route::get('/{dorm}/edit-dorm', 'DormController@edit');
+
+        Route::post('/{dorm}/posts', 'PostController@createPost')->name('add-post');
     });
 
     Route::get('/search', 'DormController@search')->name('search');
