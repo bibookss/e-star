@@ -8,14 +8,14 @@
     <div class="modal fade" id="writeReview" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content modal-review">
+                <div class="modal-body d-flex p-4">
+                    <div class="fs-2 flex-grow-1 fw-bold ps-2"> Write your review</div>
+                    <button class="btn" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-regular fa-circle-xmark fa-2xl"></i>
+                    </button>
+                </div>
                 <form method="POST" action="{{ route('add-post', ['dorm' => $dormId]) }}">
                     @csrf
-                    <div class="modal-body d-flex p-4">
-                        <div class="fs-2 flex-grow-1 fw-bold ps-2"> Write your review</div>
-                        <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="fa-regular fa-circle-xmark fa-2xl"></i>
-                        </button>
-                    </div>
                     <div class="px-5">
                         <textarea rows="7" style="width:900px;" class=" write-review p-4 rounded-4" placeholder="Write something..." aria-label="review-text" name="review"></textarea>
                         <br>
