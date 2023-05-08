@@ -10,7 +10,9 @@
           <input type="text" class="address-input rounded-4 w-25 mx-5 ps-3" id="fname" name="address" placeholder="Enter address" value="<?php echo $_GET['address'] ?? ''; ?>">
           <button class="ylw-btn text-white px-4 py-2 fw-bold rounded-4">Search now</button>
         </form>  
-        <x-create-dorm></x-create-dorm>
+        @auth
+          <x-create-dorm></x-create-dorm>          
+        @endauth
       </div>
   </div>
 
