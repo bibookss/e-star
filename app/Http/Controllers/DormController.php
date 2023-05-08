@@ -104,17 +104,18 @@ class DormController extends Controller
             ],
         ]);
 
+        $id = $locationResult['data'][0]['locationId'];
         $response = $httpDorm->post('/api/v1/dorms', [
             'json' => [
                 'name' => $data['name'],
-                'locationId' => $locationResult['data'][0]['locationId']
+                'locationId' => $id
             ]
         ]);
 
         $result = json_decode((string) $response->getBody(), true);        
 
         // change to dorm
-        return back();
+        return redirect('http://localhost:8000/dorms/'.$id);
     }
 
     public function create()
