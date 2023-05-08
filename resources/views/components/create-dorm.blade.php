@@ -13,18 +13,19 @@
             </button>
             <div class="fs-2 fw-bold pt-3">Add dorm</div>
             <br>
-            <form>
+            <form method="POST" action="{{ route('add-dorm')}}">
+              @csrf
                 <label for="dormName" class="fs-4 fw-bold">Dorm name:</label>
                 <br>
-                <input type="text" class=" my-3 center rounded-2 p-2 add-dorm-input" id="dormName" required>
+                <input type="text" class=" my-3 center rounded-2 p-2 add-dorm-input" name="name" id="dormName" required>
                 <br>
                 <label for="city" class="fs-4 fw-bold">City:</label>
                 <br>
-                <input type="text" class=" my-3 center rounded-2 p-2 add-dorm-input" id="city" required>
+                <input type="text" class=" my-3 center rounded-2 p-2 add-dorm-input" name="city" id="city" required>
                 <br>
-                <label for="baranggayDataList" class="form-label fs-4 fw-bold">Baranggay:</label>
+                <label for="baranggayDataList" class="form-label fs-4 fw-bold" >Baranggay:</label>
                 <div class="w-100"></div>
-                <input class="add-dorm-input rounded-2 p-2 mb-2" list="baranggayOptions" id="baranggayDataList" placeholder="">
+                <input class="add-dorm-input rounded-2 p-2 mb-2" list="baranggayOptions" name="barangay" id="baranggayDataList" placeholder="">
                 <datalist id="baranggayOptions">
                     <option value="Abella">
                     <option value="Bagumbayan Norte">
@@ -57,7 +58,7 @@
                 <br>
                 <label for="street" class="fs-4 fw-bold">Street:</label>
                 <br>
-                <input type="text" class=" my-3 center rounded-2 p-2 add-dorm-input" id="street" required>
+                <input type="text" class=" my-3 center rounded-2 p-2 add-dorm-input" name="street" id="street" required>
                 <br>
                 {{-- <label for="dormPrice" class="fs-4 fw-bold">Price range of rooms:</label>
                 <br>
@@ -89,8 +90,8 @@
                   </div>
                 </div> --}}
                 <br>
-                <label for="formFileMultiple" class="form-label fs-4 fw-bold pt-2">Attach images</label>       
-                <input class="form-control blue-btn" type="file" id="formFileMultiple" style="width: 20rem;" multiple>
+                {{-- <label for="formFileMultiple" class="form-label fs-4 fw-bold pt-2">Attach images</label>       
+                <input class="form-control blue-btn" type="file" id="formFileMultiple" style="width: 20rem;" multiple> --}}
                 <button type="submit" value="submit" class="btn ylw-btn d-flex ms-auto py-2 my-4" >Publish dorm</button>
             </form>
         </div>

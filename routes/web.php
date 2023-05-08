@@ -16,7 +16,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
     Route::group(['prefix' => 'dorms'], function () {
         Route::get('/', 'DormController@index');
         Route::get('/{dorm}', 'DormController@show');
-        Route::get('/create-dorm', 'DormController@create');
+        Route::post('/create-dorm', 'DormController@addDorm')->name('add-dorm');
+        // Route::get('/', 'DormController@addDorm')->name('add-dorm');
         Route::get('/{dorm}/edit-dorm', 'DormController@edit');
     });
 
