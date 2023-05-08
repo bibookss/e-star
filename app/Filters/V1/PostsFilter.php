@@ -9,6 +9,7 @@ class PostsFilter extends ApiFilter
 {
     protected $safeParms = [
         'dormId' => ['eq'],
+        'userId' => ['eq'],
         'locationRating' => ['eq', 'gt', 'gte', 'lt', 'lte'],
         'securityRating' => ['eq', 'gt', 'gte', 'lt', 'lte'],
         'internetRating' => ['eq', 'gt', 'gte', 'lt', 'lte'],
@@ -25,6 +26,7 @@ class PostsFilter extends ApiFilter
 
     protected $columnMap = [
         'dormId' => 'dorm_id',
+        'userId' => 'user_id',
         'locationRating' => 'location_rating',
         'securityRating' => 'security_rating',
         'internetRating' => 'internet_rating',

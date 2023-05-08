@@ -12,15 +12,7 @@ class PostController extends Controller
 {
     public function createPost(Request $request, $dorm)
     {
-        \Log::debug('POST CONTROLLER KA');
-
         $token = Session::get('token');
-
-        \Log::debug($token);
-
-        // $dorm = $request->route('dorm');
-
-        \Log::debug($dorm);
 
         $httpPost = new Client([
             'base_uri' => 'http://localhost:8001/api/v1/posts',
@@ -39,13 +31,17 @@ class PostController extends Controller
             'bathroomRating' => $request->input('bathroomRating'),
         ];
 
-        \Log::debug($data);
+        // Check if user already has reviews for this dorm
+        $postExist = $httpPost->get('/api/v1/posts/userId[eq]=' . Auth::id() . '&dormId[eq]=' . $dorm);
+        $postExistResult = json_decode((string) $postExist->getBody(), true);        
 
-        $postResponse = $httpPost->post('/api/v1/posts', [
-            'json' => $data
-        ]);
-
-        $postResult = json_decode((string) $postResponse->getBody(), true);        
+        if (empty($postExistResult['data'])) {
+            $postResponse = $httpPost->post('/api/v1/posts', [
+                'json' => $data
+            ]);
+    
+            $postResult = json_decode((string) $postResponse->getBody(), true);       
+        } 
 
         return back();
     }
