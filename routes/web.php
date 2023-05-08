@@ -30,3 +30,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
     });
 });
 
+Route::fallback(function () {
+    return redirect('/');
+});
+
+

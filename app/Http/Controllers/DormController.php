@@ -123,6 +123,10 @@ class DormController extends Controller
         $response = $client->get('dorms/'.$id.'?includePosts=true');
         $dorm = json_decode($response->getBody()->getContents(), true);      
 
+        if ($dorm['status'] == 500) {
+            return redirect('http://localhost:8000/dorms');
+        }
+
         return view ('dorm', compact('dorm')); 
     }
 
