@@ -26,7 +26,9 @@ class UserController extends Controller
             ]);
 
             $response = $client->get('users/'.$id.'?includePosts=true');
-            return view('profile', compact('response'));
+            $data = json_decode((string) $response->getBody(), true);        
+
+            return view('profile')->with('data', $data['data']);
         } 
 
         return redirect('/');

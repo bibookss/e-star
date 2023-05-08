@@ -32,10 +32,10 @@ class PostController extends Controller
         ];
 
         // Check if user already has reviews for this dorm
-        $postExist = $httpPost->get('/api/v1/posts/userId[eq]=' . Auth::id() . '&dormId[eq]=' . $dorm);
+        $postExist = $httpPost->get('/api/v1/posts?userId[eq]=' . Auth::id() . '&dormId[eq]=' . $dorm);
         $postExistResult = json_decode((string) $postExist->getBody(), true);        
 
-        if (empty($postExistResult['data'])) {
+        if (empty($postExistResult['data']) || $postExistResult['status'] == 500) {
             $postResponse = $httpPost->post('/api/v1/posts', [
                 'json' => $data
             ]);
