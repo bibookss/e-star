@@ -16,15 +16,15 @@
             <form>
                 <label for="dormName" class="fs-4 fw-bold">Dorm name:</label>
                 <br>
-                <input type="text" class=" my-3 center rounded-2 p-2 email" id="dormName" required>
+                <input type="text" class=" my-3 center rounded-2 p-2 add-dorm-input" id="dormName" required>
                 <br>
                 <label for="city" class="fs-4 fw-bold">City:</label>
                 <br>
-                <input type="text" class=" my-3 center rounded-2 p-2 email" id="city" required>
+                <input type="text" class=" my-3 center rounded-2 p-2 add-dorm-input" id="city" required>
                 <br>
                 <label for="baranggayDataList" class="form-label fs-4 fw-bold">Baranggay:</label>
                 <div class="w-100"></div>
-                <input class="email rounded-2 p-2 mb-2" list="baranggayOptions" id="baranggayDataList" placeholder="">
+                <input class="add-dorm-input rounded-2 p-2 mb-2" list="baranggayOptions" id="baranggayDataList" placeholder="">
                 <datalist id="baranggayOptions">
                     <option value="Abella">
                     <option value="Bagumbayan Norte">
@@ -55,11 +55,15 @@
                     <option value="Triangulo">
                 </datalist>
                 <br>
-                <label for="dormPrice" class="fs-4 fw-bold">Price range of rooms:</label>
+                <label for="street" class="fs-4 fw-bold">Street:</label>
                 <br>
-                <input type="text" class=" my-3 center rounded-2 p-2 email" id="dormPrice" placeholder="example: 2000-8000" required>
-                <br>  
-                <div class="dropdown">
+                <input type="text" class=" my-3 center rounded-2 p-2 add-dorm-input" id="street" required>
+                <br>
+                {{-- <label for="dormPrice" class="fs-4 fw-bold">Price range of rooms:</label>
+                <br>
+                <input type="text" class=" my-3 center rounded-2 p-2 add-dorm-input" id="dormPrice" placeholder="example: 2000-8000" required>
+                <br>   --}}
+                {{-- <div class="dropdown">
                   <button class="dropdown-btn dropdown-btn3 rounded-2 my-2" style="width: 20rem">Type of rooms<i class="fa-solid fa-caret-down fa-lg ps-2"></i></button>
                   <div class="dropdown-options" style="width: 20rem" >
                     <div class="form-check form-switch">
@@ -83,7 +87,7 @@
                       <label class="form-check-label" for="flexSwitchCheckDefault"><span class="ps-2">Apartment type</span></label>
                     </div>
                   </div>
-                </div>
+                </div> --}}
                 <br>
                 <label for="formFileMultiple" class="form-label fs-4 fw-bold pt-2">Attach images</label>       
                 <input class="form-control blue-btn" type="file" id="formFileMultiple" style="width: 20rem;" multiple>

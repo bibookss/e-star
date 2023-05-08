@@ -23,11 +23,11 @@
             </div>
         </div>
         <div class="ps-2">
-        <x-star-rating></x-star-rating>
+        {{-- <x-star-rating></x-star-rating> --}}
         </div>
     </div>
     <div class="py-5">
-        <img class="real-img rounded-4" src="assets/real-map.png"  style="width: 30rem; border-bottom: 4px solid black;">
+        <img class="real-img rounded-4" src="/assets/real-map.png"  style="width: 30rem; border-bottom: 4px solid black;">
     </div>
     <script>
 		const num = {{ $dorm['overallRating'] }};

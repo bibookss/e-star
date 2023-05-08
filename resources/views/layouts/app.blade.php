@@ -14,17 +14,14 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.0.7/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
     <script src="https://kit.fontawesome.com/932573d37b.js" crossorigin="anonymous"></script>
+    
+    
+    
 
-    <script src="/js/ratingColor.js"></script>
-    <script src="/js/ratingStar.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.0.7/js/star-rating.js" type="text/javascript"></script>
-    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.0.7/themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.0.7/themes/krajee-svg/theme.js"></script>
+    
     
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -43,20 +40,20 @@
                     <img src="/assets/e-star-logo-blue-bg.png" alt="e-star logo" height="50"/>
                 </a>
                 <ul class="navbar-nav d-flex ms-auto gap-5">
-                    <li class="nav-item ps-5"><a href="/"  class="nav-link text-white {{request()->is('/') ? 'active' : ''}}" >Home</a></li>
+                    <li class="nav-item ps-5"><a href="/" class="nav-link text-white {{request()->is('/') ? 'active' : ''}}" >Home</a></li>
                     <li class="nav-item"><a href="/dorms" class="nav-link text-white {{request()->is('dorms') ? 'active' : ''}}" >Dorms</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#">Contact</a></li>
+                    <li class="nav-item"><a href="/contacts" class="nav-link text-white {{request()->is('contacts') ? 'active' : ''}}" >Contact</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="{{ url(route('home')) }}#about">About</a></li>
                 </ul>
                 <div class="d-flex gap-1 ms-auto">
                     @auth
-                        <a href="{{ route('profile') }}" id="profile">
+                        <a href="{{ route('profile') }}" id="profile" class="mt-1 me-4">
                             <iconify-icon icon="healthicons:ui-user-profile" height="40" style="color: white;"></iconify-icon>
                         </a>
                         <!-- Temporary Logout -->
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="ylw-btn rounded-4 px-2 py-1 my-2" style="width: 20rem;">Logout</button>
+                            <button type="submit" class="ylw-btn rounded-4 px-2 py-1 my-2" style="width: 6rem;">Logout</button>
                         </form>
                     @else
                         <x-sign-in></x-sign-in>

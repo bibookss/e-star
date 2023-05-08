@@ -2,13 +2,13 @@
     <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="assets/image1.jpg" class="d-block w-100" alt="...">
+            <img src="/assets/image1.jpg" class="d-block w-100" alt="...">
           </div>
           <div class="carousel-item">
-            <img src="assets/image2.jpg" class="d-block w-100" alt="...">
+            <img src="/assets/image2.jpg" class="d-block w-100" alt="...">
           </div>
           <div class="carousel-item">
-            <img src="assets/image1.jpg" class="d-block w-100" alt="...">
+            <img src="/assets/image1.jpg" class="d-block w-100" alt="...">
           </div>
             <button>
                 <i class="fa-regular fa-image"></i>

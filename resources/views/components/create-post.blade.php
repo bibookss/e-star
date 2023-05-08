@@ -17,7 +17,10 @@
                 <div class="px-5">
                     <textarea rows="7" style="width:900px;" class=" write-review p-4 rounded-4" placeholder="Write something..." aria-label="review-text"></textarea>
                     <br>
-                    <x-star-rating></x-star-rating>
+                    {{-- <x-star-rating></x-star-rating> --}}
+                    
+                    <i class="fa-solid fa-star fa-bounce fa-2xl right mx-5 my-5" style="color: #ffd43b;height:10%;"></i>
+                    <x-slider-rating></x-slider-rating>
                 </div>
                 <div class="p-4 d-flex justify-content-between">
                     <button type="button" class="btn blue-btn">Attach Images</button>

@@ -14,7 +14,7 @@
                 <div class="col-4">
                 </div>
                 <div class="col-6 pt-2 ps-0 pb-2">
-                    <x-star-rating></x-star-rating>
+                    {{-- <x-star-rating></x-star-rating> --}}
                 </div>
             </div>
         </div>

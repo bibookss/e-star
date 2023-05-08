@@ -50,6 +50,12 @@
 .hikhok{
     
 }
+.contact-img{
+    height: 200px;
+    width: 200px;
+    border: 3px solid black;
+    border-radius:50%;
+}
 .google-btn{
     font-family: 'DM Sans', sans-serif;
     background-color: #F3F3F3;
@@ -225,7 +231,7 @@ text{
     border-bottom: 4px solid black;
     width: 20rem;
 }
-.email{
+.add-dorm-input{
     background-color: #F3F3F3;
     border: 2px solid black;
     border-bottom: 4px solid black;
@@ -306,49 +312,25 @@ text{
 
 
 
+.rating-box {
+    position: relative;
+    background: #fff;
+    padding: 25px 50px 35px;
+    border-radius: 25px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+  }
 
-.rate {
-  float: left;
-  height: 46px;
-  padding: 0 10px;
-}
-.rate:not(:checked) > input {
-  position:absolute;
-  top:-9999px;
-}
-.rate:not(:checked) > label {
-  float:right;
-  width:1em;
-  overflow:hidden;
-  white-space:nowrap;
-  cursor:pointer;
-  font-size:30px;
-  color:#ccc;
-}
-.rate:not(:checked) > label:before {
-  content: '★ ';
-}
-.rate > input:checked ~ label {
-  color: #ffc700;    
-}
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-  color: #ffc700;  
-}
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-  color: #ffc700;
-}
-
-.summary-icons{
-    color:#000000;
-}
-.summary-icons .active{
-    color:#3AB738;
-}
-.bg-gray2{
-    background-color: #F3F3F3;
-}
+  .rating-box .stars {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+  .stars i {
+    color: #000000;
+    font-size: 35px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  .stars i.active {
+    color: #ff9c1a;
+  }

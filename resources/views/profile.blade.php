@@ -6,10 +6,10 @@
     <div class="col-6">
         <div class="fs-4 fw-bold pt-3">Account Settings</div>
         <div class="py-5 ms-auto">
-            <div class="card justify-content-start" style="width:30rem;">
+            <div class="card justify-content-start" style="width:35rem;">
                 <div class="card-body row container">
-                    <span class="col-3 pt-2  ms-2 fw-bold">Email</span>
-                    <input type="email" class="form-control col" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="greuyan@gbox.adnu.edu.ph">
+                    <span class="col-3 pt-2 ms-2 fw-bold">Email</span>
+                    <span class="col mt-2 fw-bold">placeholder@gmail.com</span>
                 </div>
                 <div class="row">
                     <div class="col-2 py-3 mb-3 ms-1"></div>

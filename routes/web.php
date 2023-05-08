@@ -9,7 +9,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
     Route::post('/login', 'WebAuthController@login')->name('login');
     Route::post('/logout', 'WebAuthController@logout')->name('logout');
     Route::post('/register', 'WebAuthController@register')->name('register');
-
+    // dummy controller dahil di ko gets pinagagwa diyan
+    Route::get('/contacts', 'ContactController@index');
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::group(['prefix' => 'dorms'], function () {
