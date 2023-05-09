@@ -17,7 +17,7 @@ data-bs-toggle="modal" data-bs-target="#signIn">
             <div class="container">
                 <div class="fs-2 fw-bold pt-2">Sign-in</div>
                 <br>
-                <input type="email" class=" my-2 center rounded-2 p-2 email" id="email" name="email" aria-describedby="emailHelp" placeholder="Email" required>
+                <input type="email" class=" my-2 center rounded-2 p-2 email-input" id="email" name="email" aria-describedby="emailHelp" placeholder="Email" required>
                 <br>
                 <input type="password" class="password rounded-2 p-2 my-2" id="pass" name="password" minlength="8" placeholder="Password" required>
                 <br>

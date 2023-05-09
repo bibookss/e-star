@@ -38,7 +38,7 @@
       cursor: pointer;
     }
 </style>
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
 <body>
     <p class="fw-bold px-3 pt-3 fs-3">Rating</p>
     

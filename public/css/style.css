@@ -237,6 +237,13 @@ text{
     border-bottom: 4px solid black;
     width: 20rem;
 }
+
+.email-input{
+    background-color: #F3F3F3;
+    border: 2px solid black;
+    border-bottom: 4px solid black;
+    width: 20rem;
+}
 .dorm-card{
     position:relative;
 }

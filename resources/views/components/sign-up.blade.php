@@ -17,7 +17,7 @@
             <div class="container">
                   <div class="fs-2 fw-bold pt-2">Create Account</div>
                   <br>
-                  <input type="email" class=" my-2 center rounded-2 p-2 email" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Email" required>
+                  <input type="email" class=" my-2 center rounded-2 p-2 email-input" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Email" required>
                   <span class="text-danger">@error('email') {{ $message }} @enderror</span>
                   <br>
                   <input type="password" class="password rounded-2 p-2 my-2" id="pass" name="password" minlength="8" placeholder="Password" required>
