@@ -18,10 +18,19 @@
                     {{-- <x-star-rating></x-star-rating> --}}
                 </div>
             </div>
-            <div class=" d-flex justify-content-end gap-1 me-2 mb-1">
-                <button class="btn blue-btn">Edit</button>
-                <button class="btn  ylw-btn">Delete</button>
-            </div>
+            @if(Route::is('profile') && Auth::check() && Auth::user()->id == $post['userId'])
+                {{-- <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
+                <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Delete</button>
+                </form> --}}
+                <div class=" d-flex justify-content-end gap-1 me-2 mb-1">
+                    <x-edit-post :post="$post" />
+                    <button class="btn  ylw-btn">Delete</button>
+                </div>
+            @endif
+            
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-1.7.2.js"></script>

@@ -19,7 +19,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
         // Route::get('/{dorm}/edit-dorm', 'DormController@edit');
 
         Route::post('/{dorm}/posts', 'PostController@createPost')->name('add-post');
-        // Route::put('/{dorm}/posts', 'PostController@editPost')->name('edit-post');
+        Route::put('/{dorm}/posts', 'PostController@editPost')->name('edit-post');
         // Route::delete('/{dorm}/posts', 'PostController@deletePost')->name('delete-post');
     });
 

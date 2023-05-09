@@ -4,7 +4,7 @@
         {{-- sign up page --}}
     {{-- if logged in --}}
     <button type="button" class="btn ylw-btn px-5 py-2 rounded-4" data-bs-toggle="modal" data-bs-target="#writeReview">
-        Write a Review
+        Edit
     </button>
   
   <!-- Modal -->
