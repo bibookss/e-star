@@ -1,5 +1,8 @@
 <div>
     <!-- Button trigger modal -->
+    {{-- if not logged in --}}
+        {{-- sign up page --}}
+    {{-- if logged in --}}
     <button type="button" class="btn ylw-btn px-5 py-2 rounded-4" data-bs-toggle="modal" data-bs-target="#writeReview">
         Write a Review
     </button>
@@ -17,43 +20,21 @@
                 <form method="POST" action="{{ route('add-post', ['dorm' => $dormId]) }}">
                     @csrf
                     <div class="px-5">
-                        <textarea rows="7" style="width:900px;" class=" write-review p-4 rounded-4" placeholder="Write something..." aria-label="review-text" name="review"></textarea>
+                        <textarea rows="7" style="width:900px;" class=" write-review p-4 rounded-4" placeholder="Write something..." aria-label="review-text" name="review" required></textarea>
                         <br>
                         {{-- <x-star-rating></x-star-rating> --}}
+                        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                        <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_TZvjSDdby2.json" class="ms-auto mt-3" background="transparent"  speed="1"  
+                        style="width: 125px; height: 125px; z-index:5; position: absolute; right:0px;" autoplay></lottie-player>
+                        <x-slider-rating></x-slider-rating>
                         
-                        <i class="fa-solid fa-star fa-bounce fa-2xl right mx-5 my-5" style="color: #ffd43b;height:10%;"></i>
-                        
-                        <!--- Slider -->
-                        <p class="fw-bold px-3 pt-3 fs-3">Rating</p>
-    
-                        <div class="d-flex flex-column card">
-                            <div class="p-3">
-                                <span class="fs-4 fw-bold pb-3 pe-5">Security:</span>
-                                <input type="range" min="1" max="5" value="0" id="slider1" class="slider " style="margin-left:110px;" name="securityRating">
-                                <span class="ps-5 fw-bold fs-4 px-2" id="sliderValue1"></span>            
-                            </div>
-                            <div class="p-3">
-                                <span class="fs-4 fw-bold pb-3 pe-5">Bathrooom:</span>
-                                <input type="range" min="1" max="5" value="0" id="slider2" class="slider " style="margin-left:50px;" name="bathroomRating">
-                                <span class="ps-5 fw-bold fs-4 px-2" id="sliderValue2"></span>
-                            </div>
-                            <div class="p-3">
-                                <span class="fs-4 fw-bold pb-3 pe-5">Location:</span>
-                                <input type="range" min="1" max="5" value="0" id="slider3" class="slider " style="margin-left:68px;" name="locationRating">
-                                <span class="ps-5 fw-bold fs-4 px-2" id="sliderValue3"></span>
-                            </div>
-                            <div class="p-3">
-                                <span class="fs-4 fw-bold pb-3 pe-5">Internet:</span>
-                                <input type="range" min="1" max="5" value="0" id="slider4" class="slider " style="margin-left:86px;" name="internetRating">
-                                <span class="ps-5 fw-bold fs-4 px-2" id="sliderValue4"></span>
-                            </div>
-                            
-                        </div>
-
                     </div>
-                    <div class="p-4 d-flex justify-content-between">
-                        <button type="button" class="btn blue-btn">Attach Images</button>
-                        <button type="submit" class="btn ylw-btn">Publish review</button>
+                    <div class="p-5 ">
+                        <label for="formFileMultiple" class="form-label fs-4 fw-bold px-2 ms-2">Attach images</label>                
+                        <div class="d-flex pt-2">
+                            <input class="form-control blue-btn" type="file" id="formFileMultiple" style="width: 18rem;" multiple>
+                            <button type="submit" class="btn ylw-btn ms-auto" >Publish review</button>
+                        </div>
                     </div>
                 </form>
             </div>

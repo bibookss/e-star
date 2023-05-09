@@ -13,51 +13,55 @@
         @auth
           <x-create-dorm></x-create-dorm>          
         @endauth
-      </div>
-  </div>
-
-    <div class="d-flex">
-        {{-- <h4 class="fw-bold px-3 pt-2 fs-2">Sort by:</h4>
-        <div class="dropdown">
-            <button class="dropdown-btn dropdown-btn2">Most Likes<i class="fa-solid fa-caret-down fa-lg ps-2"></i></button>
-            <div class="dropdown-options">
-              <a href="#">Most Likes</a>
-              <a href="#">Rating</a>
-              <a href="#">Recent</a>
-            </div>
-        </div> --}}
-        <h4 class="fw-bold px-3 pt-2 fs-2">Filter</h4>
-        <div class="dropdown">
-            <button class="dropdown-btn dropdown-btn2">by<i class="fa-solid fa-caret-down fa-lg ps-2"></i></button>
-            <div class="dropdown-options">
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault"><span class="ps-2">Internet</span></label>
-              </div>
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault"><span class="ps-2">Air Conditioner</span></label>
-              </div>
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault"><span class="ps-2">Parking</span></label>
-              </div>
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault"><span class="ps-2">Kitchen</span></label>
-              </div>
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault"><span class="ps-2">CCTV</span></label>
-              </div>
-            </div>
-          </div>
-    </div>
-    <div class="d-flex flex-row flex-wrap gap-4 justify-content-center">
-        @foreach ($dorms['data'] as $dorm) 
-          <x-dorm-list :dorm="$dorm"></x-dorm-list>  
-        @endforeach
     </div>
 </div>
+
+<div class="d-flex">
+    {{-- <h4 class="fw-bold px-3 pt-2 fs-2">Sort by:</h4>
+    <div class="dropdown">
+        <button class="dropdown-btn dropdown-btn2">Most Likes<i class="fa-solid fa-caret-down fa-lg ps-2"></i></button>
+        <div class="dropdown-options">
+          <a href="#">Most Likes</a>
+          <a href="#">Rating</a>
+          <a href="#">Recent</a>
+        </div>
+    </div> --}}
+    <h4 class="fw-bold px-3 pt-2 fs-2">Filter</h4>
+    <div class="dropdown">
+        <button class="dropdown-btn dropdown-btn2">by<i class="fa-solid fa-caret-down fa-lg ps-2"></i></button>
+        <div class="dropdown-options">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault"><span class="ps-2">Internet</span></label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault"><span class="ps-2">Air Conditioner</span></label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault"><span class="ps-2">Parking</span></label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault"><span class="ps-2">Kitchen</span></label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault"><span class="ps-2">CCTV</span></label>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="d-flex flex-row flex-wrap gap-4 justify-content-center">
+      @foreach ($dorms['data'] as $dorm) 
+        <x-dorm-list :dorm="$dorm"></x-dorm-list>  
+      @endforeach
+  </div>
+  {{-- if no dorms
+  <div class="vh-100 d-flex justify-content-center">
+    <x-create-dorm></x-create-dorm>
+  </div>
+</div> --}}
 <x-footer></x-footer>
 @endsection

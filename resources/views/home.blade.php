@@ -78,7 +78,7 @@
 <div>
     <h1 class="text-center fw-bold pt-5">View the best reviewed dormitories in the city</h1>
 </div>
-<div class="container">
+<div class="container-fluid">
     <div class="d-flex flex-wrap gap-4 justify-content-center">
         @foreach ($dorms['data'] as $dorm) 
             <x-dorm-list :dorm="$dorm" />

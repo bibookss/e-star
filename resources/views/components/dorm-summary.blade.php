@@ -2,7 +2,8 @@
     <div class="card rounded-4" style="width: 30rem;" >
         <div class=" list-group-flush">
             <div class="ps-3 pt-3 pb-1 ">
-                <span class="mx-2 px-2 py-1 rounded-5 fw-bold text-white fs-1" id="ratingOverall">{{ $dorm['overallRating'] }}</span>
+                {{-- <span class="mx-2 px-3 py-1 rounded-5 fw-bold text-white fs-1" id="ratingOverall">{{ $dorm['overallRating'] }}</span> --}}
+                <p class="ms-3 px-3 py-1 rounded-5 text-white fs-2 d-inline-flex fw-bold" data-color="{{$dorm['overallRating']}}" >{{$dorm['overallRating']}}</p>
                 <span class="mx-3 flex-grow-1 fw-bold"> {{ $dorm['postCount'] }} reviews</span>
                 <br>
                 <br>
@@ -29,19 +30,46 @@
     <div class="py-5">
         <img class="real-img rounded-4" src="/assets/real-map.png"  style="width: 30rem; border-bottom: 4px solid black;">
     </div>
+    <script src="https://code.jquery.com/jquery-1.7.2.js"></script>
     <script>
-		const num = {{ $dorm['overallRating'] }};
-		const numElem = document.getElementById("ratingOverall");
+        $(document).ready(function(){
 
-		if (num >= 1 && num <= 2) {
-			numElem.classList.add("red-rating");
-		} else if (num > 2 && num <= 4) {
-			numElem.classList.add("ylw-rating");
-		} else if (num > 4 && num <= 5) {
-			numElem.classList.add("grn-rating");
-		} else {
-			// Handle numbers outside the range
-			console.error("Number out of range");
-		}
-	</script>
+        var mc = {
+        '0-2'     : 'red-rating',
+        '2-3.5'    : 'ylw-rating',
+        '3.5-5'   : 'grn-rating'
+        };
+
+        function between(x, min, max) {
+        return x >= min && x <= max;
+        }
+        var dc;
+        var first; 
+        var second;
+        var th;
+
+        $('p').each(function(index){
+
+        th = $(this);
+
+        dc = parseInt($(this).attr('data-color'),10);
+
+
+        $.each(mc, function(name, value){
+
+
+        first = parseInt(name.split('-')[0],10);
+        second = parseInt(name.split('-')[1],10);
+
+        console.log(between(dc, first, second));
+
+        if( between(dc, first, second) ){
+            th.addClass(value);
+        }
+
+        });
+
+        });
+        });
+    </script>
 </div>

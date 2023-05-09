@@ -24,12 +24,18 @@ data-bs-toggle="modal" data-bs-target="#signIn">
                 <a class="text-primary" href="#"><u>Forgot password?</u></a>
                 <br>
                 <input class="ylw-btn rounded-4 px-2 py-1 my-2" type="submit" value="Continue" style="width: 20rem;">
+                {{-- pag mali ang credentials, call this function: "credentialALert()" --}}
               </div>
           </form>
           <div class="fs-5 fw-bold hr2">or use</div>           
-          <button class="google-btn rounded-4 px-2 py-1 my-2" style="width: 20rem;"><i class="fa-brands fa-google mx-2"></i> Sign-in with Google</button>
-          <div class="fs-5 fw-bold hr3">or</div> 
+          <button class="google-btn rounded-4 px-2 py-1 my-2" style="width: 20rem;"><i class="fa-brands fa-google mx-2"></i> Sign-in with Google</button> 
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  function credentialAlert() {
+  alert("Invalid username or password, please try again");
+}
+</script>

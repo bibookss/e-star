@@ -45,7 +45,7 @@
     <div class="d-flex flex-column card">
         <div class="p-3">
             <span class="fs-4 fw-bold pb-3 pe-5">Room:</span>
-            <input type="range" min="1" max="5" value="0" id="slider1" class="slider " style="margin-left:110px;">
+            <input type="range" min="1" max="5" value="0" id="slider1" class="slider " style="margin-left:110px;" required>
             <span class="ps-5 fw-bold fs-4 px-2" id="sliderValue1"></span>            
         </div>
         <div class="p-3">
