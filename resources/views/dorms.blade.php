@@ -12,7 +12,7 @@
       <form method="GET" action="{{ route('search') }}">
       <div class="col my-5 d-flex justify-content-center pt-3">
           @csrf
-          <input type="text" class="address-input rounded-4 w-25 mx-5 ps-3" id="fname" name="address" placeholder="Enter address" value="<?php echo $_GET['address'] ?? ''; ?>">
+          <input type="text" class="address-input rounded-4 w-25 mx-5 ps-3" id="fname" name="q" placeholder="Enter address" value="<?php echo $_GET['q'] ?? ''; ?>">
           <button class="ylw-btn text-white px-4 py-2 fw-bold rounded-4">Search now</button>
         </form>  
         @auth
@@ -69,8 +69,8 @@
   </div>
 </div> --}}
 <form action="{{ request()->routeIs('search') ? route('search', ['perPage' => $perPage, 'page' => $page+1])  : route('dorms', ['perPage' => $perPage, 'page' => $page+1]) }}" method="GET">  <div class="d-flex justify-content-end py-3 px-5 me-3 mb-3">
-  <input type="hidden" name="q" value="{{  request()->query('address') }}">  <p class="col-4 fw-bold pt-4 ">Showing {{count($dorms['data'])}} of {{ $dorms['total'] }} reviews</p>
-    @if (count($dorms['data']) < $perPage * ($page+1))
+  <input type="hidden" name="q" value="{{  request()->query('q') }}">  <p class="col-4 fw-bold pt-4 ">Showing {{count($dorms['data'])}} of {{ $dorms['total'] }} reviews</p>
+    @if (count($dorms['data']) < $perPage * ($page+1) && count($dorms['data']) < $dorms['total'])
       <input type="hidden" name="page" value="{{ $page+1 }}">
       <input type="hidden" name="perPage" value="{{ $perPage }}">
       <button type="submit" class="col-2 blue-btn text-white rounded-4">Load More</button>

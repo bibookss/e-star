@@ -41,7 +41,7 @@ class DormController extends Controller
         $page = $request->input('page', 1);
 
         if ($request->address) {
-            $queryString = $request->address;
+            $queryString = $request->q;
         } else {
             $queryString = $request->input('q');
         }
