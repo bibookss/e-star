@@ -23,11 +23,11 @@
                 <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit">Delete</button>
+                    <button type="submit">Delete</button>               
                 </form> --}}
                 <div class=" d-flex justify-content-end gap-1 me-2 mb-1">
                     <x-edit-post :post="$post" />
-                    <button class="btn  ylw-btn">Delete</button>
+                    <button class="btn ylw-btn">Delete</button>
                 </div>
             @endif
             

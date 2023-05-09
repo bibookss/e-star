@@ -8,16 +8,15 @@ class EditPost extends Component
 {
     public function __construct($post)
     {
+        \Log::debug("editt post construct");
+        \Log::debug($post);
         $this->post = $post;
-        \Log::debug('EditPost');
-        \Log::debug($post['review']);
     }
 
     public function render()
     {
         return view('components.edit-post', [
             'post' => $this->post,
-            'dormId' => $this->post['dormId'],      
         ]);    
     }
 }

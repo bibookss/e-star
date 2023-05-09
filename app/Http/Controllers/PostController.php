@@ -46,7 +46,7 @@ class PostController extends Controller
         return back();
     }
 
-    public function editPost(Request $request, $dorm) {
+    public function editPost(Request $request, $post) {
         $token = Session::get('token');
 
         $httpPost = new Client([
@@ -58,7 +58,7 @@ class PostController extends Controller
         ]);
 
         $data = [
-            'dormId' => $dorm,
+            'postId' => $post,
             'review' => $request->input('review'),
             'locationRating' => $request->input('locationRating'),
             'securityRating' => $request->input('securityRating'),
@@ -66,7 +66,7 @@ class PostController extends Controller
             'bathroomRating' => $request->input('bathroomRating'),
         ]; 
 
-        $postResponse = $httpPost->post('/api/v1/posts', [
+        $postResponse = $httpPost->patch('/api/v1/posts/' . $post, [
             'json' => $data
         ]);
 
