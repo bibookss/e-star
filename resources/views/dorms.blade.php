@@ -1,3 +1,8 @@
+@php
+  use Illuminate\Http\Request;
+@endphp
+
+
 @extends('layouts.app')
 
 @section('content')
@@ -53,7 +58,7 @@
         </div>
       </div>
   </div>
-  <div class="d-flex flex-row flex-wrap gap-4 justify-content-center">
+  <div class="d-flex flex-row flex-wrap gap-4 justify-content-center"  id="dorms-container">
       @foreach ($dorms['data'] as $dorm) 
         <x-dorm-list :dorm="$dorm"></x-dorm-list>  
       @endforeach
@@ -63,5 +68,19 @@
     <x-create-dorm></x-create-dorm>
   </div>
 </div> --}}
+<form action="{{ request()->routeIs('search') ? route('search', ['perPage' => $perPage, 'page' => $page+1])  : route('dorms', ['perPage' => $perPage, 'page' => $page+1]) }}" method="GET">  <div class="d-flex justify-content-end py-3 px-5 me-3 mb-3">
+  <input type="hidden" name="q" value="{{  request()->query('address') }}">  <p class="col-4 fw-bold pt-4 ">Showing {{count($dorms['data'])}} of {{ $dorms['total'] }} reviews</p>
+    @if (count($dorms['data']) < $perPage * ($page+1))
+      <input type="hidden" name="page" value="{{ $page+1 }}">
+      <input type="hidden" name="perPage" value="{{ $perPage }}">
+      <button type="submit" class="col-2 blue-btn text-white rounded-4">Load More</button>
+    @endif
+  </div>
+</form>
+
+
+
+
+
 <x-footer></x-footer>
 @endsection

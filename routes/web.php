@@ -12,7 +12,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::group(['prefix' => 'dorms'], function () {
-        Route::get('/', 'DormController@index');
+        Route::get('/', 'DormController@index')->name('dorms');
         Route::get('/{dorm}', 'DormController@show');
         Route::post('/create-dorm', 'DormController@addDorm')->name('add-dorm');
         // Route::get('/', 'DormController@addDorm')->name('add-dorm');

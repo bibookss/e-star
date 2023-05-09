@@ -24,11 +24,23 @@ class DormController extends Controller
             $perPage = $request->input('perPage', 12);
             $page = $request->input('page', 1);
 
+            if (!$perPage && !$page) {
+                $dorms = Dorm::where($filterItems)->get();
+
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Successfully retrieved dorms.',
+                    'total' => $dorms->total(),
+                    'data' => new DormCollection($dorms)
+                ]);
+            }
+
             $dorms = Dorm::where($filterItems)->paginate($perPage, ['*'], 'page', $page);
 
             return response()->json([
                 'status' => 200,
                 'message' => 'Successfully retrieved dorms.',
+                'total' => $dorms->total(),
                 'data' => new DormCollection($dorms)
             ]); 
         } catch (\Exception $e) {

@@ -15,23 +15,47 @@ class DormController extends Controller
         $client = new Client([
             'base_uri' => 'http://localhost:8001/api/v1/',
         ]);
-        $response = $client->get('dorms');
+
+        // Get pagination parameters from the request
+        $perPage = $request->input('perPage', 12);
+        $page = $request->input('page', 1);
+        
+        $response = $client->get('dorms?' . 'perPage=' . $perPage * $page);
         $dorms = json_decode($response->getBody()->getContents(), true);      
 
-        return view ('dorms', compact('dorms'));
+        return view ('dorms', [
+            'dorms' => $dorms,
+            'perPage' => $perPage,
+            'page' => $page
+        ]);
     }
 
     public function search(Request $request)
     {
-        $queryString = $request->address;
         $client = new Client([
             'base_uri' => 'http://localhost:8001/api/v1/search',
         ]);
 
-        $response = $client->get('?address[LIKE]='.$queryString);
+        // Get pagination parameters from the request
+        $perPage = $request->input('perPage', 12);
+        $page = $request->input('page', 1);
+
+        if ($request->address) {
+            $queryString = $request->address;
+        } else {
+            $queryString = $request->input('q');
+        }
+
+        $response = $client->get('?address[LIKE]='.$queryString.'&perPage=' . $perPage * $page);
         $dorms = json_decode($response->getBody()->getContents(), true);      
 
-        return view ('dorms', compact('dorms'));
+
+        return view ('dorms', [
+            'dorms' => $dorms,
+            'perPage' => $perPage,
+            'page' => $page,
+            'request' => $request->all(),
+        ]);
     }
 
     public function filter(Request $request) 
