@@ -12,7 +12,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content modal-review">
                 <div class="modal-body d-flex p-4">
-                    <div class="fs-2 flex-grow-1 fw-bold ps-2"> Write your review</div>
+                    <div class="fs-2 flex-grow-1 fw-bold ps-2"> Update your review</div>
                     <button class="btn" data-bs-dismiss="modal" aria-label="Close">
                         <i class="fa-regular fa-circle-xmark fa-2xl"></i>
                     </button>

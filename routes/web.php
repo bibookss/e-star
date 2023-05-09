@@ -20,7 +20,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
 
         Route::post('/{dorm}/posts', 'PostController@createPost')->name('add-post');
         Route::patch('/posts/{post}', 'PostController@editPost')->name('edit-post');
-        // Route::delete('/{dorm}/posts', 'PostController@deletePost')->name('delete-post');
+        Route::delete('/posts/{post}', 'PostController@deletePost')->name('delete-post');
     });
 
     Route::get('/search', 'DormController@search')->name('search');

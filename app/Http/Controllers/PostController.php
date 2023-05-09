@@ -71,8 +71,25 @@ class PostController extends Controller
         ]);
 
         $postResult = json_decode((string) $postResponse->getBody(), true);       
-    
 
+        return back();
+    }
+
+    public function deletePost(Request $request, $post) {
+        $token = Session::get('token');
+
+        $httpPost = new Client([
+            'base_uri' => 'http://localhost:8001/api/v1/posts',
+            'headers' => [
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer ' . $token,
+            ],
+        ]);
+
+        $postResponse = $httpPost->delete('/api/v1/posts/' . $post);
+
+        $postResult = json_decode((string) $postResponse->getBody(), true);       
+    
         return back();
     }
 }

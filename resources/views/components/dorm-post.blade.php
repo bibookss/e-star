@@ -18,7 +18,8 @@
                     {{-- <x-star-rating></x-star-rating> --}}
                 </div>
             </div>
-            @if(Route::is('profile') && Auth::check() && Auth::user()->id == $post['userId'])
+            {{-- @if(Route::is('profile') && Auth::check() && Auth::user()->id == $post['userId']) --}}
+            @if(Auth::check() && Auth::user()->id == $post['userId'])
                 {{-- <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
                 <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
                     @csrf
@@ -27,7 +28,11 @@
                 </form> --}}
                 <div class=" d-flex justify-content-end gap-1 me-2 mb-1">
                     <x-edit-post :post="$post" />
-                    <button class="btn ylw-btn">Delete</button>
+                    <form method="POST" action="{{ route('delete-post', ['post' => $post['postId']]) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn ylw-btn" type="submit">Delete</button>
+                    </form>
                 </div>
             @endif
             
