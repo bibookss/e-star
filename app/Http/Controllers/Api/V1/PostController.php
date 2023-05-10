@@ -40,17 +40,18 @@ class PostController extends Controller
     public function createPost(Request $request)
     {
         try {
-            \Log::debug("createPost");
-            \Log::debug($request->all());
             $user = auth()->user();
-            
-            if ($request->jsonData == null) {
-                $data = $request->all();
-            } else {
-                $data = json_decode($request->jsonData); 
-            }
-
+            $data = $request->jsonData ? json_decode($request->jsonData) : $request->all();
             $dorm = Dorm::findOrFail($data->dormId);
+            
+            // Check if post already has reviews
+            if ($dorm->posts()->where('user_id', $user->id)->count() > 0) {
+                return response()->json([
+                    'status' => 400,
+                    'message' => 'You have already reviewed this dorm.'
+                ]);
+            }
+            
             $newPost = new Post([
                 'dorm_id' => $dorm->id,
                 'review' => $data->review,
@@ -59,14 +60,12 @@ class PostController extends Controller
                 'internet_rating' => $data->internetRating,
                 'bathroom_rating' => $data->bathroomRating
             ]);
-            \Log::debug($newPost);
 
             $user->posts()->save($newPost);
             $dorm->posts()->save($newPost);
 
 
             $images = $request->images;
-            \Log::debug($images);
             if ($images != null) {
                 foreach ($images as $image) {
                     $path = $image->store('public/uploads');

@@ -36,31 +36,23 @@ class PostController extends Controller
         if ($images != null) {
             foreach ($images as $image) {
                 $multipart[] = [
-                    'name' => 'images[]', // The name of the input field for the images array in the API endpoint
-                    'contents' => fopen($image->getPathname(), 'r'), // The uploaded file contents
-                    'filename' => $image->getClientOriginalName() // The original filename
+                    'name' => 'images[]',
+                    'contents' => fopen($image->getPathname(), 'r'), 
+                    'filename' => $image->getClientOriginalName() 
                 ];
             }
         }
 
-        // Check if user already has reviews for this dorm
-        $postExist = $httpPost->get('/api/v1/posts?userId[eq]=' . Auth::id() . '&dormId[eq]=' . $dorm);
-        $postExistResult = json_decode((string) $postExist->getBody(), true);        
-
-        if (empty($postExistResult['data']) || $postExistResult['status'] == 500) {
-            $postResponse = $httpPost->post('/api/v1/posts', [
-                'multipart' => array_merge($multipart, [
-                    [
-                        'name' => 'jsonData',
-                        'contents' => json_encode($data)
-                    ]
-                ])
-            ]);
-            
-            $postResult = json_decode((string) $postResponse->getBody(), true);
-            // dd($postResult);
-        } 
-
+        $postResponse = $httpPost->post('/api/v1/posts', [
+            'multipart' => array_merge($multipart, [
+                [
+                    'name' => 'jsonData',
+                    'contents' => json_encode($data)
+                ]
+            ])
+        ]);
+        
+        $postResult = json_decode((string) $postResponse->getBody(), true);
         return back();
     }
 
