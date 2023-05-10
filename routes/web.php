@@ -12,15 +12,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::group(['prefix' => 'dorms'], function () {
-        Route::get('/', 'DormController@index');
+        Route::get('/', 'DormController@index')->name('dorms');
         Route::get('/{dorm}', 'DormController@show');
         Route::post('/create-dorm', 'DormController@addDorm')->name('add-dorm');
         // Route::get('/', 'DormController@addDorm')->name('add-dorm');
         // Route::get('/{dorm}/edit-dorm', 'DormController@edit');
 
         Route::post('/{dorm}/posts', 'PostController@createPost')->name('add-post');
-        // Route::put('/{dorm}/posts', 'PostController@editPost')->name('edit-post');
-        // Route::delete('/{dorm}/posts', 'PostController@deletePost')->name('delete-post');
+        Route::patch('/posts/{post}', 'PostController@editPost')->name('edit-post');
+        Route::delete('/posts/{post}', 'PostController@deletePost')->name('delete-post');
     });
 
     Route::get('/search', 'DormController@search')->name('search');

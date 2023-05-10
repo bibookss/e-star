@@ -24,6 +24,10 @@ class SearchController extends Controller
         $filter = new SearchFilter();
         $searchTerms = $filter->transform($request);
         
+        // Get pagination parameters from the request
+        $perPage = $request->input('perPage', 12);
+        $page = $request->input('page', 1);
+
         $query = Dorm::with(['location']);
 
         if (count($searchTerms) === 0) {
@@ -47,8 +51,15 @@ class SearchController extends Controller
             \Log::debug($query->toSql());
         }
 
-        $dorms = $query->get();
-        return new DormCollection($dorms);
+        $dormCount = $query->count();
+        $dorms = new DormCollection($query->paginate($perPage, ['*'], 'page', $page));
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Successfully retrieved dorms.',
+            'total' => $dormCount,
+            'data' => $dorms
+        ]); 
     }
 }
 

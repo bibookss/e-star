@@ -1,3 +1,6 @@
+@php
+    use Illuminate\Support\Str;
+@endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -40,8 +43,8 @@
                     <img src="/assets/e-star-logo-blue-bg.png" alt="e-star logo" height="50"/>
                 </a>
                 <ul class="navbar-nav d-flex ms-auto gap-5">
-                    <li class="nav-item ps-5"><a href="/" class="nav-link text-white {{request()->is('/') ? 'active' : ''}}" >Home</a></li>
-                    <li class="nav-item"><a href="/dorms" class="nav-link text-white {{request()->is('dorms') ? 'active' : ''}}" >Dorms</a></li>
+                    <li class="nav-item ps-5"><a href="/" class="nav-link text-white {{ request()->is('/') ? 'active' : '' }}">Home</a></li>
+                    <li class="nav-item"><a href="/dorms" class="nav-link text-white {{request()->is('dorms') || request()->is('search') ? 'active' : ''}}" >Dorms</a></li>
                     <li class="nav-item"><a href="/contacts" class="nav-link text-white {{request()->is('contacts') ? 'active' : ''}}" >Contact</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="{{ url(route('home')) }}#about">About</a></li>
                 </ul>

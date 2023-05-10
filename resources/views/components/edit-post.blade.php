@@ -3,8 +3,8 @@
     {{-- if not logged in --}}
         {{-- sign up page --}}
     {{-- if logged in --}}
-    <button type="button" class="btn ylw-btn px-5 py-2 rounded-4" data-bs-toggle="modal" data-bs-target="#writeReview">
-        Write a Review
+    <button type="button" class="btn blue-btn" data-bs-toggle="modal" data-bs-target="#writeReview">
+        Edit
     </button>
   
   <!-- Modal -->
@@ -12,13 +12,14 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content modal-review">
                 <div class="modal-body d-flex p-4">
-                    <div class="fs-2 flex-grow-1 fw-bold ps-2"> Write your review</div>
+                    <div class="fs-2 flex-grow-1 fw-bold ps-2"> Update your review</div>
                     <button class="btn" data-bs-dismiss="modal" aria-label="Close">
                         <i class="fa-regular fa-circle-xmark fa-2xl"></i>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('add-post', ['dorm' => $dormId]) }}">
+                <form method="POST" action="{{ route('edit-post', ['post' => $post['postId']]) }}">
                     @csrf
+                    @method('PATCH')
                     <div class="px-5">
                         <textarea rows="7" style="width:900px;" class=" write-review p-4 rounded-4" placeholder="Write something..." aria-label="review-text" name="review" required></textarea>
                         <br>
@@ -56,7 +57,7 @@
                         <label for="formFileMultiple" class="form-label fs-4 fw-bold px-2 ms-2">Attach images</label>                
                         <div class="d-flex pt-2">
                             <input class="form-control blue-btn" type="file" id="formFileMultiple" style="width: 18rem;" multiple>
-                            <button type="submit" class="btn ylw-btn ms-auto" >Publish review</button>
+                            <button type="submit" class="btn ylw-btn ms-auto" >Update review</button>
                         </div>
                     </div>
                 </form>

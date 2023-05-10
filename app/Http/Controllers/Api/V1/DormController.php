@@ -15,17 +15,33 @@ use App\Http\Requests\V1\UpdateDormRequest;
 
 class DormController extends Controller
 {
-    public function getAllDorms(Request $request)
-    {
+    public function getAllDorms(Request $request) {
         try {
             $filter = new DormsFilter();
             $filterItems = $filter->transform($request);
-            $dorms = Dorm::where($filterItems);
+
+            // Get pagination parameters from the request
+            $perPage = $request->input('perPage', 12);
+            $page = $request->input('page', 1);
+
+            if (!$perPage && !$page) {
+                $dorms = Dorm::where($filterItems)->get();
+
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Successfully retrieved dorms.',
+                    'total' => $dorms->total(),
+                    'data' => new DormCollection($dorms)
+                ]);
+            }
+
+            $dorms = Dorm::where($filterItems)->paginate($perPage, ['*'], 'page', $page);
 
             return response()->json([
                 'status' => 200,
                 'message' => 'Successfully retrieved dorms.',
-                'data' => new DormCollection($dorms->get())
+                'total' => $dorms->total(),
+                'data' => new DormCollection($dorms)
             ]); 
         } catch (\Exception $e) {
             return response()->json([
@@ -35,6 +51,7 @@ class DormController extends Controller
             ]);
         }
     }
+
 
     public function getDorm($id)
     {
