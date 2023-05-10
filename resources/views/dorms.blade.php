@@ -10,10 +10,11 @@
     <br><br>
     <div class="row container-fluid">
       <form method="GET" action="{{ route('search') }}">
-      <div class="col my-5 d-flex justify-content-center pt-3">
-          @csrf
-          <input type="text" class="address-input rounded-4 w-25 mx-5 ps-3" id="fname" name="q" placeholder="Enter address" value="<?php echo $_GET['q'] ?? ''; ?>">
-          <button class="ylw-btn text-white px-4 py-2 fw-bold rounded-4">Search now</button>
+        <div class="col my-5 d-flex justify-content-center pt-3">
+            @csrf
+            <input type="text" class="address-input rounded-4 w-25 mx-5 ps-3" id="fname" name="q" placeholder="Enter address" value="<?php echo $_GET['q'] ?? ''; ?>">
+            <button class="ylw-btn text-white px-4 py-2 fw-bold rounded-4">Search now</button>
+        </div>
         </form>  
         @auth
           <x-create-dorm></x-create-dorm>          
@@ -31,7 +32,7 @@
           <a href="#">Recent</a>
         </div>
     </div> --}}
-    <h4 class="fw-bold px-3 pt-2 fs-2">Filter</h4>
+    <h4 class="fw-bold px-3 ms-5 pt-2 fs-2">Filter</h4>
     <div class="dropdown">
         <button class="dropdown-btn dropdown-btn2">by<i class="fa-solid fa-caret-down fa-lg ps-2"></i></button>
         <div class="dropdown-options">

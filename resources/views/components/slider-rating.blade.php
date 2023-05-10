@@ -63,7 +63,7 @@
             <input type="range" min="1" max="5" value="0" id="slider4" class="slider " style="margin-left:86px;">
             <span class="ps-5 fw-bold fs-4 px-2" id="sliderValue4"></span>
         </div>
-        
+
     </div>
     
 </body>

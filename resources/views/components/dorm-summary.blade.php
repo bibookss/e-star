@@ -1,10 +1,11 @@
 <div>
     <div class="card rounded-4" style="width: 30rem;" >
         <div class=" list-group-flush">
-            <div class="ps-3 pt-3 pb-1 ">
+            <div class="ps-3 pt-4 pb-1 d-flex">
                 {{-- <span class="mx-2 px-3 py-1 rounded-5 fw-bold text-white fs-1" id="ratingOverall">{{ $dorm['overallRating'] }}</span> --}}
-                <p class="ms-3 px-3 py-1 rounded-5 text-white fs-2 d-inline-flex fw-bold" data-color="{{$dorm['overallRating']}}" >{{$dorm['overallRating']}}</p>
-                <span class="mx-3 flex-grow-1 fw-bold"> {{ $dorm['postCount'] }} reviews</span>
+                <p class="ms-3 px-4 rounded-5 text-white fs-1 d-inline-flex fw-bold" data-color="{{$dorm['overallRating']}}" >{{$dorm['overallRating']}}</p>
+                <div class="w-25  flex-grow-1"></div>
+                <p class="mx-3 flex-shrink-1 fw-bold me-5 mt-3"> {{ $dorm['postCount'] }} reviews</p>
                 <br>
                 <br>
                 {{-- <span class="">
@@ -24,7 +25,8 @@
             </div>
         </div>
         <div class="ps-2">
-        {{-- <x-star-rating></x-star-rating> --}}
+            
+        <x-star-rating></x-star-rating>
         </div>
     </div>
     <div class="py-5">
@@ -32,6 +34,8 @@
     </div>
     <script src="https://code.jquery.com/jquery-1.7.2.js"></script>
     <script>
+
+        // color change
         $(document).ready(function(){
 
         var mc = {

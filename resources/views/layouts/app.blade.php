@@ -20,11 +20,7 @@
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
     <script src="https://kit.fontawesome.com/932573d37b.js" crossorigin="anonymous"></script>
     
-    
-    
 
-
-    
     
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
