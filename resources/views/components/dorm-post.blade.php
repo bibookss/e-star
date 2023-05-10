@@ -6,10 +6,20 @@
                     {{-- <span class="ms-3 px-3 py-1 rounded-5 text-white fs-2 grn-rating" id="number" data-color="{{$post['overallRating']}}">{{$post['overallRating']}} </span> --}}
                     <p class="ms-3 px-3 py-1 rounded-5 text-white fs-4 d-inline-flex" data-color="{{$post['overallRating']}}" >{{$post['overallRating']}}</p>
                     <div class="pt-3 ps-2">{{ $post['datePosted'] }}</div>
+                    <div class="pt-3 ps-2">
+                        @if ($post['isVerified'] == 1)
+                            <i class="fa-sharp fa-solid fa-circle-check" style="color: #2ec27e;"></i>                      
+                            Verified Student
+                        @endif
+                    </div>
                 </div>
                 <div class="col d-flex justify-content-start">
-                    {{ $post['review'] }}
+                    <div>
+                        {{ $post['review'] }}
+                    </div>
+                    
                 </div>
+
             </div>
             <div class="row">
                 <div class="col-4">

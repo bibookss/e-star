@@ -24,6 +24,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
     });
 
     Route::get('/search', 'DormController@search')->name('search');
+    Route::get('/filter', 'DormController@filter')->name('filter');
 
     Route::group(['prefix' => 'profile'], function () {
         Route::get('/', 'UserController@show')->name('profile');

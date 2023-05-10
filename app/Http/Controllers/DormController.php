@@ -17,12 +17,11 @@ class DormController extends Controller
         ]);
 
         // Get pagination parameters from the request
-        $perPage = $request->input('perPage', 12);
-        $page = $request->input('page', 1);
-        
-        $response = $client->get('dorms?' . 'perPage=' . $perPage * $page);
-        $dorms = json_decode($response->getBody()->getContents(), true);      
+        $perPage = $request->input('perPage', 10) ? $request->input('perPage', 10) : 10;
+        $page = $request->input('page', 1) ? $request->input('page', 1) : 1;
 
+        $response = $client->get('dorms?includeImages=true&' . 'perPage=' . $perPage * $page );
+        $dorms = json_decode($response->getBody()->getContents(), true);      
         return view ('dorms', [
             'dorms' => $dorms,
             'perPage' => $perPage,
@@ -46,7 +45,7 @@ class DormController extends Controller
             $queryString = $request->input('q');
         }
 
-        $response = $client->get('?address[LIKE]='.$queryString.'&perPage=' . $perPage * $page);
+        $response = $client->get('?address[LIKE]='.$queryString.'&includeImages=true&perPage=' . $perPage * $page);
         $dorms = json_decode($response->getBody()->getContents(), true);      
 
 
@@ -88,7 +87,7 @@ class DormController extends Controller
             'name' => $request->input('name'),
             'barangay' => $request->input('barangay'),
             'city' => $request->input('city'),
-            'street' => $request->input('city')
+            'street' => $request->input('street')
         ];
 
         // Search for loation if it exists, create otherwise
@@ -97,9 +96,8 @@ class DormController extends Controller
 
 
         $locationResponse = $httpLocation->get($address);
-
         $locationResult = json_decode((string) $locationResponse->getBody(), true);        
-
+        
         if (empty($locationResult['data'])) {
             // Create location
             $locationResponse = $httpLocation->post('/api/v1/locations', [
@@ -111,7 +109,10 @@ class DormController extends Controller
             ]);
 
             $locationResult = json_decode((string) $locationResponse->getBody(), true);        
-        } 
+            $id = $locationResult['data']['locationId'];
+        } else {
+            $id = $locationResult['data'][0]['locationId'];
+        }
 
         $httpDorm = new Client([
             'base_uri' => 'http://localhost:8001/api/v1/dorms',
@@ -121,7 +122,6 @@ class DormController extends Controller
             ],
         ]);
 
-        $id = $locationResult['data'][0]['locationId'];
         $response = $httpDorm->post('/api/v1/dorms', [
             'json' => [
                 'name' => $data['name'],
@@ -131,7 +131,7 @@ class DormController extends Controller
 
         $result = json_decode((string) $response->getBody(), true);        
 
-        return redirect('http://localhost:8000/dorms/'.$id);
+        return redirect('http://localhost:8000/dorms/'.$result['data']['dormId']);
     }
 
     public function create()
@@ -144,7 +144,7 @@ class DormController extends Controller
         $client = new Client([
             'base_uri' => 'http://localhost:8001/api/v1/',
         ]);
-        $response = $client->get('dorms/'.$id.'?includePosts=true');
+        $response = $client->get('dorms/'.$id.'?includePosts=true&includeImages=true');
         $dorm = json_decode($response->getBody()->getContents(), true);      
 
         if ($dorm['status'] == 500) {

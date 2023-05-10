@@ -31,18 +31,28 @@ class PostController extends Controller
             'bathroomRating' => $request->input('bathroomRating'),
         ];
 
-        // Check if user already has reviews for this dorm
-        $postExist = $httpPost->get('/api/v1/posts?userId[eq]=' . Auth::id() . '&dormId[eq]=' . $dorm);
-        $postExistResult = json_decode((string) $postExist->getBody(), true);        
+        $images = $request->file('images');
+        $multipart = [];
+        if ($images != null) {
+            foreach ($images as $image) {
+                $multipart[] = [
+                    'name' => 'images[]',
+                    'contents' => fopen($image->getPathname(), 'r'), 
+                    'filename' => $image->getClientOriginalName() 
+                ];
+            }
+        }
 
-        if (empty($postExistResult['data']) || $postExistResult['status'] == 500) {
-            $postResponse = $httpPost->post('/api/v1/posts', [
-                'json' => $data
-            ]);
-    
-            $postResult = json_decode((string) $postResponse->getBody(), true);       
-        } 
-
+        $postResponse = $httpPost->post('/api/v1/posts', [
+            'multipart' => array_merge($multipart, [
+                [
+                    'name' => 'jsonData',
+                    'contents' => json_encode($data)
+                ]
+            ])
+        ]);
+        
+        $postResult = json_decode((string) $postResponse->getBody(), true);
         return back();
     }
 

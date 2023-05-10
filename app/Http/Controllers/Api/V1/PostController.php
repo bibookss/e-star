@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Dorm;
 use App\Models\Post;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Filters\V1\PostsFilter;
 use App\Http\Controllers\Controller;
@@ -36,23 +37,53 @@ class PostController extends Controller
         }
     }
 
-    public function createPost(StorePostRequest $request)
+    public function createPost(Request $request)
     {
         try {
             $user = auth()->user();
-            $dorm = Dorm::findOrFail($request->dormId);
-
+            $data = $request->jsonData ? json_decode($request->jsonData) : $request->all();
+            $dorm = Dorm::findOrFail($data->dormId);
+            
+            // Check if post already has reviews
+            if ($dorm->posts()->where('user_id', $user->id)->count() > 0) {
+                return response()->json([
+                    'status' => 400,
+                    'message' => 'You have already reviewed this dorm.'
+                ]);
+            }
+            
             $newPost = new Post([
                 'dorm_id' => $dorm->id,
-                'review' => $request->review,
-                'location_rating' => $request->locationRating,
-                'security_rating' => $request->securityRating,
-                'internet_rating' => $request->internetRating,
-                'bathroom_rating' => $request->bathroomRating,
+                'review' => $data->review,
+                'location_rating' => $data->locationRating,
+                'security_rating' => $data->securityRating,
+                'internet_rating' => $data->internetRating,
+                'bathroom_rating' => $data->bathroomRating
             ]);
 
             $user->posts()->save($newPost);
             $dorm->posts()->save($newPost);
+
+
+            $images = $request->images;
+            if ($images != null) {
+                foreach ($images as $image) {
+                    $path = $image->store('public/uploads');
+                    $filename = basename($path);
+    
+                    $newImage = Image::create([
+                        'name' => $image->getClientOriginalName(),
+                        'path' => $path,
+                        'dorm_id' => $dorm->id,
+                        'user_id' => $user->id
+                    ]);
+                        
+                    $user->images()->save($newImage);
+                    $dorm->images()->save($newImage);
+        
+                    $imagePaths[] = $newImage->path;
+                }
+            }
 
             return response()->json([
                 'status' => 201,

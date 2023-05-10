@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         $locations = Location::factory()->count(20)->create();
         $dorms = Dorm::factory()->count(30)->create();
         $schools = School::factory()->count(10)->create();
-        $users = User::factory()->count(100)->create();
+        $users = User::factory()->count(10)->create();
         
         // Associate a dorm with a school
         foreach ($schools as $school) {
@@ -39,11 +39,6 @@ class DatabaseSeeder extends Seeder
                     'user_id' => $user->id,
                     'dorm_id' => $dorm->id
                 ]);
-
-                $image = Image::factory()->create([
-                    'dorm_id' => $dorm->id,
-                    'user_id' => $user->id
-                ]); 
             }
         }
     }

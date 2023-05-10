@@ -17,7 +17,7 @@
                         <i class="fa-regular fa-circle-xmark fa-2xl"></i>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('add-post', ['dorm' => $dormId]) }}">
+                <form method="POST" action="{{ route('add-post', ['dorm' => $dormId]) }} "  enctype="multipart/form-data">
                     @csrf
                     <div class="px-5">
                         <textarea rows="7" style="width:900px;" class=" write-review p-4 rounded-4" placeholder="Write something..." aria-label="review-text" name="review" required></textarea>
@@ -56,7 +56,7 @@
                     <div class="p-5 ">
                         <label for="formFileMultiple" class="form-label fs-4 fw-bold px-2 ms-2">Attach images</label>                
                         <div class="d-flex pt-2">
-                            <input class="form-control blue-btn" type="file" id="formFileMultiple" style="width: 18rem;" multiple>
+                            <input class="form-control blue-btn" type="file" id="formFileMultiple" name="images[]" style="width: 18rem;" multiple>
                             <button type="submit" class="btn ylw-btn ms-auto" >Publish review</button>
                         </div>
                     </div>

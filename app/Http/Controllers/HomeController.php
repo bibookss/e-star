@@ -14,7 +14,7 @@ class HomeController extends Controller
         $client = new Client([
             'base_uri' => 'http://localhost:8001/api/v1/',
         ]);
-        $response = $client->get('dorms');
+        $response = $client->get('dorms?includeImages=true');
         $dorms = json_decode($response->getBody()->getContents(), true);
         
         return view('home', compact('dorms'));
