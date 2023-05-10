@@ -33,12 +33,14 @@ class PostController extends Controller
 
         $images = $request->file('images');
         $multipart = [];
-        foreach ($images as $image) {
-            $multipart[] = [
-                'name' => 'images[]', // The name of the input field for the images array in the API endpoint
-                'contents' => fopen($image->getPathname(), 'r'), // The uploaded file contents
-                'filename' => $image->getClientOriginalName() // The original filename
-            ];
+        if ($images != null) {
+            foreach ($images as $image) {
+                $multipart[] = [
+                    'name' => 'images[]', // The name of the input field for the images array in the API endpoint
+                    'contents' => fopen($image->getPathname(), 'r'), // The uploaded file contents
+                    'filename' => $image->getClientOriginalName() // The original filename
+                ];
+            }
         }
 
         // Check if user already has reviews for this dorm
@@ -46,7 +48,6 @@ class PostController extends Controller
         $postExistResult = json_decode((string) $postExist->getBody(), true);        
 
         if (empty($postExistResult['data']) || $postExistResult['status'] == 500) {
-            // dd($request->all());
             $postResponse = $httpPost->post('/api/v1/posts', [
                 'multipart' => array_merge($multipart, [
                     [
@@ -55,8 +56,9 @@ class PostController extends Controller
                     ]
                 ])
             ]);
-    
-            $postResult = json_decode((string) $postResponse->getBody(), true);       
+            
+            $postResult = json_decode((string) $postResponse->getBody(), true);
+            // dd($postResult);
         } 
 
         return back();
