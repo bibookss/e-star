@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Dorm;
 use App\Models\Post;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Filters\V1\PostsFilter;
 use App\Http\Controllers\Controller;
@@ -36,23 +37,55 @@ class PostController extends Controller
         }
     }
 
-    public function createPost(StorePostRequest $request)
+    public function createPost(Request $request)
     {
         try {
+            \Log::debug("CREAT POST");
+            \Log::debug($request->all());
+            
+            $data = json_decode($request->jsonData); // convert JSON string to an object            \Log::debug($jsonData);
+            
             $user = auth()->user();
-            $dorm = Dorm::findOrFail($request->dormId);
-
+            $dorm = Dorm::findOrFail($data->dormId);
+            \Log::debug("before post");
+            \Log::debug($dorm);
             $newPost = new Post([
                 'dorm_id' => $dorm->id,
-                'review' => $request->review,
-                'location_rating' => $request->locationRating,
-                'security_rating' => $request->securityRating,
-                'internet_rating' => $request->internetRating,
-                'bathroom_rating' => $request->bathroomRating,
+                'review' => $data->review,
+                'location_rating' => $data->locationRating,
+                'security_rating' => $data->securityRating,
+                'internet_rating' => $data->internetRating,
+                'bathroom_rating' => $data->bathroomRating
             ]);
+            \Log::debug($newPost);
 
             $user->posts()->save($newPost);
             $dorm->posts()->save($newPost);
+
+            \Log::debug("afer post");
+            $images = $request->images;
+            \Log::debug($images);
+            foreach ($images as $image) {
+                \Log::debug("IMAGE");
+                \Log::debug($image);
+
+                $path = $image->store('public/uploads');
+                $filename = basename($path);
+
+                $newImage = Image::create([
+                    'name' => $image->getClientOriginalName(),
+                    'path' => $path,
+                    'dorm_id' => $dorm->id,
+                    'user_id' => $user->id
+                ]);
+                
+                \Log::debug($newImage);
+
+                $user->images()->save($newImage);
+                $dorm->images()->save($newImage);
+    
+                $imagePaths[] = $newImage->path;
+            }
 
             return response()->json([
                 'status' => 201,
