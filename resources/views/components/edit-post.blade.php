@@ -3,12 +3,12 @@
     {{-- if not logged in --}}
         {{-- sign up page --}}
     {{-- if logged in --}}
-    <button type="button" class="btn blue-btn" data-bs-toggle="modal" data-bs-target="#writeReview">
+    <button type="button" class="btn blue-btn" data-bs-toggle="modal" data-bs-target="#updateReview">
         Edit
     </button>
   
   <!-- Modal -->
-    <div class="modal fade" id="writeReview" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="updateReview" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content modal-review">
                 <div class="modal-body d-flex p-4">
@@ -54,9 +54,7 @@
                         
                     </div>
                     <div class="p-5 ">
-                        <label for="formFileMultiple" class="form-label fs-4 fw-bold px-2 ms-2">Attach images</label>                
                         <div class="d-flex pt-2">
-                            <input class="form-control blue-btn" type="file" id="formFileMultiple" style="width: 18rem;" multiple>
                             <button type="submit" class="btn ylw-btn ms-auto" >Update review</button>
                         </div>
                     </div>
