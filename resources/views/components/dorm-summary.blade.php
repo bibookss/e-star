@@ -28,48 +28,51 @@
         </div>
     </div>
     <div class="py-5">
-        <img class="real-img rounded-4" src="/assets/real-map.png"  style="width: 30rem; border-bottom: 4px solid black;">
+        <div id="map" style="height: 500px;" class="real-img rounded-4"></div>
     </div>
     <script src="https://code.jquery.com/jquery-1.7.2.js"></script>
-    <script>
-        $(document).ready(function(){
-
+</div>
+<script>
+    $(document).ready(function(){
         var mc = {
-        '0-2'     : 'red-rating',
-        '2-3.5'    : 'ylw-rating',
-        '3.5-5'   : 'grn-rating'
+            '0-2'     : 'red-rating',
+            '2-3.5'    : 'ylw-rating',
+            '3.5-5'   : 'grn-rating'
         };
 
         function between(x, min, max) {
-        return x >= min && x <= max;
-        }
+            return x >= min && x <= max;
+            }
+
         var dc;
         var first; 
         var second;
         var th;
 
         $('p').each(function(index){
+            th = $(this);
 
-        th = $(this);
-
-        dc = parseInt($(this).attr('data-color'),10);
-
-
-        $.each(mc, function(name, value){
+            dc = parseInt($(this).attr('data-color'),10);
 
 
-        first = parseInt(name.split('-')[0],10);
-        second = parseInt(name.split('-')[1],10);
+            $.each(mc, function(name, value){
+                first = parseInt(name.split('-')[0],10);
+                second = parseInt(name.split('-')[1],10);
 
-        console.log(between(dc, first, second));
+                console.log(between(dc, first, second));
 
-        if( between(dc, first, second) ){
-            th.addClass(value);
-        }
-
+                if( between(dc, first, second) ){
+                    th.addClass(value);
+                }
+            });
         });
 
-        });
-        });
-    </script>
-</div>
+        var map = L.map('map').setView([51.505, -0.09], 13);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        L.Control.geocoder().addTo(map);
+    });
+</script>
+
