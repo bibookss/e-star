@@ -20,7 +20,7 @@ class DormController extends Controller
         $perPage = $request->input('perPage', 12);
         $page = $request->input('page', 1);
         
-        $response = $client->get('dorms?' . 'perPage=' . $perPage * $page);
+        $response = $client->get('dorms?includePosts=true&includeImages=true&' . 'perPage=' . $perPage * $page );
         $dorms = json_decode($response->getBody()->getContents(), true);      
 
         return view ('dorms', [
