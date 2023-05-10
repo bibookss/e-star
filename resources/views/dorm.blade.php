@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="px-5 pt-5 mt-5">
-  <x-image-carousel></x-image-carousel>
+  <x-image-carousel :dorm="$dorm['data']"/>
   <div class="d-flex py-5">
     <h2 class="fw-bold p-1 flex-grow-1"> {{$dorm['data']['name']}} </h2>
     @auth

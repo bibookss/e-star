@@ -144,7 +144,7 @@ class DormController extends Controller
         $client = new Client([
             'base_uri' => 'http://localhost:8001/api/v1/',
         ]);
-        $response = $client->get('dorms/'.$id.'?includePosts=true');
+        $response = $client->get('dorms/'.$id.'?includePosts=true&includeImages=true');
         $dorm = json_decode($response->getBody()->getContents(), true);      
 
         if ($dorm['status'] == 500) {
