@@ -39,11 +39,6 @@ class DatabaseSeeder extends Seeder
                     'user_id' => $user->id,
                     'dorm_id' => $dorm->id
                 ]);
-
-                $image = Image::factory()->create([
-                    'dorm_id' => $dorm->id,
-                    'user_id' => $user->id
-                ]); 
             }
         }
     }
