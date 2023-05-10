@@ -3,6 +3,7 @@
 namespace App\Http\Resources\V1;
 
 use DateTime;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
@@ -16,6 +17,7 @@ class PostResource extends JsonResource
             'postId' => $this->id,
             'dormId' => $this->dorm_id,
             'userId' => $this->user_id,
+            'isVerified' => $this->user->is_verified_student,
             'datePosted' => $formattedDate,
             'review' => $this->review,
             'locationRating' => $this->location_rating,

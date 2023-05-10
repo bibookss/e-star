@@ -26,11 +26,18 @@ class AuthController extends Controller
     public function createUser(StoreUserRequest $request)
     {
         try {
+            $email = $request->email;
+            $educationalDomains = ['edu', 'ac', 'school', 'college', 'university']; 
+            $domain = substr(strrchr($email, "@"), 1);
+            $isEducational = preg_match('/\b('.implode('|',$educationalDomains).')\b/i', $domain);
+
             $user = User::create([
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'is_verified_student' => false
+                'is_verified_student' => $isEducational ? true : false,
             ]);
+
+
 
             return response()->json([
                 'status' => 201,
