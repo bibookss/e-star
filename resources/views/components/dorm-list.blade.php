@@ -3,7 +3,12 @@
         <div class="justify-content-center ">
             <a class="btn" href="/dorms/{{$dorm["dormId"]}}" role="button">
                 <div class="card fw-bold rounded-4 dorm-card" style="border-bottom: #000000 solid 4px;">
-                    <img class="card-img-top img-card" src={{ asset('storage/' . str_replace('public/', '', $dorm['images'][0]['path'])) }} alt="...">
+                    @if (count($dorm['images']) > 0)
+                        <img class="card-img-top img-card" src={{ asset('storage/' . str_replace('public/', '', $dorm['images'][0]['path'])) }} alt="...">
+                    @endif
+                    @if (count($dorm['images']) == 0)
+                        <img class="card-img-top img-card" src="/assets/image1.jpg" alt="...">
+                    @endif
                     <div class="card-body ">
                         <div class="d-flex">
                             <h6 class="card-title fw-bold dorm-left flex-grow-1">{{ $dorm["name"] }}</h6>
