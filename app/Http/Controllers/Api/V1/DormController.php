@@ -17,11 +17,12 @@ class DormController extends Controller
 {
     public function getAllDorms(Request $request) {
         try {
+            sleep(1);
             $filter = new DormsFilter();
             $filterItems = $filter->transform($request);
 
             // Get pagination parameters from the request
-            $perPage = $request->input('perPage', 12);
+            $perPage = $request->input('perPage', 10);
             $page = $request->input('page', 1);
 
             if (!$perPage && !$page) {
