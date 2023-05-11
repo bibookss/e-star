@@ -14,7 +14,7 @@ data-bs-toggle="modal" data-bs-target="#signIn">
           </button>
           <form action="{{ route('login') }}" method="POST">
             @csrf
-            <div class="container">
+            <div class="container pb-3">
                 <div class="fs-2 fw-bold pt-2">Sign-in</div>
                 <br>
                 <input type="email" class=" my-2 center rounded-2 p-2 email-input" id="email" name="email" aria-describedby="emailHelp" placeholder="Email" required>
@@ -27,8 +27,8 @@ data-bs-toggle="modal" data-bs-target="#signIn">
                 {{-- pag mali ang credentials, call this function: "credentialALert()" --}}
               </div>
           </form>
-          <div class="fs-5 fw-bold hr2">or use</div>           
-          <button class="google-btn rounded-4 px-2 py-1 my-2" style="width: 20rem;"><i class="fa-brands fa-google mx-2"></i> Sign-in with Google</button> 
+          {{-- <div class="fs-5 fw-bold hr2">or use</div>           
+          <button class="google-btn rounded-4 px-2 py-1 my-2" style="width: 20rem;"><i class="fa-brands fa-google mx-2"></i> Sign-in with Google</button>  --}}
       </div>
     </div>
   </div>
