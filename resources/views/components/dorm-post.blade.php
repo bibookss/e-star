@@ -1,42 +1,27 @@
 <div>
     <div class="card rounded-4 px-3" style="width: 45rem;" >
-        <div class="card-body list-group-item pt-4 ps-4 fw-bold container dorm-post">
+        <div class="card-body list-group-item p-4 container dorm-post">
             <div class="row">
-                <div class="col-3">
-                    {{-- <span class="ms-3 px-3 py-1 rounded-5 text-white fs-2 grn-rating" id="number" data-color="{{$post['overallRating']}}">{{$post['overallRating']}} </span> --}}
-                    <p class="ms-3 px-3 py-1 rounded-5 text-white fs-4 d-inline-flex" data-color="{{$post['overallRating']}}" >{{$post['overallRating']}}</p>
-                    <div class="pt-3 ps-2">{{ $post['datePosted'] }}</div>
-                    <div class="pt-3 ps-2">
+                <div class="col-5 d-flex align-items-center fw-bold">
+                    <p style="min-width: 75px;" class="text-center px-3 py-1 rounded-5 text-white fs-4" data-color="{{$post['overallRating']}}" >{{$post['overallRating']}}</p>
+                    <div class="ms-3">{{ $post['datePosted'] }}</div>
+                </div>
+                <div class="col-7">
+                    <div class="pt-3 ps-2 text-end">
                         @if ($post['isVerified'] == 1)
                             <i class="fa-sharp fa-solid fa-circle-check" style="color: #2ec27e;"></i>                      
                             Verified Student
                         @endif
                     </div>
                 </div>
-                <div class="col-8">
-                    <div>
-                        {{ $post['review'] }}
-                    </div>
-                    
-                </div>
-
             </div>
             <div class="row">
-                <div class="col-4">
-                </div>
-                <div class="col-6 pt-2 ps-0 pb-2">
-                    {{-- <x-star-rating></x-star-rating> --}}
+                <div>
+                    {{ $post['review'] }}
                 </div>
             </div>
-            {{-- @if(Route::is('profile') && Auth::check() && Auth::user()->id == $post['userId']) --}}
             @if(Auth::check() && Auth::user()->id == $post['userId'])
-                {{-- <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
-                <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Delete</button>               
-                </form> --}}
-                <div class=" d-flex justify-content-end gap-1 me-2 mb-1">
+                <div class=" d-flex justify-content-end gap-1 pt-3">
                     <x-edit-post :post="$post" />
                     <form method="POST" action="{{ route('delete-post', ['post' => $post['postId']]) }}">
                         @csrf
@@ -45,7 +30,6 @@
                     </form>
                 </div>
             @endif
-            
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-1.7.2.js"></script>
