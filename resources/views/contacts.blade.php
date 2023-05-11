@@ -11,7 +11,7 @@
                         </div>
                         <div class="col mt-5" style="margin-left: 130px;">
                             <div class="fs-3 fw-bold">Gabriel Reuyan</div>
-                            <div class="fs-4 text-warning fw-bold">Front-End</div>
+                            <div class="fs-4 text-warning fw-bold">Frontend Developer</div>
                             <div class="fs-4 fw-bold">greuyan@gbox.adnu.edu.ph</div>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                         </div>
                         <div class="col mt-5" style="margin-left: 130px;">
                             <div class="fs-3 fw-bold">Albert Perez</div>
-                            <div class="fs-4 text-warning fw-bold">Back-End</div>
+                            <div class="fs-4 text-warning fw-bold">Backend Developer</div>
                             <div class="fs-4 fw-bold">albperez@gbox.adnu.edu.ph</div>
                         </div>
                     </div>
