@@ -7,15 +7,20 @@
         <div class="col-6">
             <div class="fs-4 fw-bold pt-3">Account Settings</div>
             <div class="py-5 ms-auto">
-                <div class="card justify-content-start" style="width:35rem;">
-                    <div class="card-body row container">
-                        <span class="col-3 pt-2 ms-2 fw-bold">Email</span>
-                        <span class="col mt-2 fw-bold"> {{ $data['email'] }}</span>
+                <div class="card justify-content-start p-2" style="width:35rem;">
+                    <div class="card-body row">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+                            <input readonly type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{{ $data['email'] }}">
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-2 py-3 mb-3 ms-1"></div>
-                        <button class="account-btn mx-auto col-4 fw-bold">Forgot Password?</button>
-                        <button class="account-btn mx-auto col-3 fw-bold text-danger">Delete Account</button>
+                    <div class="row text-center py-2">
+                        <div class="col-6">
+                            <button class="btn btn-secondary fw-bold">Forgot Password?</button>
+                        </div>
+                        <div class="col-6">
+                            <button class="fw-bold btn btn-warning">Delete Account</button>
+                        </div>
                     </div>
                 </div>
             </div>
