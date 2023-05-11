@@ -4,11 +4,17 @@
 
 <div class="px-5 pt-5 mt-5 container">
   <x-image-carousel :dorm="$dorm['data']"/>
-  <div class="d-flex py-5">
-    <h2 class="fw-bold p-1 flex-grow-1"> {{$dorm['data']['name']}} </h2>
-    @auth
-      <x-create-post dormId="{{ $dorm['data']['dormId'] }}"/>
-    @endauth
+  
+  <div class="d-flex pt-3">
+    <div class="pt-5 flex-grow-1">
+      <h2 class="fw-bold p-1"> {{$dorm['data']['name']}} </h2>
+      <p class="ms-1 mb-2">Ateneo Avenue, Bagumbayan Norte, Naga City</p>
+    </div>
+    <div class="pt-5 mt-3">
+      @auth
+        <x-create-post dormId="{{ $dorm['data']['dormId'] }}"/>
+      @endauth
+    </div>
   </div>
   <div class="d-flex justify-content-between">
     <x-dorm-summary :dorm="$dorm['data']" />
