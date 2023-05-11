@@ -1,5 +1,5 @@
 <div>
-    <div class="card rounded-4" style="width: 20rem;" >
+    <div class="card rounded-4" style="width: 25rem;" >
         <div class=" list-group-flush">
             <div class="ps-3 pt-4 pb-1 d-flex">
                 {{-- <span class="mx-2 px-3 py-1 rounded-5 fw-bold text-white fs-1" id="ratingOverall">{{ $dorm['overallRating'] }}</span> --}}

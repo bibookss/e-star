@@ -156,7 +156,7 @@
 .example-info img{
     border: 1px solid black;
 }
-h1,h2,h4,h6,p{
+h1,h2,h3,h4,h6,p{
     font-family: 'DM Sans', sans-serif;
 }
 text{
