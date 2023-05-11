@@ -13,11 +13,23 @@ class SearchController extends Controller
 {
     public function filterDorms(Request $request)
     {
+        // Get pagination parameters from the request
+        $perPage = $request->input('perPage', 12);
+        $page = $request->input('page', 1);
+
         $filter = new SearchFilter();
         $filterItems = $filter->transform($request);
         $dorms = $filter->apply($filterItems);
 
-        return new DormCollection($dorms->get());
+        $dormCount = $dorms->count();
+        $dorms = new DormCollection($dorms->paginate($perPage, ['*'], 'page', $page));
+        
+        return response()->json([
+            'status' => 200,
+            'message' => 'Successfully retrieved dorms.',
+            'total' => $dormCount,
+            'data' => $dorms
+        ]); 
     }
 
     public function searchDorms(Request $request) {

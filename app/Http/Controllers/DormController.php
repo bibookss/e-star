@@ -23,6 +23,10 @@ class DormController extends Controller
         $response = $client->get('dorms?includeImages=true&' . 'perPage=' . $perPage * $page );
         $dorms = json_decode($response->getBody()->getContents(), true);      
 
+        usort($dorms['data'], function($a, $b) {
+            return $b['overallRating'] <=> $a['overallRating'];
+        });
+            
         return view ('dorms', [
             'dorms' => $dorms,
             'perPage' => $perPage,
@@ -59,18 +63,31 @@ class DormController extends Controller
 
     public function filter(Request $request) 
     {
-        $queryString = http_build_query($request->all());
+        $ratingType = $request->input('ratingType');
+        $ratingValue = $request->input('ratingValue');
+        $queryString = $ratingType.'Rating[gte]='.$ratingValue;
+
+        // Get pagination parameters from the request
+        $perPage = $request->input('perPage', 12);
+        $page = $request->input('page', 1);
+
+
         $client = new Client([
-            'base_uri' => 'http://localhost:8001/api/v1/',
+            'base_uri' => 'http://localhost:8001/api/v1/search/',
             'headers' => [
                 'Accept' => 'application/json',
             ],
         ]);
-        $response = $client->get('filter?'.$queryString);
-        $dorms = json_decode($response->getBody()->getContents(), true);      
 
-        return view ('dorms', compact('dorms'));
-    }
+        $response = $client->get('filter?'.$queryString . '&includeImages=true&perPage=' . $perPage * $page);
+        $dorms = json_decode($response->getBody()->getContents(), true);  
+        
+        return view ('dorms', [
+            'dorms' => $dorms,
+            'perPage' => $perPage,
+            'page' => $page,
+            'request' => $request->all(),
+        ]);    }
 
     public function addDorm(Request $request) {
         $token = Session::get('token');
