@@ -2,7 +2,7 @@
     <div id="carouselExample" class="carousel slide">
       <div class="carousel-inner">
         @foreach($dorm['images'] as $index => $image)            
-        <div class="carousel-item @if($index === 0) active @endif">
+        <div data-image-src="{{ asset('storage/' . str_replace('public/', '', $image['path'])) }}" class="carousel-item @if($index === 0) active @endif " data-bs-toggle="modal" data-bs-target="#myModal">
               <img src="{{ asset('storage/' . str_replace('public/', '', $image['path'])) }}" class="d-block w-100">
             </div>
           @endforeach
@@ -22,3 +22,27 @@
         </button>
       </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <img id="modal-image" src="" class="img-fluid">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  var carouselItems = document.querySelectorAll('.carousel-item');
+  var modalImage = document.getElementById('modal-image');
+
+  carouselItems.forEach(function(item) {
+    item.addEventListener('click', function() {
+      var imageSrc = item.getAttribute('data-image-src');
+      modalImage.setAttribute('src', imageSrc);
+    });
+  });
+</script>
