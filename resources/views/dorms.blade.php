@@ -27,7 +27,7 @@ use Illuminate\Http\Request;
   <form class="d-flex flex-wrap mx-3" method="GET" action="{{ route('filter') }}">
     @csrf
     <div class="form-group mx-2 mb-2">
-      <select name="ratingType" id="ratingType" class="form-control address-input">
+      <select name="ratingType" id="ratingType" class="form-control filter-button">
         <option value="location">Location</option>
         <option value="internet">Internet</option>
         <option value="bathroom">Bathroom</option>
@@ -36,7 +36,7 @@ use Illuminate\Http\Request;
       </select>
     </div>
     <div class="form-group mx-2 mb-2">
-      <select name="ratingValue" id="ratingValue" class="form-control address-input">
+      <select name="ratingValue" id="ratingValue" class="form-control filter-button">
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
