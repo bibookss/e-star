@@ -56,19 +56,19 @@
 <div class="p-4">
 	<div class="d-flex justify-content-between">
 	  <span class="fw-bold fs-5">Room</span>
-	  <input type="range" class="summaryRange pt-1" value="{{$dorm['averageSecurityRating']}}" max="5" id="average1" disabled>
+	  <input type="range" class="summaryRange pt-1" value="{{$dorm['averageSecurityRating'] ?? 0}}" max="5" id="average1" disabled>
 	</div>
 	<div class="d-flex justify-content-between">
 	  <span class="fw-bold fs-5">Bathroom</span>
-	  <input type="range" class="summaryRange pt-1" value="{{$dorm['averageBathroomRating']}}" max="5" id="average1" disabled>
+	  <input type="range" class="summaryRange pt-1" value="{{$dorm['averageBathroomRating']  ?? 0}}" max="5" id="average1" disabled>
 	</div>
 	<div class="d-flex justify-content-between">
 	  <span class="fw-bold fs-5">Loaction</span>
-	  <input type="range" class="summaryRange pt-1" value="{{$dorm['averageLocationRating']}}" max="5" id="average1" disabled>
+	  <input type="range" class="summaryRange pt-1" value="{{$dorm['averageLocationRating']  ?? 0}}" max="5" id="average1" disabled>
 	</div>
 	<div class="d-flex justify-content-between">
 	  <span class="fw-bold fs-5">Internet</span>
-	  <input type="range" class="summaryRange pt-1" value="{{$dorm['averageInternetRating']}}" max="5" id="average1" disabled>
+	  <input type="range" class="summaryRange pt-1" value="{{$dorm['averageInternetRating']  ?? 0}}" max="5" id="average1" disabled>
 	</div>
   </div>
   

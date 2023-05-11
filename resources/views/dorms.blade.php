@@ -64,11 +64,13 @@
         <x-dorm-list :dorm="$dorm"></x-dorm-list>  
       @endforeach
   </div>
-  {{-- if no dorms
-  <div class="vh-100 d-flex justify-content-center">
-    <x-create-dorm></x-create-dorm>
-  </div>
-</div> --}}
+  @if ($dorms['total'] == 0) 
+    <div style="height: 25vh;" class="px-5 d-flex flex-row align-items-center justify-content-center">
+      <h1 class="fw-bold text-center">No dorms found</h1>
+    </div>
+  @endif
+  
+
 <form action="{{ request()->routeIs('search') ? route('search', ['perPage' => $perPage, 'page' => $page+1])  : route('dorms', ['perPage' => $perPage, 'page' => $page+1]) }}" method="GET">  <div class="d-flex justify-content-end py-3 px-5 me-3 mb-3">
   <input type="hidden" name="q" value="{{  request()->query('q') }}">  <p class="col-4 fw-bold pt-4 ">Showing {{count($dorms['data'])}} of {{ $dorms['total'] }} dorms</p>
     @if (count($dorms['data']) < $perPage * ($page+1) && count($dorms['data']) < $dorms['total'])

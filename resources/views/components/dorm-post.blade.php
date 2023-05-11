@@ -7,7 +7,7 @@
                     <div class="ms-3">{{ $post['datePosted'] }}</div>
                 </div>
                 <div class="col-7">
-                    <div class="pt-3 ps-2 text-end">
+                    <div class="pt-3 fw-bold ps-2 text-end">
                         @if ($post['isVerified'] == 1)
                             <i class="fa-sharp fa-solid fa-circle-check" style="color: #2ec27e;"></i>                      
                             Verified Student

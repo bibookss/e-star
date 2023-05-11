@@ -8,7 +8,9 @@
   <div class="d-flex pt-3">
     <div class="pt-5 flex-grow-1">
       <h2 class="fw-bold p-1"> {{$dorm['data']['name']}} </h2>
-      <p class="ms-1 mb-4 fs-5">Ateneo Avenue, Bagumbayan Norte, Naga City</p>
+      <p class="ms-1 mb-4 fs-5">
+        {{ $dorm['data']['location']['street'] . ', ' . $dorm['data']['location']['barangay'] . ', ' . $dorm['data']['location']['city'] }}
+      </p>
     </div>
     <div class="pt-5 mt-3">
       @auth
