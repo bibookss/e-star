@@ -63,7 +63,7 @@
 	  <input type="range" class="summaryRange pt-1" value="{{$dorm['averageBathroomRating']  ?? 0}}" max="5" id="average1" disabled>
 	</div>
 	<div class="d-flex justify-content-between">
-	  <span class="fw-bold fs-5">Loaction</span>
+	  <span class="fw-bold fs-5">Location</span>
 	  <input type="range" class="summaryRange pt-1" value="{{$dorm['averageLocationRating']  ?? 0}}" max="5" id="average1" disabled>
 	</div>
 	<div class="d-flex justify-content-between">
