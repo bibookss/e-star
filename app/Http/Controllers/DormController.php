@@ -22,6 +22,7 @@ class DormController extends Controller
 
         $response = $client->get('dorms?includeImages=true&' . 'perPage=' . $perPage * $page );
         $dorms = json_decode($response->getBody()->getContents(), true);      
+
         return view ('dorms', [
             'dorms' => $dorms,
             'perPage' => $perPage,
@@ -47,7 +48,6 @@ class DormController extends Controller
 
         $response = $client->get('?address[LIKE]='.$queryString.'&includeImages=true&perPage=' . $perPage * $page);
         $dorms = json_decode($response->getBody()->getContents(), true);      
-
 
         return view ('dorms', [
             'dorms' => $dorms,

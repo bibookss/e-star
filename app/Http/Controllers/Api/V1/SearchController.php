@@ -31,7 +31,14 @@ class SearchController extends Controller
         $query = Dorm::with(['location']);
 
         if (count($searchTerms) === 0) {
-            return new DormCollection($query->get());
+            $dormCount = $query->count();
+            $dorms = new DormCollection($query->paginate($perPage, ['*'], 'page', $page));
+            return response()->json([
+                'status' => 200,
+                'message' => 'Successfully retrieved dorms.',
+                'total' => $dormCount,
+                'data' => $dorms
+            ]); 
         }
         
         $words = explode(' ', $searchTerms[0][2]);
@@ -53,7 +60,7 @@ class SearchController extends Controller
 
         $dormCount = $query->count();
         $dorms = new DormCollection($query->paginate($perPage, ['*'], 'page', $page));
-
+        
         return response()->json([
             'status' => 200,
             'message' => 'Successfully retrieved dorms.',
