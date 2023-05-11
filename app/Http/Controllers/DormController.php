@@ -44,11 +44,7 @@ class DormController extends Controller
         $perPage = $request->input('perPage', 12);
         $page = $request->input('page', 1);
 
-        if ($request->address) {
-            $queryString = $request->q;
-        } else {
-            $queryString = $request->input('q');
-        }
+        $queryString = $request->input('q');
 
         $response = $client->get('?address[LIKE]='.$queryString.'&includeImages=true&perPage=' . $perPage * $page);
         $dorms = json_decode($response->getBody()->getContents(), true);      

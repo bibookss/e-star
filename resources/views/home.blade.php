@@ -16,7 +16,7 @@
             <form method="GET" action="{{ route('search') }}">
                 @csrf
                 <div class="my-5 align-items-center d-flex gap-5">
-                    <input type="text" class="address-input rounded-4 ps-4" id="fname" name="address" placeholder="Enter address">
+                    <input type="text" class="address-input rounded-4 ps-4" id="fname" name="q" placeholder="Enter address">
                     <button class="ylw-btn text-white px-4 py-2 fw-bold rounded-4" type="submit">Search now</button>
                 </div>
             </form>
