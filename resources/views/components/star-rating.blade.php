@@ -3,7 +3,7 @@
 		outline: 0;
 		border: solid black 2px;
 		border-radius: 500px;
-		width: 270px;
+		width: 200px;
 		max-width: 100%;
 		margin: 24px 0 16px;
 		transition: box-shadow 0.2s ease-in-out;
