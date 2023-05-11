@@ -1,8 +1,8 @@
 <div>
-    <div class="card rounded-4 " style="width: 45rem;" >
+    <div class="card rounded-4 px-3" style="width: 45rem;" >
         <div class="card-body list-group-item pt-4 ps-4 fw-bold container dorm-post">
-            <div class="row align-items-start">
-                <div class="col-4">
+            <div class="row">
+                <div class="col-3">
                     {{-- <span class="ms-3 px-3 py-1 rounded-5 text-white fs-2 grn-rating" id="number" data-color="{{$post['overallRating']}}">{{$post['overallRating']}} </span> --}}
                     <p class="ms-3 px-3 py-1 rounded-5 text-white fs-4 d-inline-flex" data-color="{{$post['overallRating']}}" >{{$post['overallRating']}}</p>
                     <div class="pt-3 ps-2">{{ $post['datePosted'] }}</div>
@@ -13,7 +13,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="col d-flex justify-content-start">
+                <div class="col-8">
                     <div>
                         {{ $post['review'] }}
                     </div>

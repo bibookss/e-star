@@ -41,7 +41,7 @@
                              </div>
                              <div class="p-3">
                                  <span class="fs-4 fw-bold pb-3 pe-5">Location:</span>
-                                 <input type="range" min="1" max="5" value="0" id="slider3" class="slider " style="margin-left:68px;" name="locationRating" required>
+                                 <input type="range" min="1" max="5" value="0" id="slider3" class="slider " style="margin-left:80px;" name="locationRating" required>
                                  <span class="ps-5 fw-bold fs-4 px-2" id="sliderValue3"></span>
                              </div>
                              <div class="p-3">
