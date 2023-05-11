@@ -20,6 +20,10 @@
                     {{ $post['review'] }}
                 </div>
             </div>
+            <div class="row">
+                <x-star-rating :dorm="$post" />
+            </div>
+
             @if(Auth::check() && Auth::user()->id == $post['userId'])
                 <div class=" d-flex justify-content-end gap-1 pt-3">
                     <x-edit-post :post="$post" />

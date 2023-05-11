@@ -11,9 +11,15 @@ class StarRating extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($dorm)
     {
-        //
+        if (!array_key_exists('averageLocationRating', $dorm)) {
+            $dorm['averageLocationRating'] = $dorm['locationRating'];
+            $dorm['averageBathroomRating'] = $dorm['bathroomRating'];
+            $dorm['averageSecurityRating'] = $dorm['securityRating'];
+            $dorm['averageInternetRating'] = $dorm['internetRating'];
+        }
+        $this->dorm = $dorm;        
     }
 
     /**
@@ -23,6 +29,8 @@ class StarRating extends Component
      */
     public function render()
     {
-        return view('components.star-rating');
+        return view('components.star-rating', [
+            'dorm' => $this->dorm,
+        ]);
     }
 }

@@ -25,8 +25,7 @@
             </div>
         </div>
         <div class="ps-2">
-            
-        <x-star-rating></x-star-rating>
+        <x-star-rating :dorm="$dorm"/>
         </div>
     </div>
     <div class="py-5">
