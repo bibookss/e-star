@@ -1,5 +1,5 @@
 <div>
-    <div class="card rounded-4 " style="width: 50rem;" >
+    <div class="card rounded-4 " style="width: 45rem;" >
         <div class="card-body list-group-item pt-4 ps-4 fw-bold container dorm-post">
             <div class="row align-items-start">
                 <div class="col-4">
