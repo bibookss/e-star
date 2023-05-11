@@ -14,7 +14,6 @@
             @csrf
             <input type="text" class="address-input rounded-4 w-25 mx-5 ps-3" id="fname" name="q" placeholder="Enter address" value="<?php echo $_GET['q'] ?? ''; ?>">
             <button class="ylw-btn text-white px-4 py-2 fw-bold rounded-4">Search now</button>
-        </div>
         </form>  
         @auth
           <x-create-dorm></x-create-dorm>          
