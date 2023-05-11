@@ -27,30 +27,46 @@
                         <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_TZvjSDdby2.json" class="ms-auto mt-3" background="transparent"  speed="1"  
                         style="width: 125px; height: 125px; z-index:5; position: absolute; right:0px;" autoplay></lottie-player>
                         
-                         <!--- Slider -->
-                         <p class="fw-bold px-3 pt-3 fs-3">Rating</p>
-                         <div class="d-flex flex-column card">
-                             <div class="p-3">
-                                 <span class="fs-4 fw-bold pb-3 pe-5">Security:</span>
-                                 <input type="range" min="1" max="5" value="0" id="slider1" class="slider " style="margin-left:88px;" name="securityRating">
-                                 <span class="ps-5 fw-bold fs-4 px-2" id="sliderValue1"></span>            
+                          <!--- Slider -->
+                          <p class="fw-bold px-3 pt-3 fs-3">Rating</p>
+                          <div class="card">
+                             <div class="row p-3">
+                                 <div class="col-3 fw-bold fs-4">Room:</div>
+                                 <div class="col-8">
+                                     <input type="range" class="slider" min="1" max="5" value="0" id="slider1" name="securityRating" required>
+                                 </div>
+                                 <div class="col-1">
+                                     <span class="fw-bold fs-4 px-2" id="sliderValue1"></span>            
+                                 </div>
                              </div>
-                             <div class="p-3">
-                                 <span class="fs-4 fw-bold pb-3 pe-5">Bathrooom:</span>
-                                 <input type="range" min="1" max="5" value="0" id="slider2" class="slider " style="margin-left:50px;" name="bathroomRating">
-                                 <span class="ps-5 fw-bold fs-4 px-2" id="sliderValue2"></span>
+                             <div class="row p-3">
+                                 <div class="col-3 fw-bold fs-4">Bathroom:</div>
+                                 <div class="col-8">
+                                     <input type="range" class="slider" min="1" max="5" value="0" id="slider2" name="bathroomRating" required>
+                                 </div>
+                                 <div class="col-1">
+                                     <span class="fw-bold fs-4 px-2" id="sliderValue2"></span>            
+                                 </div>
                              </div>
-                             <div class="p-3">
-                                 <span class="fs-4 fw-bold pb-3 pe-5">Location:</span>
-                                 <input type="range" min="1" max="5" value="0" id="slider3" class="slider " style="margin-left:80px;" name="locationRating">
-                                 <span class="ps-5 fw-bold fs-4 px-2" id="sliderValue3"></span>
+                             <div class="row p-3">
+                                 <div class="col-3 fw-bold fs-4">Location:</div>
+                                 <div class="col-8">
+                                     <input type="range" class="slider" min="1" max="5" value="0" id="slider3" name="locationRating" required>
+                                 </div>
+                                 <div class="col-1">
+                                     <span class="fw-bold fs-4 px-2" id="sliderValue3"></span>            
+                                 </div>
                              </div>
-                             <div class="p-3">
-                                 <span class="fs-4 fw-bold pb-3 pe-5">Internet:</span>
-                                 <input type="range" min="1" max="5" value="0" id="slider4" class="slider " style="margin-left:86px;" name="internetRating">
-                                 <span class="ps-5 fw-bold fs-4 px-2" id="sliderValue4"></span>
+                             <div class="row p-3">
+                                 <div class="col-3 fw-bold fs-4">Internet:</div>
+                                 <div class="col-8">
+                                     <input type="range" class="slider" min="1" max="5" value="0" id="slider4" name="internetRating" required>
+                                 </div>
+                                 <div class="col-1">
+                                     <span class="fw-bold fs-4 px-2" id="sliderValue4"></span>            
+                                 </div>
                              </div>
-                        </div>
+                         </div>
                         
                     </div>
                     <div class="p-5 ">

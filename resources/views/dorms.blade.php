@@ -6,7 +6,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="px-5 pt-3">
+<div class="pt-3">
     <br><br>
     <div class="">
       <form method="GET" action="{{ route('search') }}">

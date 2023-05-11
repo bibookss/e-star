@@ -28,27 +28,43 @@
                         
                          <!--- Slider -->
                          <p class="fw-bold px-3 pt-3 fs-3">Rating</p>
-                         <div class="d-flex flex-column card">
-                             <div class="p-3">
-                                 <span class="fs-4 fw-bold pb-3 pe-5">Room:</span>
-                                 <input type="range" min="1" max="5" value="0" id="slider1" class="slider " style="margin-left:110px;" name="securityRating" required> 
-                                 <span class="ps-5 fw-bold fs-4 px-2" id="sliderValue1"></span>            
-                             </div>
-                             <div class="p-3">
-                                 <span class="fs-4 fw-bold pb-3 pe-5">Bathrooom:</span>
-                                 <input type="range" min="1" max="5" value="0" id="slider2" class="slider " style="margin-left:50px;" name="bathroomRating" required>
-                                 <span class="ps-5 fw-bold fs-4 px-2" id="sliderValue2"></span>
-                             </div>
-                             <div class="p-3">
-                                 <span class="fs-4 fw-bold pb-3 pe-5">Location:</span>
-                                 <input type="range" min="1" max="5" value="0" id="slider3" class="slider " style="margin-left:80px;" name="locationRating" required>
-                                 <span class="ps-5 fw-bold fs-4 px-2" id="sliderValue3"></span>
-                             </div>
-                             <div class="p-3">
-                                 <span class="fs-4 fw-bold pb-3 pe-5">internet:</span>
-                                 <input type="range" min="1" max="5" value="0" id="slider4" class="slider " style="margin-left:86px;" name="internetRating" required>
-                                 <span class="ps-5 fw-bold fs-4 px-2" id="sliderValue4"></span>
-                             </div>
+                         <div class="card">
+                            <div class="row p-3">
+                                <div class="col-3 fw-bold fs-4">Room:</div>
+                                <div class="col-8">
+                                    <input type="range" class="slider" min="1" max="5" value="0" id="slider1" name="securityRating" required>
+                                </div>
+                                <div class="col-1">
+                                    <span class="fw-bold fs-4 px-2" id="sliderValue1"></span>            
+                                </div>
+                            </div>
+                            <div class="row p-3">
+                                <div class="col-3 fw-bold fs-4">Bathroom:</div>
+                                <div class="col-8">
+                                    <input type="range" class="slider" min="1" max="5" value="0" id="slider2" name="bathroomRating" required>
+                                </div>
+                                <div class="col-1">
+                                    <span class="fw-bold fs-4 px-2" id="sliderValue2"></span>            
+                                </div>
+                            </div>
+                            <div class="row p-3">
+                                <div class="col-3 fw-bold fs-4">Location:</div>
+                                <div class="col-8">
+                                    <input type="range" class="slider" min="1" max="5" value="0" id="slider3" name="locationRating" required>
+                                </div>
+                                <div class="col-1">
+                                    <span class="fw-bold fs-4 px-2" id="sliderValue3"></span>            
+                                </div>
+                            </div>
+                            <div class="row p-3">
+                                <div class="col-3 fw-bold fs-4">Internet:</div>
+                                <div class="col-8">
+                                    <input type="range" class="slider" min="1" max="5" value="0" id="slider4" name="internetRating" required>
+                                </div>
+                                <div class="col-1">
+                                    <span class="fw-bold fs-4 px-2" id="sliderValue4"></span>            
+                                </div>
+                            </div>
                         </div>
                         
                     </div>
@@ -74,7 +90,7 @@
     
     .slider {
       -webkit-appearance: none;
-      width: 60%;
+      width: 100%;
       height: 15px;
       background: #d3d3d3;
       outline: none;
